@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 class Person{
     public:
         vector<int> partners;
@@ -50,8 +49,6 @@ void updateMatches(vector<Person> &men, vector<Person> &women);
 
 
 int main(int argc, char *argv[]) {
-
-
 
     //Read in data
     ifstream fin;
@@ -137,7 +134,8 @@ bool gsPropose(vector<Person> &men, vector<Person> &women, int manId, int womanI
     }
     if(proposalRank < currentRank) {
         women[womanId].partners[0] = manId;
-        gsSelect(men, women, currentRank);
+        if(currentRank < men.size())
+            gsSelect(men, women, currentRank);
         return true;
     } else {
         return false;

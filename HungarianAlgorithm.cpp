@@ -1,4 +1,3 @@
-#include "HungarianAlgorithm.h"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -42,6 +41,7 @@ void dijkstraComputePaths(Node *source, vector<Node *> nodes){
     }
     source->dist = 0;
 
+    //Que for adgacent previously unvisited nodes
     set<pair<double, Node*>> nodeQueue;
     nodeQueue.insert(make_pair(source->dist, source));
 
@@ -75,6 +75,9 @@ list<Node *> findShortestPath(Node *target, vector<Node *> nodes){
     return path;
 }
 
+void reversePaths(list<Node *> path, vector<Node *> nodes){
+
+}
 int main(int argc, char *argv[]){
 
     //Readin Data
@@ -86,6 +89,7 @@ int main(int argc, char *argv[]){
 
     fin >> nodeCount;
 
+    //Read in cost table
     for(int i=0; i<nodeCount; i++){
         int connectionCount;
         fin >> connectionCount;
@@ -99,21 +103,21 @@ int main(int argc, char *argv[]){
     }
 
     //Build graph structure
-    Node end;
-    Node start;
+    Node end = Node();
+    Node start = Node();
     vector<Node> men;
     vector<Node> women;
 
     //Declare and add women nodes
     for(int i=0; i<nodeCount; i++){
-        Node woman;
+        Node woman = Node();
         woman.edges.push_back(new Edge(&end, 0));
         women.push_back(woman);
     }
 
     //Declare and add man nodes
     for(int i=0; i<nodeCount; i++){
-        Node man;
+        Node man = Node();
         for(int j=0; j<nodeCount; j++){
             man.edges.push_back(new Edge(&women[j], costs[i][j]));
         }

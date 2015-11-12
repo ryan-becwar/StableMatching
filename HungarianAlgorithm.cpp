@@ -9,88 +9,164 @@
 #include <iterator>
 
 using namespace std;
-struct Node;
 const double maxDist = numeric_limits<double>::infinity();
+typedef pair<int, int> Point;
 
-typedef struct Edge {
-    Node *p;
-    double cost;
-
-    Edge(Node *node, double edgeCost){
-         p = node;
-         cost = edgeCost;
+void printCosts(vector<vector<double>> &costs, vector<bool> markedRows, vector<bool> markedCols){
+    for(int i=0; i<costs.size(); i++){
+        for(int j=0; j<costs[i].size(); j++){
+            cout << costs[i][j] << "\t";
+        }
+        if(markedRows[i])
+            cout << "x\t";
+        cout << endl;
     }
-}Edge;
-
-typedef struct Node {
-    double dist;
-    Node *previous;
-    vector<Edge *> edges;
-}Node;
-
-Node *UNASSIGNED = new Node();
-
-
-void dijkstraComputePaths(Node *source, vector<Node *> nodes){
-    int n = nodes.size();
-
-    //reset minimum distance and previous node
-    for(int i=0; i<n; i++){
-        nodes[i]->dist = maxDist;
-        nodes[i]->previous = UNASSIGNED;
+    for(int i=0; i<costs.size(); i++){
+        if(markedCols[i])
+            cout << "x";
+        cout << "\t";
     }
-    source->dist = 0;
+    cout << endl;
+}
+void initialSubtraction(vector<vector<double>> &costs, unsigned long width){
 
-    //Que for adgacent previously unvisited nodes
-    set<pair<double, Node*>> nodeQueue;
-    nodeQueue.insert(make_pair(source->dist, source));
 
-    while(!nodeQueue.empty()){
-        double dist = nodeQueue.begin()->first;
-        Node * u = nodeQueue.begin()->second;
-        nodeQueue.erase(nodeQueue.begin());
+    for(int row = 0; row<width; row++){
+        double rowMin = maxDist;
+        int minIndex = -1;
+        for(int col = 0; col<width; col++){
+            if(costs[row][col] < rowMin){
+                rowMin = costs[row][col];
+                minIndex = col;
+            }
+        }
 
-        //for each edge exiting u
-        vector<Edge *> &edges = u->edges;
-        for(int i=0; i<edges.size(); i++){
-            Node *v = edges[i]->p;
-            double cost = edges[i]->cost;
-            double distThroughU = dist + cost;
-            if(distThroughU < v->dist){
-                nodeQueue.erase(make_pair(v->dist, v));
-                v->dist = distThroughU;
-                v->previous = u;
-                nodeQueue.insert(make_pair(v->dist, v));
+        for(int col = 0; col<width; col++){
+            costs[row][col] -= rowMin;
+        }
+    }
+
+    //Subtract min from each column
+    for(int col = 0; col<width; col++){
+        double colMin = maxDist;
+        int minIndex = -1;
+        for(int row = 0; row<width; row++){
+            if(costs[row][col] < colMin) {
+                colMin = costs[row][col];
+                minIndex = row;
+            }
+        }
+
+        for(int row = 0; row<width; row++){
+            costs[row][col] -=colMin;
+        }
+    }
+}
+
+int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &markedRows, vector<bool> &markedCols, vector<Point> &zeroes){
+
+    vector<vector<bool>> selected;
+    vector<int> rowSelected(width, 0);
+    vector<int> colSelected(width, 0);
+    for(int i=0; i<width; i++){
+        vector<bool> v(width, false);
+        selected.push_back(v);
+    }
+
+    for(int row = 0; row<width; row++){
+        for(int col = 0; col<width; col++){
+            if(costs[row][col] == 0){
+                zeroes.push_back(make_pair(row, col));
             }
         }
     }
 
-}
-
-list<Node *> findShortestPath(Node *target, vector<Node *> nodes){
-    list<Node *> path;
-    for(;target != UNASSIGNED && target != NULL; target = target->previous){
-        path.push_front(target);
+    //Assign initial zeroes
+    for(int row = 0; row<width; row++){
+        for(int col = 0; col<width; col++){
+            if(costs[row][col] == 0 && rowSelected[row] == 0 && colSelected[col] == 0){
+                selected[row][col] = true;
+                rowSelected[row]++;
+                colSelected[col]++;
+            }
+        }
     }
-    return path;
+
+    //Debugging to list selected 0's
+    for(int row = 0; row<width; row++) {
+        for (int col = 0; col < width; col++) {
+            if(selected[row][col])
+                cout << "x ";
+            else
+                cout << "- ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+
+    //mark all rows with selected 0's
+    for(int row = 0; row<width; row++){
+        if (!markedRows[row]) {
+            if(rowSelected[row] == 0){
+                markedRows[row] = true;
+            }
+            //Mark all columns with zeroes in the row
+            for(int col = 0; col<width; col++){
+                if(costs[row][col] == 0){
+                    markedCols[col] = true;
+                    //Mark all rows with selected 0's in column
+                    for(int r2 =0; r2<width; r2++){
+                        if(selected[r2][col]){
+                            markedRows[r2] == true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //draw lines through each marked column and unmarked row
+    for(int row = 0; row<width; row++){
+        markedRows[row] == !markedRows[row];
+    }
+
+    //sum of lines
+    int markedCount = 0;
+    for(int i=0; i<width; i++){
+        if(markedRows[i])
+            markedCount++;
+        if(markedCols[i])
+            markedCount++;
+    }
+
+    if(markedCount == width){
+        return markedCount;
+    } else {
+        return markedCount;
+    }
+
 }
 
-void reversePaths(list<Node *> path, vector<Node *> nodes){
-
-}
 int main(int argc, char *argv[]){
 
     //Readin Data
+    unsigned long width;
     vector<vector<double>> costs;
-    int nodeCount;
+    vector<int> rowZeroes;
+    vector<int> colZeroes;
+    vector<Point> zeroes;
 
     ifstream fin;
     fin.open(argv[1]);
 
-    fin >> nodeCount;
+    fin >> width;
+
+    vector<bool> markedRows(width, false);
+    vector<bool> markedCols(width, false);
 
     //Read in cost table
-    for(int i=0; i<nodeCount; i++){
+    for(int i=0; i< width; i++){
         int connectionCount;
         fin >> connectionCount;
         vector<double> connectionCosts;
@@ -102,47 +178,12 @@ int main(int argc, char *argv[]){
         costs.push_back(connectionCosts);
     }
 
-    //Build graph structure
-    Node end = Node();
-    Node start = Node();
-    vector<Node> men;
-    vector<Node> women;
+    initialSubtraction(costs, width);
+    printCosts(costs, markedRows, markedCols);
 
-    //Declare and add women nodes
-    for(int i=0; i<nodeCount; i++){
-        Node woman = Node();
-        woman.edges.push_back(new Edge(&end, 0));
-        women.push_back(woman);
-    }
+    solve(costs, width, markedRows, markedCols, zeroes);
 
-    //Declare and add man nodes
-    for(int i=0; i<nodeCount; i++){
-        Node man = Node();
-        for(int j=0; j<nodeCount; j++){
-            man.edges.push_back(new Edge(&women[j], costs[i][j]));
-        }
-        men.push_back(man);
-        start.edges.push_back(new Edge(&man, 0));
-    }
-
-    vector<Node*> nodeList;
-    nodeList.push_back(&start);
-    for(int i=0; i<nodeCount; i++){
-        nodeList.push_back(&men[i]);
-    }
-    for(int i=0; i<nodeCount; i++){
-        nodeList.push_back(&women[i]);
-    }
-    nodeList.push_back(&end);
-
-    dijkstraComputePaths(nodeList[0], nodeList);
-
-    for(int i=0; i<nodeList.size(); i++){
-        cout << i << ": " << nodeList[i]->dist << endl;
-    }
-
-    list<Node *> shortestPath = findShortestPath(&end, nodeList);
-
+    printCosts(costs, markedRows, markedCols);
 
 
     return 0;

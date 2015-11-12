@@ -110,19 +110,20 @@ int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &mark
         if (!markedRows[row]) {
             if(rowSelected[row] == 0){
                 markedRows[row] = true;
-            }
-            //Mark all columns with zeroes in the row
-            for(int col = 0; col<width; col++){
-                if(costs[row][col] == 0){
-                    markedCols[col] = true;
-                    //Mark all rows with selected 0's in column
-                    for(int r2 =0; r2<width; r2++){
-                        if(selected[r2][col]){
-                            markedRows[r2] == true;
+                //Mark all columns with zeroes in the row
+                for(int col = 0; col<width; col++){
+                    if(costs[row][col] == 0){
+                        markedCols[col] = true;
+                        //Mark all rows with selected 0's in column
+                        for(int r2 =0; r2<width; r2++){
+                            if(selected[r2][col]){
+                                markedRows[r2] == true;
+                            }
                         }
                     }
                 }
             }
+
         }
     }
 

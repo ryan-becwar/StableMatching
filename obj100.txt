@@ -1,0 +1,1 @@
+Dual simplex - Optimal:  Objective =  5.4434052406e+01

@@ -28,6 +28,21 @@ void printCosts(vector<vector<double>> &costs, vector<bool> markedRows, vector<b
     }
     cout << endl;
 }
+
+void printMatches(vector<Point> matches, vector<vector<double>> &costs){
+    double totalCost = 0;
+
+    cout << "Matches:" << endl;
+    for(int i=0; i<matches.size(); i++){
+        int man = matches[i].first;
+        int woman = matches[i].second;
+        double cost = costs[man][woman];
+        totalCost += cost;
+        cout << man << " " << woman << " Cost: " << cost << endl;
+    }
+    cout << "Total Cost: " << totalCost << endl;
+    cout << "Average Cost: " << totalCost / matches.size() << endl;
+}
 void initialSubtraction(vector<vector<double>> &costs, unsigned long width){
 
 
@@ -63,7 +78,7 @@ void initialSubtraction(vector<vector<double>> &costs, unsigned long width){
     }
 }
 
-int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &markedRows, vector<bool> &markedCols, vector<Point> &zeroes){
+int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &markedRows, vector<bool> &markedCols){
 
     vector<vector<bool>> selected;
     vector<int> rowSelected(width, 0);
@@ -73,13 +88,6 @@ int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &mark
         selected.push_back(v);
     }
 
-    for(int row = 0; row<width; row++){
-        for(int col = 0; col<width; col++){
-            if(costs[row][col] == 0){
-                zeroes.push_back(make_pair(row, col));
-            }
-        }
-    }
 
     //Assign initial zeroes
     for(int row = 0; row<width; row++){
@@ -108,6 +116,7 @@ int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &mark
     //mark all rows with selected 0's
     for(int row = 0; row<width; row++){
         if (!markedRows[row]) {
+            //Mark rows with no selected 0's
             if(rowSelected[row] == 0){
                 markedRows[row] = true;
                 //Mark all columns with zeroes in the row
@@ -129,7 +138,7 @@ int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &mark
 
     //draw lines through each marked column and unmarked row
     for(int row = 0; row<width; row++){
-        markedRows[row] == !markedRows[row];
+        markedRows[row] = !markedRows[row];
     }
 
     //sum of lines
@@ -149,6 +158,37 @@ int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &mark
 
 }
 
+//given a modified set of costs that is determined to contain a possible matching, find a set of valid matches
+vector<Point> match(vector<vector<double>> &costs, unsigned long width){
+    vector<vector<bool>> isMatched;
+    for(int i=0; i<width; i++){
+        vector<bool> v(width, false);
+        isMatched.push_back(v);
+    }
+    vector<Point> matches;
+
+    for(int row = 0; row<width; row++){
+        bool rowMatched = false;
+        for(int col = 0; col<width && !rowMatched; col++){
+            if(costs[row][col] == 0){
+                bool available = true;
+                for(int r2 = 0; r2<row; r2++){
+                    if(isMatched[r2][col])
+                        available = false;
+                }
+                if(available) {
+                    isMatched[row][col] = true;
+                    rowMatched = true;
+                    matches.push_back(Point(row, col));
+                }
+            }
+        }
+    }
+
+    return matches;
+
+}
+
 int main(int argc, char *argv[]){
 
     //Readin Data
@@ -156,7 +196,6 @@ int main(int argc, char *argv[]){
     vector<vector<double>> costs;
     vector<int> rowZeroes;
     vector<int> colZeroes;
-    vector<Point> zeroes;
 
     ifstream fin;
     fin.open(argv[1]);
@@ -178,14 +217,17 @@ int main(int argc, char *argv[]){
         }
         costs.push_back(connectionCosts);
     }
+    vector<vector<double>> originalCosts(costs);
 
     initialSubtraction(costs, width);
     printCosts(costs, markedRows, markedCols);
 
-    solve(costs, width, markedRows, markedCols, zeroes);
+    solve(costs, width, markedRows, markedCols);
 
     printCosts(costs, markedRows, markedCols);
 
+    vector<Point> matches = match(costs, width);
+    printMatches(matches, originalCosts);
 
     return 0;
 }

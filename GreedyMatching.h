@@ -1,14 +1,7 @@
-//
-// Created by Ryan on 11/23/2015.
-//
-
 #ifndef STABLEMATCHING_GREEDYMATCHING_H
 #define STABLEMATCHING_GREEDYMATCHING_H
 
-
-class greedyMatching {
-
-};
+int runGreedy(int argc, char *argv[]);
 
 
 #endif //STABLEMATCHING_GREEDYMATCHING_H

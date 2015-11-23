@@ -5,7 +5,6 @@
 #include <limits>
 #include <algorithm>
 #include <set>
-#include <utility>
 #include <iterator>
 
 using namespace std;
@@ -45,14 +44,11 @@ void printMatches(vector<Point> matches, vector<vector<double>> &costs){
 }
 void initialSubtraction(vector<vector<double>> &costs, unsigned long width){
 
-
     for(int row = 0; row<width; row++){
         double rowMin = maxDist;
-        int minIndex = -1;
         for(int col = 0; col<width; col++){
             if(costs[row][col] < rowMin){
                 rowMin = costs[row][col];
-                minIndex = col;
             }
         }
 
@@ -64,11 +60,9 @@ void initialSubtraction(vector<vector<double>> &costs, unsigned long width){
     //Subtract min from each column
     for(int col = 0; col<width; col++){
         double colMin = maxDist;
-        int minIndex = -1;
         for(int row = 0; row<width; row++){
             if(costs[row][col] < colMin) {
                 colMin = costs[row][col];
-                minIndex = row;
             }
         }
 
@@ -158,6 +152,17 @@ int solve(vector<vector<double>> &costs, unsigned long width, vector<bool> &mark
 
 }
 
+//Checks if there are any other matched points on a given column, besides the given row position
+//returns true if there are conflicting matches in the row
+bool checkCol(vector<int> rowMatches, int checkRow, int col, unsigned long width){
+    for(int row =0; row <width; row++){
+        if(row != checkRow){
+            if(rowMatches[row] == col)
+                return true;
+        }
+    }
+    return false;
+}
 //given a modified set of costs that is determined to contain a possible matching, find a set of valid matches
 vector<Point> match(vector<vector<double>> &costs, unsigned long width){
     vector<vector<bool>> isMatched;
@@ -166,36 +171,72 @@ vector<Point> match(vector<vector<double>> &costs, unsigned long width){
         isMatched.push_back(v);
     }
     vector<Point> matches;
+    //Store the index of the selected match in each row to speedup calculations
+    vector<int> rowMatches(width, -1);
 
+    //Precompute available 0 locations in each row
+    //In the worst case this does not affect running time, but significanly improves it in average cases
+    //where 0s are sparse
+    vector<vector<int>> rowZeroes;
+    for(int row=0; row<width; row++){
+        vector<int> v;
+        for(int col=0; col<width; col++){
+            if(costs[row][col] == 0)
+                v.push_back(col);
+        }
+        rowZeroes.push_back(v);
+    }
+
+    //Initially selects the 1st 0 in every row as matched
     for(int row = 0; row<width; row++){
         bool rowMatched = false;
         for(int col = 0; col<width && !rowMatched; col++){
             if(costs[row][col] == 0){
-                bool available = true;
-                for(int r2 = 0; r2<row; r2++){
-                    if(isMatched[r2][col])
-                        available = false;
-                }
-                if(available) {
-                    isMatched[row][col] = true;
-                    rowMatched = true;
-                    matches.push_back(Point(row, col));
+                isMatched[row][col] = true;
+                rowMatched = true;
+                rowMatches[row] = col;
+            }
+        }
+    }
+
+    //Refines the matches until a valid set of matches is reached
+    for(bool update = true; update;){
+        update = false;
+        for(int row = 0; row<width; row++){
+            //If the current match for the row is invalid
+            if(checkCol(rowMatches, row, rowMatches[row], width)){
+                int current = rowMatches[row];
+                bool moved = false;
+                for(int i=0; i<rowZeroes[row].size() && !moved; i++) {
+                    if (current != rowZeroes[row][i]){
+                        //if other column is unoccupied
+                        if (!checkCol(rowMatches, row, rowZeroes[row][i], width)) {
+                            rowMatches[row] = rowZeroes[row][i];
+                            moved = true;
+                            update = true;
+                        }
+                    }
                 }
             }
         }
+
+    }
+
+    //Assign match pairs from rowMatches
+    for(int row = 0; row<width; row++){
+        matches.push_back(Point(row, rowMatches[row]));
     }
 
     return matches;
 
 }
 
-int main(int argc, char *argv[]){
+
+int runHungarian(int argc, char *argv[]) {
 
     //Readin Data
     unsigned long width;
     vector<vector<double>> costs;
-    vector<int> rowZeroes;
-    vector<int> colZeroes;
 
     ifstream fin;
     fin.open(argv[1]);

@@ -5,6 +5,7 @@
 #ifndef STABLEMATCHING_HUNGARIANALGORITHM_H
 #define STABLEMATCHING_HUNGARIANALGORITHM_H
 
+int runHungarian(int argc, char *argv[]);
 
 class HungarianAlgorithm {
 

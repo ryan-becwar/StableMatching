@@ -28,7 +28,7 @@ void printCosts(vector<vector<double>> &costs, vector<bool> markedRows, vector<b
     cout << endl;
 }
 
-void printMatches(vector<Point> matches, vector<vector<double>> &costs){
+double printMatches(vector<Point> matches, vector<vector<double>> &costs){
     double totalCost = 0;
 
     cout << "Matches:" << endl;
@@ -39,8 +39,9 @@ void printMatches(vector<Point> matches, vector<vector<double>> &costs){
         totalCost += cost;
         cout << man << " " << woman << " Cost: " << cost << endl;
     }
-    cout << "Total Cost: " << totalCost << endl;
-    cout << "Average Cost: " << totalCost / matches.size() << endl;
+    //cout << "Total Cost: " << totalCost << endl;
+    //cout << "Average Cost: " << totalCost / matches.size() << endl;
+    return totalCost;
 }
 void initialSubtraction(vector<vector<double>> &costs, unsigned long width){
 
@@ -232,7 +233,7 @@ vector<Point> match(vector<vector<double>> &costs, unsigned long width){
 }
 
 
-int runHungarian(int argc, char *argv[]) {
+double runHungarian(int argc, char *argv[]) {
 
     //Readin Data
     unsigned long width;
@@ -268,7 +269,7 @@ int runHungarian(int argc, char *argv[]) {
     printCosts(costs, markedRows, markedCols);
 
     vector<Point> matches = match(costs, width);
-    printMatches(matches, originalCosts);
+    double totalCost = printMatches(matches, originalCosts);
 
-    return 0;
+    return totalCost;
 }

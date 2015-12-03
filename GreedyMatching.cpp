@@ -19,7 +19,7 @@ typedef struct Matching {
 } Matching;
 
 
-int runGreedy(int argc, char *argv[]) {
+double runGreedy(int argc, char *argv[]) {
 
     unsigned long personCount;
     vector<Matching> matches;
@@ -63,7 +63,7 @@ int runGreedy(int argc, char *argv[]) {
         cout << finalMatches[i].man << " " << finalMatches[i].woman << " ";
         cout << finalMatches[i].cost << endl;
     }
-    cout << "Total Cost: " << totalCost << endl << "Average Costs: " << totalCost / finalMatches.size() << endl;
+    //cout << "Total Cost: " << totalCost << endl << "Average Costs: " << totalCost / finalMatches.size() << endl;
 
-    return 0;
+    return totalCost;
 }

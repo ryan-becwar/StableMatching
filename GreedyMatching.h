@@ -1,7 +1,7 @@
 #ifndef STABLEMATCHING_GREEDYMATCHING_H
 #define STABLEMATCHING_GREEDYMATCHING_H
 
-int runGreedy(int argc, char *argv[]);
+double runGreedy(int argc, char *argv[]);
 
 
 #endif //STABLEMATCHING_GREEDYMATCHING_H

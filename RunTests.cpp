@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "HungarianAlgorithm.h"
 #include "GreedyMatching.h"
 
@@ -12,14 +14,34 @@ void printCost(double cost, double optimalCost, double greedyCost, ostream &out)
     out << "Percent of optimal: " << optimalRatio * 100 << "%\n";
     out << "Percent improvement from greedy: " << greedyImprove * 100 << "%\n";
 }
+
 int main(int argc, char* argv[]){
 
+    //Generate dataset output file
+    string dataNameBase = "datasets/testData";
+    int dataFileNum = 0;
+    string dataFileName = dataNameBase.append(to_string(dataFileNum));
 
-    /*
-     * Should Generate tests cases and then run them
-     */
-    //Change to file output as needed
-    ostream &out = cout;
+    while(std::ifstream(dataFileName)){
+        dataFileNum++;
+        dataFileName = dataNameBase.append(to_string(dataFileNum));
+    }
+    ofstream dataStream(dataFileName);
+
+    //Setup log output
+    string logNameBase = "logs/testLog";
+    int logFileNum = 0;
+    string logFileName = logNameBase.append(to_string(logFileNum));
+
+    //As long as there is a file with the given file name
+    while(std::ifstream(logFileName)){
+        logFileNum++;
+        logFileName = logNameBase.append(to_string(logFileNum));
+    }
+
+    ofstream logStream(logFileName);
+
+    ostream &out = logStream;
 
     out << "Hungarian Algorithm(Optimal): " << endl;
     double optimalCost = runHungarian(argc, argv);

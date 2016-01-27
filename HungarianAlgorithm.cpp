@@ -1,11 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <list>
-#include <fstream>
-#include <limits>
-#include <algorithm>
-#include <set>
-#include <iterator>
+#include "HungarianAlgorithm.h"
 
 using namespace std;
 const double maxDist = numeric_limits<double>::infinity();
@@ -233,7 +226,7 @@ vector<Point> match(vector<vector<double>> &costs, unsigned long width){
 }
 
 
-double runHungarian(int argc, char *argv[]) {
+double runHungarianLong(int argc, char *argv[]) {
 
     //Readin Data
     unsigned long width;
@@ -241,6 +234,47 @@ double runHungarian(int argc, char *argv[]) {
 
     ifstream fin;
     fin.open(argv[1]);
+
+    fin >> width;
+
+    vector<bool> markedRows(width, false);
+    vector<bool> markedCols(width, false);
+
+    //Read in cost table
+    for(int i=0; i< width; i++){
+        int connectionCount;
+        fin >> connectionCount;
+        vector<double> connectionCosts;
+        for(int j=0; j<connectionCount; j++){
+            double cost;
+            fin >> cost;
+            connectionCosts.push_back(cost);
+        }
+        costs.push_back(connectionCosts);
+    }
+    vector<vector<double>> originalCosts(costs);
+
+    initialSubtraction(costs, width);
+    printCosts(costs, markedRows, markedCols);
+
+    solve(costs, width, markedRows, markedCols);
+
+    printCosts(costs, markedRows, markedCols);
+
+    vector<Point> matches = match(costs, width);
+    double totalCost = printMatches(matches, originalCosts);
+
+    return totalCost;
+}
+
+double runHungarian(string dataFile) {
+
+    //Readin Data
+    unsigned long width;
+    vector<vector<double>> costs;
+
+    ifstream fin;
+    fin.open(dataFile);
 
     fin >> width;
 

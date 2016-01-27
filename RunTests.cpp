@@ -44,11 +44,11 @@ int main(int argc, char* argv[]){
     ostream &out = logStream;
 
     out << "Hungarian Algorithm(Optimal): " << endl;
-    double optimalCost = runHungarian(argc, argv);
+    double optimalCost = runHungarianLong(argc, argv);
     out << "Total Cost: " << optimalCost << endl;
 
     out << "Greedy matching: " << endl;
-    double greedyCost = runGreedy(argc, argv);
+    double greedyCost = runGreedyLong(argc, argv);
     out << "Total Cost: " << greedyCost << endl;
 
     printCost(28, optimalCost, greedyCost, out);

@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11   CMakeFiles/GSAllocation.dir/depreciated/GaleShapleyAllocation.cpp.o  -o GSAllocation -rdynamic 

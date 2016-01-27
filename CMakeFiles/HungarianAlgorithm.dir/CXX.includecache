@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ryan/StableMatching/HungarianAlgorithm.cpp
+HungarianAlgorithm.h
+/home/ryan/StableMatching/HungarianAlgorithm.h
+
+/home/ryan/StableMatching/HungarianAlgorithm.h
+iostream
+-
+vector
+-
+list
+-
+fstream
+-
+limits
+-
+algorithm
+-
+set
+-
+iterator
+-
+

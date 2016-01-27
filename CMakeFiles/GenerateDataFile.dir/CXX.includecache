@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ryan/StableMatching/GenerateDataFile.cpp
+GenerateDataFile.h
+/home/ryan/StableMatching/GenerateDataFile.h
+vector
+-
+iostream
+-
+fstream
+-
+algorithm
+-
+ctime
+-
+cmath
+-
+
+/home/ryan/StableMatching/GenerateDataFile.h
+

@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++11   CMakeFiles/StableMatching.dir/depreciated/galeShapley.cpp.o  -o StableMatching -rdynamic 

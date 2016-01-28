@@ -1,5 +1,0 @@
-/home/ryan/StableMatching/CMakeFiles/StableMatching.dir
-/home/ryan/StableMatching/CMakeFiles/RunTests.dir
-/home/ryan/StableMatching/CMakeFiles/GenerateDataFile.dir
-/home/ryan/StableMatching/CMakeFiles/HungarianAlgorithm.dir
-/home/ryan/StableMatching/CMakeFiles/GSAllocation.dir

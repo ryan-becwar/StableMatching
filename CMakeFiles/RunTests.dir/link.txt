@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++11   CMakeFiles/RunTests.dir/RunTests.cpp.o CMakeFiles/RunTests.dir/HungarianAlgorithm.cpp.o CMakeFiles/RunTests.dir/GreedyMatching.cpp.o  -o RunTests -rdynamic 

@@ -140,7 +140,16 @@ int main(int argc, char *argv[]){
 	vector<vector<double> > p = transitionMat(costs);
 	printMatrix(p);
 
+	printMatrix(transpose(p));
+
 	vector<vector<double> > ppt = multiply(p, transpose(p));
 	printMatrix(ppt);
+
+	for(int i=0; i<ppt.size(); i++){
+		double sum = 0;
+		for(int j=0; j<ppt[i].size(); j++){
+			sum += ppt[i][j];
+		}
+	}
 	return 0;
 }

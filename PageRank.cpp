@@ -1,11 +1,25 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 #include "matrix.h"
 
 using namespace std;
 
+#define LARGE 10000000
+
+typedef pair<int, int> pii;
+struct sort_pairi{
+	bool operator()(const pii &left, const pii &right){
+		return left.first < right.first;
+	}
+};
 typedef pair<int, double> pid;
+struct sort_paird{
+	bool operator()(const pid &left, const pid &right){
+		return left.second > right.second;
+	}
+};
 
 int main(int argc, char *argv[]){
 	//Readin Data
@@ -30,6 +44,7 @@ int main(int argc, char *argv[]){
         costs.push_back(connectionCosts);
 	}
 
+	cout << "costs: " << endl;
 	printMatrix(costs);
 	vector<vector<double> > cT = transpose(costs);
 //	printMatrix(cT);
@@ -62,6 +77,57 @@ int main(int argc, char *argv[]){
 		printf("Iteration %d\n", i);
 		printMatrix(x);
 	}
+
+	//Create vector to sort elements in x based off of transition probability
+	vector<pid> rightSort;
+	for(unsigned int i=0; i<x.size(); i++){
+		pid p;
+		p.first = i;
+		p.second = x[i][0];
+		rightSort.push_back(p);
+	}
+
+	cerr << "Sorting\n";
+	sort(rightSort.begin(), rightSort.end(), sort_paird());
+	vector<int> rightPreference;
+	for(unsigned int i=0; i<rightSort.size(); i++){
+		rightPreference.push_back(rightSort[i].first);
+		cout << rightPreference[i] << endl;
+	}
+
+	vector<pii> matches;
+	vector<bool> available;
+	for(unsigned int i=0; i<rightPreference.size(); i++){
+		available.push_back(true);
+	}
+
+	for(unsigned int i=0; i<rightPreference.size(); i++){
+		int l = rightPreference[i];
+		double minCost = LARGE;
+		int minIndex;
+		for(unsigned int j=0; j<width; j++){
+			if(available[j] && costs[l][j] < minCost) {
+				minCost = costs[l][j];
+				minIndex = j;
+			}
+		}
+		available[minIndex] = false;
+		pii p;
+		p.first = l;
+		p.second = minIndex;
+		matches.push_back(p);
+	}
+
+	sort(matches.begin(), matches.end(), sort_pairi());
+	double totalCost = 0;
+	cout << "Matches:" << endl;
+	for(unsigned int i=0; i<matches.size(); i++){
+		totalCost += costs[matches[i].first][matches[i].second];
+		cout << matches[i].first << " " << matches[i].second <<
+		" " << costs[matches[i].first][matches[i].second] << endl;
+	}
+	cout << totalCost << endl;
+
 
 	return 0;
 }

@@ -1,30 +1,24 @@
-CC=clang
+CC=gcc
 CPP=g++
 CFLAGS=-Wall -g
 
-BINS=pagerank
+BINS=pagerank readAnnotationFormat
 
 all: $(BINS)
 
 pagerank:  PageRank.cpp 
 	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.cpp
 
-leaktest: leaktest.c
-	$(CC) $(CFLAGS) -o leaktest leaktest.c
-
-broken.o: broken.c
-	$(CC) $(CFLAGS) -c broken.c
-
-leakcount: leakcount.c
-	$(CC) $(CFLAGS) -o leakcount leakcount.c
-
+build_lp: build_lp.cpp
+	$(CPP) $(CFLAGS) -o build_lp build_lp.cpp
+readAnnotationFormat: readAnnotationFormat.cpp
+		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp
 
 clean:
 	rm $(BINS) 
 
-test: broken.o broken.h .FORCE
-	$(CC) $(CFLAGS) -o test mytests.c broken.o
-	./test 
-
+gen_cplex:
+	./build_lp << datasets/WeightedData.txt
+	
 .FORCE:	
 	

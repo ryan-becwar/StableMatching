@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-#include "echo_instance.h"
 
 using namespace std;
 
@@ -19,7 +18,7 @@ typedef struct Matching {
     }
 } Matching;
 
-/*
+
 double runGreedyLong(int argc, char *argv[]) {
 
     unsigned long personCount;
@@ -116,11 +115,4 @@ double runGreedy(string dataFile) {
     //cout << "Total Cost: " << totalCost << endl << "Average Costs: " << totalCost / finalMatches.size() << endl;
 
     return totalCost;
-}*/
-
-int main(int argc, char* argv[]){
-    printf("GreedyMatching\n");
-    Instance I = read_instance();
-    print_instance(I);
-    return 0;
 }

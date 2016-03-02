@@ -2,44 +2,40 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include "echo_instance.h"  
 
 using namespace std;
-typedef map<string, double> msd;
 
-struct Node {
-  int allocation;
-  int size;
-  msd attrs;
-};
-
-struct Edge {
-  int allocation;
-  int capacity;
-  msd attrs;
-};
-
-struct Instance {
-  vector<Node> lhsnodes;
-  vector<Node> rhsnodes;
-  vector<Edge> edges;
-};
 
 Instance read_instance(void) 
 {
   Instance I;
-  int Nlhs, Nrhs, Nedges, ival;
+  int Nlhs, Nrhs, Nedges;
+  int ival;
   string s;
   double dval;
 
   cin >> Nlhs >> Nrhs >> Nedges >> s;
+      //DEBUG
+      cerr << "s: " << s << endl;
+
   for (int i=0; i<Nlhs; i++) {
     cin >> ival;
+    //DEBUG
+    cerr << "ival: " << ival << endl;
     Node n;
     while (cin >> s && s != "node") {
+      //DEBUG
+      cerr << "s: " << s << endl;
       if (s == "size") cin >> n.size;
       else if (s == "allocation") cin >> n.allocation;
-      else { cin >> dval; n.attrs[s] = dval; }
+      else { cin >> dval; n.attrs[s] = dval;
+        //DEBUG
+        cerr << "s: " << s << "dval: " << dval << endl;
       }
+    }
+    //DEBUG
+    cerr << "node " << i << " done\n";
     I.lhsnodes.push_back(n);    
   }
 
@@ -54,6 +50,10 @@ Instance read_instance(void)
     I.rhsnodes.push_back(n);    
   }
 
+  //readin edges
+  for(int i=0; i<Nedges; i++) {
+
+  }
   return I;
 }
 
@@ -81,11 +81,14 @@ void print_instance(Instance I)
     cout << "\n";
   }
 
+  cout << I.edges.size() << "\n";
+  for(int i=0; i<I.edges.size(); i++){
+    cout << "edge" << endl;
+  }
+
 }
 
-int main(void)
-{
+int main(){
   Instance I = read_instance();
   print_instance(I);
 }
-

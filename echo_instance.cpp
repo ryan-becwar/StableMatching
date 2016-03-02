@@ -16,43 +16,40 @@ Instance read_instance(void)
   double dval;
 
   cin >> Nlhs >> Nrhs >> Nedges >> s;
-      //DEBUG
-      cerr << "s: " << s << endl;
 
   for (int i=0; i<Nlhs; i++) {
     cin >> ival;
-    //DEBUG
-    cerr << "ival: " << ival << endl;
     Node n;
     while (cin >> s && s != "node") {
-      //DEBUG
-      cerr << "s: " << s << endl;
       if (s == "size") cin >> n.size;
       else if (s == "allocation") cin >> n.allocation;
       else { cin >> dval; n.attrs[s] = dval;
-        //DEBUG
-        cerr << "s: " << s << "dval: " << dval << endl;
       }
     }
-    //DEBUG
-    cerr << "node " << i << " done\n";
     I.lhsnodes.push_back(n);    
   }
 
   for (int i=0; i<Nrhs; i++) {
     cin >> ival;
     Node n;
-    while (cin >> s && s != "node") {
+    while (cin >> s && s != "node" && s != "edge") {
       if (s == "size") cin >> n.size;
       else if (s == "allocation") cin >> n.allocation;
       else { cin >> dval; n.attrs[s] = dval; }
-      }
+    }
     I.rhsnodes.push_back(n);    
   }
 
   //readin edges
   for(int i=0; i<Nedges; i++) {
-
+    Edge e;
+    cin >> e.start >> e.end;
+    while(cin >> s && s != "edge") {
+      if (s == "capacity") cin >> e.capacity;
+      else if (s == "allocation") cin >> e.allocation;
+      else { cin >> dval; e.attrs[s] = dval; }
+    }
+    I.edges.push_back(e);
   }
   return I;
 }
@@ -83,7 +80,13 @@ void print_instance(Instance I)
 
   cout << I.edges.size() << "\n";
   for(int i=0; i<I.edges.size(); i++){
-    cout << "edge" << endl;
+    cout << "edge " << i;
+    cout << " allocation " << I.edges[i].allocation;
+    cout << " capacity " << I.edges[i].capacity;
+    for (msd::iterator it = I.edges[i].attrs.begin();
+      it != I.edges[i].attrs.end(); it++)
+      cout << " " << it->first << " " << it->second;
+    cout << endl;
   }
 
 }

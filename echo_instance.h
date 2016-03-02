@@ -14,6 +14,8 @@ struct Node {
 };
 
 struct Edge {
+  int start;
+  int end;
   int allocation;
   int capacity;
   msd attrs;

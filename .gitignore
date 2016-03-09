@@ -6,3 +6,6 @@ CMakeCache.txt
 pagerank
 a.out
 readAnnotationFormat
+GenerateDataFile
+GreedyMatching
+build_lp

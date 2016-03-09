@@ -132,21 +132,21 @@ Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double l
     for(int i=0; i<lhsCount; i++){
         Node n;
         n.size = 1;
-        n.allocation = 1;
+        n.allocation = 0;
         I.lhsnodes.push_back(n);
     }
     //rhs nodes
     for(int i=0; i<rhsCount; i++){
         Node n;
         n.size = 1;
-        n.allocation = 1;
+        n.allocation = 0;
         I.rhsnodes.push_back(n);
     }
     //edges
     for(int i=0; i<lhsCount; i++){
         for(int j=0; j<rhsCount; j++){
             Edge e;
-            e.allocation = 1;
+            e.allocation = 0;
             e.capacity = 1;
             e.attrs["value"] = 0.0;
             e.start = i;

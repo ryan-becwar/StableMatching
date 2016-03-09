@@ -56,7 +56,7 @@ Instance read_instance(void)
 
 void print_instance(Instance I)
 {
-  cout << I.lhsnodes.size() << "\n";
+  cout << I.lhsnodes.size() << " " << I.rhsnodes.size() << " " << I.edges.size() << "\n";
   for (int i=0; i<I.lhsnodes.size(); i++) {
     cout << "node " << i;
     cout << " size " << I.lhsnodes[i].size;
@@ -66,8 +66,8 @@ void print_instance(Instance I)
       cout << " " << it->first << " " << it->second;
     cout << "\n";
   }
+  cout << endl;
 
-  cout << I.rhsnodes.size() << "\n";
   for (int i=0; i<I.rhsnodes.size(); i++) {
     cout << "node " << i;
     cout << " size " << I.rhsnodes[i].size;
@@ -77,10 +77,10 @@ void print_instance(Instance I)
       cout << " " << it->first << " " << it->second;
     cout << "\n";
   }
+  cout << endl;
 
-  cout << I.edges.size() << "\n";
   for(int i=0; i<I.edges.size(); i++){
-    cout << "edge " << i;
+    cout << "edge " << I.edges[i].start << " " << I.edges[i].end;
     cout << " allocation " << I.edges[i].allocation;
     cout << " capacity " << I.edges[i].capacity;
     for (msd::iterator it = I.edges[i].attrs.begin();
@@ -91,7 +91,9 @@ void print_instance(Instance I)
 
 }
 
+/*
 int main(){
   Instance I = read_instance();
   print_instance(I);
 }
+*/

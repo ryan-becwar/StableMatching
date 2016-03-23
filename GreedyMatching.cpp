@@ -19,6 +19,7 @@ typedef struct Matching {
     }
 } Matching;
 
+
 /*
 double runGreedyLong(int argc, char *argv[]) {
 
@@ -121,6 +122,24 @@ double runGreedy(string dataFile) {
 int main(int argc, char* argv[]){
     printf("GreedyMatching\n");
     Instance I = read_instance();
+
+    sort(I.edges.begin(), I.edges.end());
+
+    for(int i=0; i<I.edges.size(); i++){
+        int start = I.edges[i].start;
+        int end = I.edges[i].end;
+        while(I.lhsnodes[start].allocation < I.lhsnodes[start].size
+            && I.rhsnodes[end].allocation < I.rhsnodes[end].size
+            && I.edges[i].allocation < I.edges[i].size){
+            I.lhsnodes[start].allocation++;
+            I.rhsnodes[end].allocation++;
+            I.edges[i].allocation++;
+        }
+    }
     print_instance(I);
+
+    cout << "value: " << get_value(I) << endl;
+
+
     return 0;
 }

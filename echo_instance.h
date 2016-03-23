@@ -17,8 +17,14 @@ struct Edge {
   int start;
   int end;
   int allocation;
-  int capacity;
+  int size;
+  double value;
   msd attrs;
+
+
+  bool operator<(const Edge& rhs){
+    return value > rhs.value;
+  }
 };
 
 struct Instance {
@@ -29,3 +35,4 @@ struct Instance {
 
 Instance read_instance(void);
 void print_instance(Instance I);
+double get_value(Instance I);

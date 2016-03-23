@@ -3,7 +3,6 @@
 #include <fstream>
 #include <algorithm>
 #include "matrix.h"
-#include "echo_instance.h"
 
 using namespace std;
 
@@ -23,8 +22,6 @@ struct sort_paird{
 };
 
 int main(int argc, char *argv[]){
-
-	Instance I = read_instance();
 	//Readin Data
 	unsigned long width;
 	vector<vector<double> > costs;

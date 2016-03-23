@@ -147,8 +147,8 @@ Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double l
         for(int j=0; j<rhsCount; j++){
             Edge e;
             e.allocation = 0;
-            e.capacity = 1;
-            e.attrs["value"] = 0.0;
+            e.size = 1;
+            e.value = 0.0;
             e.start = i;
             e.end = j;
             I.edges.push_back(e);
@@ -176,7 +176,7 @@ Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double l
         int l = I.edges[i].start;
         int r = I.edges[i].end;
 
-        I.edges[i].attrs["value"] = left[l].preferenceList[r];
+        I.edges[i].value = left[l].preferenceList[r];
     }
 
     /*

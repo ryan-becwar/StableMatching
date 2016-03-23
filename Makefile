@@ -1,13 +1,13 @@
 CC=gcc
 CPP=g++
-CFLAGS=-Wall -g -std=c++11
+CFLAGS=-g -std=c++11
 
-BINS=pagerank readAnnotationFormat build_lp GenerateDataFile
+BINS=pagerank readAnnotationFormat build_lp GenerateDataFile GreedyMatching pagerank
 
 all: $(BINS)
 
 pagerank:  PageRank.cpp 
-	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.cpp
+	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.cpp echo_instance.cpp
 
 build_lp: cplex/build_lp.cpp
 	$(CPP) $(CFLAGS) -o cplex/build_lp cplex/build_lp.cpp

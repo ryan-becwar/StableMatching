@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -33,6 +34,16 @@ struct Instance {
   vector<Edge> edges;
 };
 
+struct order_edge{
+  bool operator()(const Edge &left, const Edge &right){
+    if(left.start == right.start){
+      return(left.end < right.end);
+    }
+    return left.start < right.start;
+  }
+};
+
 Instance read_instance(void);
 void print_instance(Instance I);
 double get_value(Instance I);
+void order_edges(Instance &I);

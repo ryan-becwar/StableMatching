@@ -25,7 +25,7 @@ clean:
 	rm $(BINS) cplex/build_lp
 
 gen_cplex:
-	./build_lp << datasets/WeightedData.txt
+	./cplex/build_lp << datasets/WeightedData.txt
 	
 .FORCE:	
 	

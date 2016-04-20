@@ -1,4 +1,4 @@
-5 5 25
+5 3 15
 node 0 size 1 allocation 0
 node 1 size 1 allocation 0
 node 2 size 1 allocation 0
@@ -8,31 +8,19 @@ node 4 size 1 allocation 0
 node 0 size 1 allocation 0
 node 1 size 1 allocation 0
 node 2 size 1 allocation 0
-node 3 size 1 allocation 0
-node 4 size 1 allocation 0
 
 edge 0 0 allocation 0 size 1 value 0.635751
 edge 0 1 allocation 0 size 1 value 0.681402
 edge 0 2 allocation 0 size 1 value 0.792235
-edge 0 3 allocation 0 size 1 value 1.07684
-edge 0 4 allocation 0 size 1 value 1.05478
 edge 1 0 allocation 0 size 1 value 1.16324
 edge 1 1 allocation 0 size 1 value 0.350664
 edge 1 2 allocation 0 size 1 value 1.21336
-edge 1 3 allocation 0 size 1 value 0.239396
-edge 1 4 allocation 0 size 1 value 0.193711
 edge 2 0 allocation 0 size 1 value 1.36678
 edge 2 1 allocation 0 size 1 value 1.16139
 edge 2 2 allocation 0 size 1 value 1.31844
-edge 2 3 allocation 0 size 1 value 0.519852
-edge 2 4 allocation 0 size 1 value 1.10141
 edge 3 0 allocation 0 size 1 value 1.24034
 edge 3 1 allocation 0 size 1 value 0.222979
 edge 3 2 allocation 0 size 1 value 0.858717
-edge 3 3 allocation 0 size 1 value 1.12136
-edge 3 4 allocation 0 size 1 value 0.4087
 edge 4 0 allocation 0 size 1 value 1.22513
 edge 4 1 allocation 0 size 1 value 0.733735
 edge 4 2 allocation 0 size 1 value 0.407961
-edge 4 3 allocation 0 size 1 value 1.20545
-edge 4 4 allocation 0 size 1 value 0.433311

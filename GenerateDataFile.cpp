@@ -195,7 +195,7 @@ Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double l
 int main(int argc, char *argv[]){
 
     if(!(argc == 4 || argc == 7 || argc == 3 || argc == 6)){
-        cerr << "Usage: generateDataFile.o <lhsCount> <rhsCount> [<location weight> <global rank weight> <random weight>] <file output> \n";
+        cerr << "Usage: generateDataFile.o <lhsCount> <rhsCount> [<location weight> <global rank weight> <random weight>] > <output file> \n";
         return 0;
     }
 

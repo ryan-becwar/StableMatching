@@ -136,6 +136,8 @@ int main(int argc, char* argv[]){
             I.edges[i].allocation++;
         }
     }
+
+    order_edges(I);
     print_instance(I);
 
     cout << "value: " << get_value(I) << endl;

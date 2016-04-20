@@ -102,6 +102,10 @@ double get_value(Instance I){
   return sum;
 }
 
+void order_edges(Instance &I){
+  std::sort(I.edges.begin(), I.edges.end(), order_edge());
+}
+
 /*
 int main(){
   Instance I = read_instance();

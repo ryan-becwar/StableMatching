@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <random>
 #include "matrix.h"
 #include "echo_instance.h"
 
@@ -30,10 +31,62 @@ void print_pid(vector<pid> p){
 	}
 }
 
+/*
+Principal eigenvector x (sorted into rightSort), corresponds to the flexibility of
+matching for each element on the right side of the graph: higher value means higher
+flexibility, so we want to greedily match right side elements with a low rightSort
+value first
+
+This essentially leads to a greedy matching solution, but done in the order of 
+the given vector
+*/
+vector<pii> find_matches(vector<vector<double>> values, vector<unsigned int> order, unsigned long width) {
+	vector<pii> matches;
+
+	//Initialize available array to true
+	vector<bool> available;
+	for(unsigned int i=0; i<order.size(); i++){
+		available.push_back(true);
+	}
+
+
+	for(unsigned int i=0; i<order.size(); i++){
+		int r = order[i];
+		double maxVal = 0;
+		int maxIndex;
+		for(unsigned int j=0; j<width; j++){
+			if(available[j] && values[j][r] > maxVal) {
+				maxVal = values[j][r];
+				maxIndex = j;
+			}
+		}
+		available[maxIndex] = false;
+		pii p;
+		p.first = maxIndex;
+		p.second = r;
+		matches.push_back(p);
+	}
+
+	sort(matches.begin(), matches.end(), sort_pairi());
+
+	return matches;
+}
+
+void write_matches(Instance& I, vector<pii> matches){
+	
+	for(unsigned int i=0; i<matches.size(); i++){
+		//Currently will fail of edges are out of order, sorting of edges may be needed to prevent
+		int index = (matches[i].first * I.rhsnodes.size()) + matches[i].second;
+		I.edges[index].allocation++;
+		I.lhsnodes[I.edges[index].start].allocation++;
+		I.rhsnodes[I.edges[index].end].allocation++;
+	}
+}
+
 int main(int argc, char *argv[]){
 
-	Instance I = read_instance();
 	//Readin Data
+	Instance I = read_instance();
 	unsigned long width = (unsigned long) I.lhsnodes.size();
 
 	//Initialize values matrix to correct size
@@ -100,48 +153,25 @@ int main(int argc, char *argv[]){
 
 	//Sort in ascending order
 	sort(rightSort.begin(), rightSort.end(), sort_paird());
-	reverse(rightSort.begin(), rightSort.end());
+	//reverse(rightSort.begin(), rightSort.end());
+
+	vector<unsigned int> generatedOrder;
+	for(unsigned int i=0; i<rightSort.size(); i++){
+		generatedOrder.push_back(rightSort[i].first);
+	}
 
 	#ifdef VERBOSE
 	cout << "rightSort: \n";
 	print_pid(rightSort);
 	#endif
 
-	vector<pii> matches;
-	//Initialize available array to true
-	vector<bool> available;
-	for(unsigned int i=0; i<rightSort.size(); i++){
-		available.push_back(true);
-	}
+	vector<pii> matches = find_matches(values, generatedOrder, width);
+	//Write back matches to the instance
+	write_matches(I, matches);
 
-
-	/*
-	Principal eigenvector x (sorted into rightSort), corresponds to the flexibility of
-	matching for each element on the right side of the graph: higher value means higher
-	flexibility, so we want to greedily match right side elements with a low rightSort
-	value first
-	*/
-	for(unsigned int i=0; i<rightSort.size(); i++){
-		int r = rightSort[i].first;
-		double maxVal = 0;
-		int maxIndex;
-		for(unsigned int j=0; j<width; j++){
-			if(available[j] && values[j][r] > maxVal) {
-				maxVal = values[j][r];
-				maxIndex = j;
-			}
-		}
-		available[maxIndex] = false;
-		pii p;
-		p.first = maxIndex;
-		p.second = r;
-		matches.push_back(p);
-	}
-
-	sort(matches.begin(), matches.end(), sort_pairi());
 
 	#ifdef VERBOSE
-	//write out matches
+	//write out information about matches
 	double totalCost = 0;
 	cout << matches.size() << " Matches:" << endl;
 	for(unsigned int i=0; i<matches.size(); i++){
@@ -152,18 +182,40 @@ int main(int argc, char *argv[]){
 	cout << totalCost << endl;
 	#endif
 
-	//Write back matches to edges
-	for(unsigned int i=0; i<matches.size(); i++){
-		//Curretnly will fail of edges are out of order, sorting of edges may be needed to prevent
-		int index = (matches[i].first * I.rhsnodes.size()) + matches[i].second;
-		I.edges[index].allocation++;
-		I.lhsnodes[I.edges[index].start].allocation++;
-		I.rhsnodes[I.edges[index].end].allocation++;
-	}
+    double smartValue = get_value(I);
 
     print_instance(I);
+    cout << "value: " << smartValue << endl;
 
-    cout << "value: " << get_value(I) << endl;
+
+    //random engine needed for random ordering
+    default_random_engine randomEngine;
+
+
+    const unsigned int greedyCount = 100;
+    vector<double> greedyValueResults;
+    for(unsigned int i=0; i<greedyCount; i++){
+    	//generate random order vector
+    	vector<unsigned int> randomOrder;
+    	for(unsigned int j=0; j<width; j++){
+    		randomOrder.push_back(j);
+    	}
+
+    	std::shuffle(std::begin(randomOrder), std::end(randomOrder), randomEngine);
+
+
+    	//calculate value of matching based on this order
+    	vector<pii> randomMatches = find_matches(values, randomOrder, width);
+		//Write back matches to the instance
+		write_matches(I, randomMatches);
+		greedyValueResults.push_back(get_value(I));
+    }
+
+    std::sort(greedyValueResults.begin(), greedyValueResults.end());
+
+    for(int i=0; i<greedyValueResults.size(); i++){
+    	cout << greedyValueResults[i] << endl;
+    }
 
 	return 0;
 }

@@ -15,7 +15,7 @@ using namespace std;
 typedef pair<int, int> pii;
 struct sort_pairi{
 	bool operator()(const pii &left, const pii &right){
-		return left.first < right.first;
+		return left.first > right.first;
 	}
 };
 typedef pair<int, double> pid;
@@ -73,7 +73,16 @@ vector<pii> find_matches(vector<vector<double>> values, vector<unsigned int> ord
 }
 
 void write_matches(Instance& I, vector<pii> matches){
-	
+	//0 out previous allocation status
+	for(unsigned int i=0; i<I.edges.size(); i++){
+		I.edges[i].allocation = 0;
+	}
+	for(unsigned int i=0; i<I.lhsnodes.size(); i++){
+		I.lhsnodes[i].allocation = 0;
+	}	for(unsigned int i=0; i<I.rhsnodes.size(); i++){
+		I.rhsnodes[i].allocation = 0;
+	}
+
 	for(unsigned int i=0; i<matches.size(); i++){
 		//Currently will fail of edges are out of order, sorting of edges may be needed to prevent
 		int index = (matches[i].first * I.rhsnodes.size()) + matches[i].second;
@@ -153,7 +162,7 @@ int main(int argc, char *argv[]){
 
 	//Sort in ascending order
 	sort(rightSort.begin(), rightSort.end(), sort_paird());
-	//reverse(rightSort.begin(), rightSort.end());
+	reverse(rightSort.begin(), rightSort.end());
 
 	vector<unsigned int> generatedOrder;
 	for(unsigned int i=0; i<rightSort.size(); i++){
@@ -184,8 +193,10 @@ int main(int argc, char *argv[]){
 
     double smartValue = get_value(I);
 
+    #ifdef VERBOSE
     print_instance(I);
     cout << "value: " << smartValue << endl;
+    #endif
 
 
     //random engine needed for random ordering
@@ -213,9 +224,20 @@ int main(int argc, char *argv[]){
 
     std::sort(greedyValueResults.begin(), greedyValueResults.end());
 
+    #ifdef VERBOSE
     for(int i=0; i<greedyValueResults.size(); i++){
     	cout << greedyValueResults[i] << endl;
     }
+    #endif
+
+    //TODO: implement this as a binary search, written like this quickly
+    //Find how the smart value compares to random greedy values
+    unsigned int smartValueRank;
+    for(smartValueRank = 0; smartValueRank < greedyCount &&
+    	smartValue > greedyValueResults[smartValueRank]; smartValueRank++);
+
+    cout << "matching order determined using pagerank algorithm ranked " << smartValueRank <<
+		" out of " << greedyCount << " random orderings." << endl;
 
 	return 0;
 }

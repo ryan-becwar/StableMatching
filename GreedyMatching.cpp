@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
 
     sort(I.edges.begin(), I.edges.end());
 
-    for(int i=0; i<I.edges.size(); i++){
+    for(unsigned int i=0; i<I.edges.size(); i++){
         int start = I.edges[i].start;
         int end = I.edges[i].end;
         while(I.lhsnodes[start].allocation < I.lhsnodes[start].size

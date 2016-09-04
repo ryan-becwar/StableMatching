@@ -1,6 +1,6 @@
 CC=gcc
 CPP=g++
-CFLAGS=-g -std=c++11
+CFLAGS=-g -std=c++11 -Wall
 
 BINS= matrix.o echo_instance.o pagerank build_lp GenerateDataFile GreedyMatching pagerank
 

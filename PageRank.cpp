@@ -12,12 +12,15 @@ using namespace std;
 
 //#define VERBOSE
 
+//Used to sort by first index of matches, so sorts ascending
 typedef pair<int, int> pii;
 struct sort_pairi{
 	bool operator()(const pii &left, const pii &right){
-		return left.first > right.first;
+		return left.first < right.first;
 	}
 };
+
+//Used to sort value of doulbe, so sorts descending
 typedef pair<int, double> pid;
 struct sort_paird{
 	bool operator()(const pid &left, const pid &right){
@@ -26,7 +29,7 @@ struct sort_paird{
 };
 
 void print_pid(vector<pid> p){
-	for(int i=0; i<p.size(); i++){
+	for(unsigned int i=0; i<p.size(); i++){
 		cout << p[i].first << " " << p[i].second <<endl;
 	}
 }
@@ -94,31 +97,7 @@ void write_matches(Instance& I, vector<pii> matches){
 	}
 }
 
-int main(int argc, char *argv[]){
-	//Readin Data
-	Instance I = read_instance();
-	unsigned long width = (unsigned long) I.lhsnodes.size();
-
-	//Initialize values matrix to correct size
-	vector<vector<double> > values;
-	for(int i=0; i< I.lhsnodes.size(); i++){
-		vector<double> connectionCosts;
-		connectionCosts.resize(I.rhsnodes.size());
-		values.push_back(connectionCosts);
-	}
-
-	//Assign values matrix from Instance edges
-	for(int i=0; i<I.edges.size(); i++){
-		values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
-	}
-
-	#ifdef VERBOSE
-	vector<vector<double> > vT = transpose(values);
-	vector<vector<double> > vvT = multiply(values, vT);
-	printMatrix(values);
-	printMatrix(vT);
-	printMatrix(vvT);
-	#endif
+void pagerank_order(Instance& I, vector<vector<double>> values, unsigned long width){
 
 	vector<vector<double> > p = transitionMat(values);
 	vector<vector<double> > ppt = multiply(p, transpose(p));
@@ -134,11 +113,11 @@ int main(int argc, char *argv[]){
 	}
 
 	#ifdef VERBOSE
-	cout << "ppt:" << endl;
-	printMatrix(ppt);
+		cout << "ppt:" << endl;
+		printMatrix(ppt);
 
-	cout << "x\n";
-	printMatrix(x);
+		cout << "x\n";
+		printMatrix(x);
 	#endif
 
 	for(int i=0; i<5; i++){
@@ -170,28 +149,57 @@ int main(int argc, char *argv[]){
 	}
 
 	#ifdef VERBOSE
-	cout << "rightSort: \n";
-	print_pid(rightSort);
+		cout << "rightSort: \n";
+		print_pid(rightSort);
 	#endif
 
 	vector<pii> matches = find_matches(values, generatedOrder, width);
 	//Write back matches to the instance
 	write_matches(I, matches);
-	double smartValue = get_value(I);
 
 
 	#ifdef VERBOSE
-	//write out information about matches
-	double totalCost = 0;
-	cout << matches.size() << " Matches:" << endl;
-	for(unsigned int i=0; i<matches.size(); i++){
-		totalCost += values[matches[i].first][matches[i].second];
-		cout << matches[i].first << " " << matches[i].second <<
-		" " << values[matches[i].first][matches[i].second] << endl;
+		//write out information about matches
+		double totalCost = 0;
+		cout << matches.size() << " Matches:" << endl;
+		for(unsigned int i=0; i<matches.size(); i++){
+			totalCost += values[matches[i].first][matches[i].second];
+			cout << matches[i].first << " " << matches[i].second <<
+			" " << values[matches[i].first][matches[i].second] << endl;
+		}
+		cout << totalCost << endl;
+	#endif
+}
+
+int main(int argc, char *argv[]){
+
+	//Readin Data
+	Instance I = read_instance();
+	unsigned long width = (unsigned long) I.lhsnodes.size();
+
+	//Initialize values matrix to correct size
+	vector<vector<double> > values;
+	for(unsigned int i=0; i< I.lhsnodes.size(); i++){
+		vector<double> connectionCosts;
+		connectionCosts.resize(I.rhsnodes.size());
+		values.push_back(connectionCosts);
 	}
-	cout << totalCost << endl;
+
+	//Assign values matrix from Instance edges
+	for(unsigned int i=0; i<I.edges.size(); i++){
+		values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
+	}
+
+
+	#ifdef VERBOSE
+	vector<vector<double> > vT = transpose(values);
+	vector<vector<double> > vvT = multiply(values, vT);
+	printMatrix(vT);
+	printMatrix(vvT);
 	#endif
 
+	pagerank_order(I, values, width);
+	double smartValue = get_value(I);
 
   #ifdef VERBOSE
   print_instance(I);

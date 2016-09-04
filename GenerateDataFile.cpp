@@ -32,14 +32,14 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
     uniform_real_distribution<double> distribution(0.0, 1.0);
 
     //Assign random points
-    for(int i=0; i<left.size(); i++){
+    for(unsigned int i=0; i<left.size(); i++){
         Point p;
         p.first = distribution(randomEngine);
         p.second = distribution(randomEngine);
         leftPoints.push_back(p);
     }
 
-    for(int i=0; i<right.size(); i++){
+    for(unsigned int i=0; i<right.size(); i++){
         Point p;
         p.first = distribution(randomEngine);
         p.second = distribution(randomEngine);
@@ -47,8 +47,8 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
     }
 
     //assign preference values based on distance
-    for(int i=0; i<left.size(); i++){
-        for(int j=0; j<right.size(); j++){
+    for(unsigned int i=0; i<left.size(); i++){
+        for(unsigned int j=0; j<right.size(); j++){
             double dist = sqrt(pow((rightPoints[j].first - leftPoints[i].first),2)
                                + pow((rightPoints[j].second - leftPoints[i].second),2));
 
@@ -72,19 +72,19 @@ void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, dou
     uniform_real_distribution<double> distribution(0.0, 1.0);
 
     //value left, assign right's preference weights
-    for(int i=0; i<left.size(); i++){
+    for(unsigned int i=0; i<left.size(); i++){
         double globalRank = distribution(randomEngine);
         globalRank *= rankWeight;
-        for(int j=0; j<right.size(); j++){
+        for(unsigned int j=0; j<right.size(); j++){
             right[j].preferenceList[i] += globalRank;
         }
     }
 
     //value right, assign left's preference weights
-    for(int i=0; i<right.size(); i++){
+    for(unsigned int i=0; i<right.size(); i++){
         double globalRank = distribution(randomEngine);
         globalRank *= rankWeight;
-        for(int j=0; j<left.size(); j++){
+        for(unsigned int j=0; j<left.size(); j++){
             left[j].preferenceList[i] += globalRank;
         }
     }
@@ -95,16 +95,16 @@ void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double 
     default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(-.5, .5);
 
-    for(int i=0; i<left.size(); i++){
-        for(int j=0; j<right.size(); j++){
+    for(unsigned int i=0; i<left.size(); i++){
+        for(unsigned int j=0; j<right.size(); j++){
             double epsilon = distribution(randomEngine);
             epsilon *= randomWeight;
             left[i].preferenceList[j] += epsilon;
         }
     }
 
-    for(int i=0; i<right.size(); i++){
-        for(int j=0; j<left.size(); j++){
+    for(unsigned int i=0; i<right.size(); i++){
+        for(unsigned int j=0; j<left.size(); j++){
             double epsilon = distribution(randomEngine);
             epsilon *= randomWeight;
             right[i].preferenceList[j] += epsilon;
@@ -114,7 +114,7 @@ void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double 
 
 void writeNodeData(ostream &out, vector<NodeData> &nodes){
     out << nodes.size() << endl;
-    for(int i=0; i<nodes.size(); i++){
+    for(unsigned int i=0; i<nodes.size(); i++){
         out << nodes[i].listLength << " ";
         for(int j=0; j<nodes[i].listLength; j++){
             out << nodes[i].preferenceList[j] << " ";
@@ -172,7 +172,7 @@ Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double l
     assignRandomWeight(left, right, randomWeight);
 
     //Gets data from the left and right structures and assigns it to Instance
-    for(int i=0; i<I.edges.size(); i++){
+    for(unsigned int i=0; i<I.edges.size(); i++){
         int l = I.edges[i].start;
         int r = I.edges[i].end;
 

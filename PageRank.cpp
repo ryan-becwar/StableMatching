@@ -10,7 +10,7 @@ using namespace std;
 
 #define LARGE 10000000
 
-#define VERBOSE
+//#define VERBOSE
 
 //Used to sort by first index of matches, so sorts ascending
 typedef pair<int, int> pii;
@@ -40,7 +40,7 @@ matching for each element on the right side of the graph: higher value means hig
 flexibility, so we want to greedily match right side elements with a low rightSort
 value first
 
-This essentially leads to a greedy matching solution, but done in the order of 
+This essentially leads to a greedy matching solution, but done in the order of
 the given vector
 */
 vector<pii> find_matches(vector<vector<double>> values, vector<unsigned int> order, unsigned long width) {

@@ -1,6 +1,6 @@
 CC=gcc
 CPP=g++
-CFLAGS=-g -std=c++11
+CFLAGS=-g -std=c++11 -Wall
 
 BINS=pagerank readAnnotationFormat build_lp GenerateDataFile GreedyMatching pagerank
 

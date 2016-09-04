@@ -97,7 +97,14 @@ void write_matches(Instance& I, vector<pii> matches){
 	}
 }
 
-void pagerank_order(Instance& I, vector<vector<double>> values, unsigned long width){
+
+/*
+Using an algorithm loosely modeled after the google pagerank algorith, we can
+determine the priority with which we should match each node on the left side
+of the matching based off of its centrality.  This generates a ranked order
+based on that priority
+*/
+vector<unsigned int> generate_pagerank_order(vector<vector<double>> values, unsigned long width){
 
 	vector<vector<double> > p = transitionMat(values);
 	vector<vector<double> > ppt = multiply(p, transpose(p));
@@ -132,11 +139,11 @@ void pagerank_order(Instance& I, vector<vector<double>> values, unsigned long wi
 	//Create vector to sort elements in x based off of transition probability
 	vector<pid> rightSort;
 	for(unsigned int i=0; i<x.size(); i++){
-		pid p;
-		p.first = i;
+		pid pair;
+		pair.first = i;
 		//x is one dimensional matrix
-		p.second = x[i][0];
-		rightSort.push_back(p);
+		pair.second = x[i][0];
+		rightSort.push_back(pair);
 	}
 
 	//Sort in ascending order
@@ -151,14 +158,7 @@ void pagerank_order(Instance& I, vector<vector<double>> values, unsigned long wi
 	#ifdef VERBOSE
 		cout << "rightSort: \n";
 		print_pid(rightSort);
-	#endif
 
-	vector<pii> matches = find_matches(values, generatedOrder, width);
-	//Write back matches to the instance
-	write_matches(I, matches);
-
-
-	#ifdef VERBOSE
 		//write out information about matches
 		double totalCost = 0;
 		cout << matches.size() << " Matches:" << endl;
@@ -169,6 +169,8 @@ void pagerank_order(Instance& I, vector<vector<double>> values, unsigned long wi
 		}
 		cout << totalCost << endl;
 	#endif
+
+	return generatedOrder;
 }
 
 int main(int argc, char *argv[]){
@@ -185,11 +187,19 @@ int main(int argc, char *argv[]){
 		values.push_back(connectionCosts);
 	}
 
-	//Assign values matrix from Instance edges
+	//Assign values values to matrix from Instance edges
 	for(unsigned int i=0; i<I.edges.size(); i++){
 		values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
 	}
 
+	//find the greedy order that we obtain from the pagerank algorithm
+	vector<unsigned int> pagerankOrder = generate_pagerank_order(values, width);
+
+	vector<pii> matches = find_matches(values, pagerankOrder, width);
+	//Write back matches to the instance
+	write_matches(I, matches);
+
+	double smartValue = get_value(I);
 
 	#ifdef VERBOSE
 	vector<vector<double> > vT = transpose(values);
@@ -198,10 +208,7 @@ int main(int argc, char *argv[]){
 	printMatrix(vvT);
 	#endif
 
-	pagerank_order(I, values, width);
-	double smartValue = get_value(I);
-
-  #ifdef VERBOSE
+	#ifdef VERBOSE
   print_instance(I);
   cout << "value: " << smartValue << endl;
   #endif

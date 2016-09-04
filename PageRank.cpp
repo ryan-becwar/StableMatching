@@ -71,7 +71,9 @@ vector<pii> find_matches(vector<vector<double>> values, vector<unsigned int> ord
 
 	return matches;
 }
-
+/*
+	saves matches state from the matches vector to the provided Instance variable
+*/
 void write_matches(Instance& I, vector<pii> matches){
 	//0 out previous allocation status
 	for(unsigned int i=0; i<I.edges.size(); i++){
@@ -93,7 +95,6 @@ void write_matches(Instance& I, vector<pii> matches){
 }
 
 int main(int argc, char *argv[]){
-
 	//Readin Data
 	Instance I = read_instance();
 	unsigned long width = (unsigned long) I.lhsnodes.size();
@@ -111,10 +112,9 @@ int main(int argc, char *argv[]){
 		values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
 	}
 
-	vector<vector<double> > vT = transpose(values);
-
-	vector<vector<double> > vvT = multiply(values, vT);
 	#ifdef VERBOSE
+	vector<vector<double> > vT = transpose(values);
+	vector<vector<double> > vvT = multiply(values, vT);
 	printMatrix(values);
 	printMatrix(vT);
 	printMatrix(vvT);
@@ -177,6 +177,7 @@ int main(int argc, char *argv[]){
 	vector<pii> matches = find_matches(values, generatedOrder, width);
 	//Write back matches to the instance
 	write_matches(I, matches);
+	double smartValue = get_value(I);
 
 
 	#ifdef VERBOSE
@@ -191,53 +192,51 @@ int main(int argc, char *argv[]){
 	cout << totalCost << endl;
 	#endif
 
-    double smartValue = get_value(I);
 
-    #ifdef VERBOSE
-    print_instance(I);
-    cout << "value: " << smartValue << endl;
-    #endif
-
-
-    //random engine needed for random ordering
-    default_random_engine randomEngine;
+  #ifdef VERBOSE
+  print_instance(I);
+  cout << "value: " << smartValue << endl;
+  #endif
 
 
-    const unsigned int greedyCount = 100;
-    vector<double> greedyValueResults;
-    for(unsigned int i=0; i<greedyCount; i++){
-    	//generate random order vector
-    	vector<unsigned int> randomOrder;
-    	for(unsigned int j=0; j<width; j++){
-    		randomOrder.push_back(j);
-    	}
+  //random engine needed for random ordering
+  default_random_engine randomEngine;
 
-    	std::shuffle(std::begin(randomOrder), std::end(randomOrder), randomEngine);
+  const unsigned int greedyCount = 100;
+  vector<double> greedyValueResults;
+  for(unsigned int i=0; i<greedyCount; i++){
+  	//generate random order vector
+  	vector<unsigned int> randomOrder;
+  	for(unsigned int j=0; j<width; j++){
+  		randomOrder.push_back(j);
+  	}
+
+  	std::shuffle(std::begin(randomOrder), std::end(randomOrder), randomEngine);
 
 
-    	//calculate value of matching based on this order
-    	vector<pii> randomMatches = find_matches(values, randomOrder, width);
+  	//calculate value of matching based on this order
+  	vector<pii> randomMatches = find_matches(values, randomOrder, width);
 		//Write back matches to the instance
 		write_matches(I, randomMatches);
 		greedyValueResults.push_back(get_value(I));
-    }
+  }
 
-    std::sort(greedyValueResults.begin(), greedyValueResults.end());
+  std::sort(greedyValueResults.begin(), greedyValueResults.end());
 
-    #ifdef VERBOSE
-    for(int i=0; i<greedyValueResults.size(); i++){
-    	cout << greedyValueResults[i] << endl;
-    }
-    #endif
+  #ifdef VERBOSE
+  for(int i=0; i<greedyValueResults.size(); i++){
+  	cout << greedyValueResults[i] << endl;
+  }
+  #endif
 
-    //TODO: implement this as a binary search, written like this quickly
-    //Find how the smart value compares to random greedy values
-    unsigned int smartValueRank;
-    for(smartValueRank = 0; smartValueRank < greedyCount &&
-    	smartValue > greedyValueResults[smartValueRank]; smartValueRank++);
+  //TODO: implement this as a binary search, written like this quickly
+  //Find how the smart value compares to random greedy values
+  unsigned int smartValueRank;
+  for(smartValueRank = 0; smartValueRank < greedyCount &&
+  	smartValue > greedyValueResults[smartValueRank]; smartValueRank++);
 
-    cout << "matching order determined using pagerank algorithm ranked " << smartValueRank <<
-		" out of " << greedyCount << " random orderings." << endl;
+  cout << "matching order determined using pagerank algorithm ranked " << smartValueRank <<
+	" out of " << greedyCount << " random orderings." << endl;
 
 	return 0;
 }

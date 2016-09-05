@@ -9,3 +9,4 @@ readAnnotationFormat
 GenerateDataFile
 GreedyMatching
 build_lp
+*.o

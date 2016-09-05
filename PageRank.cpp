@@ -9,8 +9,11 @@
 using namespace std;
 
 #define LARGE 10000000
+#define PAGERANK_EXP_VALUE .8
+#define PAGERANK_STEP_COUNT 10
 
-//#define VERBOSE
+#define VERBOSE
+
 
 //Used to sort by first index of matches, so sorts ascending
 typedef pair<int, int> pii;
@@ -33,6 +36,9 @@ void print_pid(vector<pid> p){
 		cout << p[i].first << " " << p[i].second <<endl;
 	}
 }
+
+void rank_results_against_random(Instance& I, vector<vector<double>> values,
+	unsigned int width, double pageRankValue);
 
 /*
 Principal eigenvector x (sorted into rightSort), corresponds to the flexibility of
@@ -109,7 +115,6 @@ vector<unsigned int> generate_pagerank_order(vector<vector<double>> values, unsi
 	vector<vector<double> > p = transitionMat(values);
 	vector<vector<double> > ppt = multiply(p, transpose(p));
 
-	const double a = .8;
 	//Vector to be repeatedly multiplied by ppt
 	//Stored as a matrix for compliance with multiplication functions
 	vector<vector<double> > x;
@@ -127,8 +132,8 @@ vector<unsigned int> generate_pagerank_order(vector<vector<double>> values, unsi
 		printMatrix(x);
 	#endif
 
-	for(int i=0; i<5; i++){
-		x = scalarMult(x, a);
+	for(int i=0; i<PAGERANK_STEP_COUNT; i++){
+		x = scalarMult(x, PAGERANK_EXP_VALUE);
 		x = multiply(ppt, x);
 		#ifdef VERBOSE
 		printf("Iteration %d\n", i);
@@ -158,17 +163,8 @@ vector<unsigned int> generate_pagerank_order(vector<vector<double>> values, unsi
 	#ifdef VERBOSE
 		cout << "rightSort: \n";
 		print_pid(rightSort);
-
-		//write out information about matches
-		double totalCost = 0;
-		cout << matches.size() << " Matches:" << endl;
-		for(unsigned int i=0; i<matches.size(); i++){
-			totalCost += values[matches[i].first][matches[i].second];
-			cout << matches[i].first << " " << matches[i].second <<
-			" " << values[matches[i].first][matches[i].second] << endl;
-		}
-		cout << totalCost << endl;
 	#endif
+
 
 	return generatedOrder;
 }
@@ -187,7 +183,7 @@ int main(int argc, char *argv[]){
 		values.push_back(connectionCosts);
 	}
 
-	//Assign values values to matrix from Instance edges
+	//Assign values to values matrix from Instance edges
 	for(unsigned int i=0; i<I.edges.size(); i++){
 		values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
 	}
@@ -199,21 +195,37 @@ int main(int argc, char *argv[]){
 	//Write back matches to the instance
 	write_matches(I, matches);
 
-	double smartValue = get_value(I);
+	double pageRankValue = get_value(I);
 
 	#ifdef VERBOSE
-	vector<vector<double> > vT = transpose(values);
-	vector<vector<double> > vvT = multiply(values, vT);
-	printMatrix(vT);
-	printMatrix(vvT);
+		vector<vector<double> > vT = transpose(values);
+		vector<vector<double> > vvT = multiply(values, vT);
+		printMatrix(vT);
+		printMatrix(vvT);
+
+		//write out information about matches
+		double totalCost = 0;
+		cout << matches.size() << " Matches:" << endl;
+		for(unsigned int i=0; i<matches.size(); i++){
+			totalCost += values[matches[i].first][matches[i].second];
+			cout << matches[i].first << " " << matches[i].second <<
+			" " << values[matches[i].first][matches[i].second] << endl;
+		}
+	cout << totalCost << endl;
 	#endif
 
 	#ifdef VERBOSE
-  print_instance(I);
-  cout << "value: " << smartValue << endl;
+	  print_instance(I);
+	  cout << "value: " << pageRankValue << endl;
   #endif
 
+	rank_results_against_random(I, values, width, pageRankValue);
 
+	return 0;
+}
+
+void rank_results_against_random(Instance& I, vector<vector<double>> values,
+	unsigned int width, double pageRankValue) {
   //random engine needed for random ordering
   default_random_engine randomEngine;
 
@@ -239,19 +251,17 @@ int main(int argc, char *argv[]){
   std::sort(greedyValueResults.begin(), greedyValueResults.end());
 
   #ifdef VERBOSE
-  for(int i=0; i<greedyValueResults.size(); i++){
+  for(unsigned int i=0; i<greedyValueResults.size(); i++){
   	cout << greedyValueResults[i] << endl;
   }
   #endif
 
   //TODO: implement this as a binary search, written like this quickly
   //Find how the smart value compares to random greedy values
-  unsigned int smartValueRank;
-  for(smartValueRank = 0; smartValueRank < greedyCount &&
-  	smartValue > greedyValueResults[smartValueRank]; smartValueRank++);
+  unsigned int pageRankValueRank;
+  for(pageRankValueRank = 0; pageRankValueRank < greedyCount &&
+  	pageRankValue > greedyValueResults[pageRankValueRank]; pageRankValueRank++);
 
-  cout << "matching order determined using pagerank algorithm ranked " << smartValueRank <<
+  cout << "matching order determined using pagerank algorithm ranked " << pageRankValueRank <<
 	" out of " << greedyCount << " random orderings." << endl;
-
-	return 0;
 }

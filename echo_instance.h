@@ -47,3 +47,4 @@ Instance read_instance(void);
 void print_instance(Instance I);
 double get_value(Instance I);
 void order_edges(Instance &I);
+vector<vector<double> > get_value_matrix(Instance &I);

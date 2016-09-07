@@ -78,6 +78,7 @@ std::vector<std::vector<double> > transpose(std::vector<std::vector<double> > a)
 	return at;
 }
 
+//inverts the values of the provided matrix and scales to make each row sum to 1
 std::vector<std::vector<double> > transitionMat(std::vector<std::vector<double> > costs){
 	unsigned int width = costs[0].size();
 	unsigned int height = costs.size();
@@ -114,4 +115,27 @@ std::vector<double> sumRows(std::vector<std::vector<double> > p){
 		sums.push_back(sum);
 	}
 	return sums;
+}
+
+//get a vector of values in the specified column
+std::vector<double> getColumn(std::vector<std::vector<double> >& matrix, unsigned int index){
+	std::vector<double> column;
+
+	//handle error cases
+	if(matrix.size() == 0){
+		std::cerr << "Empty matrix provided to getColumn function" << std::endl;
+		return column;
+	}
+
+	for(unsigned int i=0; i<matrix.size(); i++){
+		//if this row does not contain a value in this column error cases
+		if(matrix[i].size() <= index){
+			std::cerr << "Column specified is out of bounds" << std::endl;
+			return column;
+		}
+
+		column.push_back(matrix[i][index]);
+	}
+
+	return column;
 }

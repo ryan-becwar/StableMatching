@@ -8,3 +8,4 @@ std::vector<std::vector<double> > scalarMult(std::vector<std::vector<double> > a
 std::vector<std::vector<double> > transpose(std::vector<std::vector<double> > a);
 std::vector<std::vector<double> > transitionMat(std::vector<std::vector<double> > costs);
 std::vector<double> sumRows(std::vector<std::vector<double> > p);
+std::vector<double> getColumn(std::vector<std::vector<double> >& matrix, unsigned int index);

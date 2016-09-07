@@ -6,7 +6,6 @@
 #include "matrix.h"
 #include "echo_instance.h"
 
-using namespace std;
 
 #define LARGE 10000000
 #define PAGERANK_EXP_VALUE .8
@@ -33,14 +32,14 @@ struct sort_paird{
 
 void print_pid(vector<pid> p){
 	for(unsigned int i=0; i<p.size(); i++){
-		cout << p[i].first << " " << p[i].second <<endl;
+		std::cout << p[i].first << " " << p[i].second <<std::endl;
 	}
 }
 
 void rank_results_against_random(Instance& I, vector<vector<double>> values,
 	unsigned int width, double pageRankValue);
 
-/*
+/*make
 Principal eigenvector x (sorted into rightSort), corresponds to the flexibility of
 matching for each element on the right side of the graph: higher value means higher
 flexibility, so we want to greedily match right side elements with a low rightSort
@@ -125,10 +124,13 @@ vector<unsigned int> generate_pagerank_order(vector<vector<double>> values, unsi
 	}
 
 	#ifdef VERBOSE
-		cout << "ppt:" << endl;
+		std::cout << "p:" << std::endl;
+		printMatrix(p);
+
+		std::cout << "ppt:" << std::endl;
 		printMatrix(ppt);
 
-		cout << "x\n";
+		std::cout << "x\n";
 		printMatrix(x);
 	#endif
 
@@ -161,7 +163,7 @@ vector<unsigned int> generate_pagerank_order(vector<vector<double>> values, unsi
 	}
 
 	#ifdef VERBOSE
-		cout << "rightSort: \n";
+		std::cout << "rightSort: \n";
 		print_pid(rightSort);
 	#endif
 
@@ -175,18 +177,8 @@ int main(int argc, char *argv[]){
 	Instance I = read_instance();
 	unsigned long width = (unsigned long) I.lhsnodes.size();
 
-	//Initialize values matrix to correct size
-	vector<vector<double> > values;
-	for(unsigned int i=0; i< I.lhsnodes.size(); i++){
-		vector<double> connectionCosts;
-		connectionCosts.resize(I.rhsnodes.size());
-		values.push_back(connectionCosts);
-	}
-
-	//Assign values to values matrix from Instance edges
-	for(unsigned int i=0; i<I.edges.size(); i++){
-		values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
-	}
+	//get the edge values in matrix form
+	vector<vector<double> > values = get_value_matrix(I);
 
 	//find the greedy order that we obtain from the pagerank algorithm
 	vector<unsigned int> pagerankOrder = generate_pagerank_order(values, width);
@@ -205,18 +197,18 @@ int main(int argc, char *argv[]){
 
 		//write out information about matches
 		double totalCost = 0;
-		cout << matches.size() << " Matches:" << endl;
+		std::cout << matches.size() << " Matches:" << std::endl;
 		for(unsigned int i=0; i<matches.size(); i++){
 			totalCost += values[matches[i].first][matches[i].second];
-			cout << matches[i].first << " " << matches[i].second <<
-			" " << values[matches[i].first][matches[i].second] << endl;
+			std::cout << matches[i].first << " " << matches[i].second <<
+			" " << values[matches[i].first][matches[i].second] << std::endl;
 		}
-	cout << totalCost << endl;
+	std::cout << totalCost << std::endl;
 	#endif
 
 	#ifdef VERBOSE
 	  print_instance(I);
-	  cout << "value: " << pageRankValue << endl;
+	  std::cout << "value: " << pageRankValue << std::endl;
   #endif
 
 	rank_results_against_random(I, values, width, pageRankValue);
@@ -252,7 +244,7 @@ void rank_results_against_random(Instance& I, vector<vector<double>> values,
 
   #ifdef VERBOSE
   for(unsigned int i=0; i<greedyValueResults.size(); i++){
-  	cout << greedyValueResults[i] << endl;
+  	std::cout << greedyValueResults[i] << std::endl;
   }
   #endif
 
@@ -262,6 +254,6 @@ void rank_results_against_random(Instance& I, vector<vector<double>> values,
   for(pageRankValueRank = 0; pageRankValueRank < greedyCount &&
   	pageRankValue > greedyValueResults[pageRankValueRank]; pageRankValueRank++);
 
-  cout << "matching order determined using pagerank algorithm ranked " << pageRankValueRank <<
-	" out of " << greedyCount << " random orderings." << endl;
+  std::cout << "matching order determined using pagerank algorithm ranked " << pageRankValueRank <<
+	" out of " << greedyCount << " random orderings." << std::endl;
 }

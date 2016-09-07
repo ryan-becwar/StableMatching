@@ -2,12 +2,12 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include "echo_instance.h"  
+#include "echo_instance.h"
 
 using namespace std;
 
 
-Instance read_instance(void) 
+Instance read_instance(void)
 {
   Instance I;
   int Nlhs, Nrhs, Nedges;
@@ -26,7 +26,7 @@ Instance read_instance(void)
       else { cin >> dval; n.attrs[s] = dval;
       }
     }
-    I.lhsnodes.push_back(n);    
+    I.lhsnodes.push_back(n);
   }
 
   for (int i=0; i<Nrhs; i++) {
@@ -37,7 +37,7 @@ Instance read_instance(void)
       else if (s == "allocation") cin >> n.allocation;
       else { cin >> dval; n.attrs[s] = dval; }
     }
-    I.rhsnodes.push_back(n);    
+    I.rhsnodes.push_back(n);
   }
 
   //readin edges
@@ -62,7 +62,7 @@ void print_instance(Instance I)
     cout << "node " << i;
     cout << " size " << I.lhsnodes[i].size;
     cout << " allocation " << I.lhsnodes[i].allocation;
-    for (msd::iterator it = I.lhsnodes[i].attrs.begin(); 
+    for (msd::iterator it = I.lhsnodes[i].attrs.begin();
 	 it != I.lhsnodes[i].attrs.end(); it++)
       cout << " " << it->first << " " << it->second;
     cout << "\n";
@@ -73,7 +73,7 @@ void print_instance(Instance I)
     cout << "node " << i;
     cout << " size " << I.rhsnodes[i].size;
     cout << " allocation " << I.rhsnodes[i].allocation;
-    for (msd::iterator it = I.rhsnodes[i].attrs.begin(); 
+    for (msd::iterator it = I.rhsnodes[i].attrs.begin();
 	 it != I.rhsnodes[i].attrs.end(); it++)
       cout << " " << it->first << " " << it->second;
     cout << "\n";
@@ -106,9 +106,20 @@ void order_edges(Instance &I){
   std::sort(I.edges.begin(), I.edges.end(), order_edge());
 }
 
-/*
-int main(){
-  Instance I = read_instance();
-  print_instance(I);
+//Returns the value attribute of all edges in the form of a lhs x rhs matrix
+vector<vector<double> > get_value_matrix(Instance& I){
+  //Initialize values matrix to correct size
+  vector<vector<double> > values;
+  for(unsigned int i=0; i< I.lhsnodes.size(); i++){
+    vector<double> connectionCosts;
+    connectionCosts.resize(I.rhsnodes.size());
+    values.push_back(connectionCosts);
+  }
+
+  //Assign values to values matrix from Instance edges
+  for(unsigned int i=0; i<I.edges.size(); i++){
+    values[I.edges[i].start][I.edges[i].end] = I.edges[i].value;
+	}
+
+  return values;
 }
-*/

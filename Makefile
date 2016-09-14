@@ -1,8 +1,8 @@
 CC=gcc
-CPP=g++
+CPP=clang++
 CFLAGS=-g -std=c++11 -Wall
 
-BINS= matrix.o echo_instance.o pagerank build_lp GenerateDataFile GreedyMatching pagerank
+BINS= matrix.o echo_instance.o matching_utilities.o pagerank build_lp GenerateDataFile GreedyMatching regret
 
 all: $(BINS)
 
@@ -12,8 +12,14 @@ matrix.o: matrix.cpp matrix.h
 echo_instance.o: echo_instance.cpp echo_instance.h
 	$(CPP) $(CFLAGS) -c echo_instance.cpp
 
-pagerank:  PageRank.cpp matrix.o echo_instance.o
-	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.o echo_instance.o
+matching_utilities.o: matching_utilities.cpp echo_instance.o
+	$(CPP) $(CFLAGS) -c matching_utilities.cpp echo_instance.o
+
+pagerank:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o
+	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.o echo_instance.o matching_utilities.o
+
+regret: regret_matching.cpp matrix.o echo_instance.o matching_utilities.o
+	$(CPP) $(CFLAGS) -o regret regret_matching.cpp matrix.o echo_instance.o matching_utilities.o
 
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp

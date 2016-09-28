@@ -1,0 +1,7 @@
+TODO:
+
+Generate plot of data factoring in drafting distribution, global greedy, regret, pagerank and optimal scores
+
+Have 3 plots: one of noise -  global(product), noise - global(min), noise - location
+
+Also, implement regret based on linear regression, as this has the property of updating the regression in constant time

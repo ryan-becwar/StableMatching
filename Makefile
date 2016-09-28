@@ -13,7 +13,7 @@ echo_instance.o: echo_instance.cpp echo_instance.h
 	$(CPP) $(CFLAGS) -c echo_instance.cpp
 
 matching_utilities.o: matching_utilities.cpp echo_instance.o
-	$(CPP) $(CFLAGS) -c matching_utilities.cpp echo_instance.o
+	$(CPP) $(CFLAGS) -c matching_utilities.cpp
 
 pagerank:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o
 	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.o echo_instance.o matching_utilities.o

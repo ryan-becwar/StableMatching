@@ -69,8 +69,9 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
 void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, double rankWeight){
     //Std random number generation
     default_random_engine randomEngine;
-    uniform_real_distribution<double> distribution(0.0, 1.0);
+    uniform_real_distribution<double> distribution(0.0, rankWeight);
 
+    /*
     //value left, assign right's preference weights
     for(unsigned int i=0; i<left.size(); i++){
         double globalRank = distribution(randomEngine);
@@ -88,6 +89,22 @@ void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, dou
             left[j].preferenceList[i] += globalRank;
         }
     }
+    */
+
+    vector<double> leftWeight, rightWeight;
+    for(unsigned int i=0; i<left.size(); i++){
+      leftWeight.push_back(distribution(randomEngine));
+    }
+    for(unsigned int i=0; i<left.size(); i++){
+      rightWeight.push_back(distribution(randomEngine));
+    }
+
+    for(unsigned int i=0; i<left.size(); i++){
+      for(unsigned int j=0; j<right.size(); j++){
+        left[i].preferenceList[j] += min(leftWeight[i], rightWeight[j]);
+      }
+    }
+
 }
 
 void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double randomWeight){

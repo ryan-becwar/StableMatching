@@ -10,7 +10,6 @@
 #define PAGERANK_EXP_VALUE .8
 #define PAGERANK_STEP_COUNT 10
 
-#define VERBOSE
 
 
 

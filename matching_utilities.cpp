@@ -2,7 +2,7 @@
 
 //using namespace std;
 
-
+#define VERBOSE
 
 void print_pid(vector<pid> p){
 	for(unsigned int i=0; i<p.size(); i++){

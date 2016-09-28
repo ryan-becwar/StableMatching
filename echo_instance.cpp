@@ -55,7 +55,7 @@ Instance read_instance(void)
   return I;
 }
 
-void print_instance(Instance I)
+void print_instance(Instance &I)
 {
   cout << I.lhsnodes.size() << " " << I.rhsnodes.size() << " " << I.edges.size() << "\n";
   for (unsigned int i=0; i<I.lhsnodes.size(); i++) {
@@ -93,7 +93,7 @@ void print_instance(Instance I)
 
 }
 
-double get_value(Instance I){
+double get_value(Instance &I){
   double sum = 0;
   for(unsigned int i=0; i<I.edges.size(); i++){
     sum += I.edges[i].value * I.edges[i].allocation;

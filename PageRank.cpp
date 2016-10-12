@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <random>
 #include "matrix.h"
-#include "matching_utilities.h"
+#include "ordering_evaluator.h"
 
 #define LARGE 10000000
 #define PAGERANK_EXP_VALUE .8
@@ -86,6 +86,8 @@ int main(int argc, char *argv[]){
 	Instance I = read_instance();
 	unsigned long width = (unsigned long) I.lhsnodes.size();
 
+	OrderingEvaluator evaluator(I, 100);
+
 	//get the edge values in matrix form
 	vector<vector<double> > values = get_value_matrix(I);
 
@@ -116,6 +118,7 @@ int main(int argc, char *argv[]){
   #endif
 
 	rank_results_against_random(I, values, width, pageRankValue);
+	evaluator.evaluateOrder(pagerankOrder);
 
 	return 0;
 }

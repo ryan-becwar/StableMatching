@@ -12,5 +12,6 @@ private:
   Instance &I;
   unsigned int greedyCount;
   vector<double> greedyResults;
-
+  vector<vector<double> > values;
+  unsigned long width;
 };

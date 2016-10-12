@@ -2,7 +2,7 @@ CC=gcc
 CPP=clang++
 CFLAGS=-g -std=c++11 -Wall
 
-BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o main pagerank build_lp GenerateDataFile GreedyMatching regret
+BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o pagerank build_lp GenerateDataFile GreedyMatching regret
 
 all: $(BINS)
 
@@ -16,13 +16,13 @@ matching_utilities.o: matching_utilities.cpp matching_utilities.h echo_instance.
 	$(CPP) $(CFLAGS) -c matching_utilities.cpp
 
 ordering_evaluator.o: ordering_evaluator.cpp ordering_evaluator.h echo_instance.o matching_utilities.o
-	$(CPP) $(CFLAGS) -c ordering_evaluator.cpp
+	$(CPP) $(CFLAGS) -c ordering_evaluator.cpp echo_instance.o matching_utilities.o
 
-pagerank:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o
-	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.o echo_instance.o matching_utilities.o
+pagerank:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
+	$(CPP) $(CFLAGS) -o pagerank PageRank.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
 
-regret: regret_matching.cpp matrix.o echo_instance.o matching_utilities.o
-	$(CPP) $(CFLAGS) -o regret regret_matching.cpp matrix.o echo_instance.o matching_utilities.o
+regret: regret_matching.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
+	$(CPP) $(CFLAGS) -o regret regret_matching.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
 
 main: main.cpp echo_instance.o ordering_evaluator.o
 	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o

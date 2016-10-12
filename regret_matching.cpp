@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "matching_utilities.h"
+#include "ordering_evaluator.h"
 
 /*
 In a regret based matching, we prioritize matches where a node has much worse
@@ -64,10 +64,13 @@ vector<unsigned int> generate_regret_order(vector<regret_projection> &projection
 
   return order;
 }
+
 int main(int argc, char *argv[]){
   //Readin Data
   Instance I = read_instance();
   unsigned long width = (unsigned long) I.lhsnodes.size();
+
+  OrderingEvaluator evaluator(I, 100);
 
   //get the edge values in matrix
   vector<vector<double> > values = get_value_matrix(I);
@@ -85,8 +88,9 @@ int main(int argc, char *argv[]){
   vector<pii> matches = find_matches(values, order, width);
   write_matches(I, matches);
   std::cout << "Regret matching value: " << get_value(I) << std::endl;
-  rank_results_against_random(I, values, width, get_value(I));
+  //rank_results_against_random(I, values, width, get_value(I));
 
+  evaluator.evaluateOrder(order);
   /*
   regret_projection projection;
   projection.setConnections(getColumn(values, 0));

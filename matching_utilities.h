@@ -1,3 +1,7 @@
+#ifndef MATCHING_UTILITIES__H
+#define MATCHING_UTILITIES__H
+
+
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -30,3 +34,5 @@ vector<pii> find_matches(vector<vector<double> > values, vector<unsigned int> or
 void write_matches(Instance& I, vector<pii> matches);
 void rank_results_against_random(Instance& I, vector<vector<double> > values,
 	unsigned int width, double pageRankValue);
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef ECHO_INSTANCE__h
+#define ECHO_INSTANCE__h
 #include <vector>
 #include <iostream>
 #include <map>
@@ -48,3 +50,5 @@ void print_instance(Instance &I);
 double get_value(Instance &I);
 void order_edges(Instance &I);
 vector<vector<double> > get_value_matrix(Instance &I);
+
+#endif

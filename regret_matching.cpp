@@ -1,7 +1,4 @@
-#include <iostream>
-#include <vector>
-#include "ordering_evaluator.h"
-
+#include "regret_matching.h"
 /*
 In a regret based matching, we prioritize matches where a node has much worse
 matching prospects among its lower priority matches.
@@ -39,8 +36,8 @@ public:
   double projectionSlope;
 };
 
-vector<unsigned int> generate_regret_order(vector<regret_projection> &projections){
-  vector<pid> slopeSort;
+std::vector<unsigned int> generate_regret_order(std::vector<regret_projection> &projections){
+  std::vector<pid> slopeSort;
   for(unsigned int i=0; i<projections.size(); i++){
     pid pair;
     pair.first = i;
@@ -57,7 +54,7 @@ vector<unsigned int> generate_regret_order(vector<regret_projection> &projection
   }
   */
 
-  vector<unsigned int> order;
+  std::vector<unsigned int> order;
   for(unsigned int i=0; i<slopeSort.size(); i++){
     order.push_back(slopeSort[i].first);
   }
@@ -65,17 +62,15 @@ vector<unsigned int> generate_regret_order(vector<regret_projection> &projection
   return order;
 }
 
-int main(int argc, char *argv[]){
+std::vector<unsigned int> regret_order(Instance& I){
   //Readin Data
-  Instance I = read_instance();
   unsigned long width = (unsigned long) I.lhsnodes.size();
 
-  OrderingEvaluator evaluator(I, 100);
 
   //get the edge values in matrix
-  vector<vector<double> > values = get_value_matrix(I);
+  std::vector<std::vector<double> > values = get_value_matrix(I);
 
-  vector<regret_projection> projections;
+  std::vector<regret_projection> projections;
   //TODO, make width represent row size
   for(int i=0; i<width; i++){
     regret_projection projection;
@@ -84,13 +79,11 @@ int main(int argc, char *argv[]){
     projections.push_back(projection);
   }
 
-  vector<unsigned int> order = generate_regret_order(projections);
-  vector<pii> matches = find_matches(values, order, width);
+  std::vector<unsigned int> order = generate_regret_order(projections);
+  std::vector<pii> matches = find_matches(values, order, width);
   write_matches(I, matches);
   std::cout << "Regret matching value: " << get_value(I) << std::endl;
-  //rank_results_against_random(I, values, width, get_value(I));
 
-  evaluator.evaluateOrder(order);
   /*
   regret_projection projection;
   projection.setConnections(getColumn(values, 0));
@@ -98,5 +91,5 @@ int main(int argc, char *argv[]){
   */
 
 
-  return 0;
+  return order;
 }

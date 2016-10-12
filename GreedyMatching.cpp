@@ -20,9 +20,8 @@ typedef struct Matching {
 } Matching;
 
 
-int main(int argc, char* argv[]){
-    printf("GreedyMatching\n");
-    Instance I = read_instance();
+void greedy(Instance I){
+    cout << "Greedy Matching" << endl;
 
     sort(I.edges.begin(), I.edges.end());
 
@@ -42,7 +41,12 @@ int main(int argc, char* argv[]){
     print_instance(I);
 
     cout << "value: " << get_value(I) << endl;
+}
 
+int main(int argc, char* argv[]){
+  Instance I = read_instance();
 
-    return 0;
+  greedy(I);
+
+  return 0;
 }

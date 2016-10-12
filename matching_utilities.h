@@ -26,7 +26,7 @@ struct sort_paird{
 
 void print_pid(vector<pid> p);
 
-vector<pii> find_matches(vector<vector<double>> values, vector<unsigned int> order, unsigned long width);
+vector<pii> find_matches(vector<vector<double> > values, vector<unsigned int> order, unsigned long width);
 void write_matches(Instance& I, vector<pii> matches);
-void rank_results_against_random(Instance& I, vector<vector<double>> values,
+void rank_results_against_random(Instance& I, vector<vector<double> > values,
 	unsigned int width, double pageRankValue);

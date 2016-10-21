@@ -5,7 +5,7 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
     vector<Point> leftPoints;
     vector<Point> rightPoints;
     //Std random number generation
-    default_random_engine randomEngine;
+    static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(0.0, 1.0);
 
     //Assign random points
@@ -45,7 +45,7 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
 
 void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, double rankWeight){
     //Std random number generation
-    default_random_engine randomEngine;
+    static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(0.0, rankWeight);
 
     /*
@@ -86,7 +86,7 @@ void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, dou
 
 void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double randomWeight){
 
-    default_random_engine randomEngine;
+    static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(-.5, .5);
 
     for(unsigned int i=0; i<left.size(); i++){
@@ -174,4 +174,25 @@ Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight,
     }
 
     return I;
+}
+
+Instance getLocationInstance(unsigned int width, double noise){
+  if(noise > 1) noise = 1;
+  if(noise < 0) noise = 0;
+
+  return(generateWeightedData(width, width, 1 - noise, 0, noise));
+}
+
+Instance getGlobalProdInstance(unsigned int width, double noise){
+  if(noise > 1) noise = 1;
+  if(noise < 0) noise = 0;
+
+  return(generateWeightedData(width, width, 0, 1 - noise, noise));
+}
+
+Instance getGlobalMinInstance(unsigned int width, double noise){
+  if(noise > 1) noise = 1;
+  if(noise < 0) noise = 0;
+
+  return(generateWeightedData(width, width, 0, 1 - noise, noise));
 }

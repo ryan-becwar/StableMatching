@@ -9,11 +9,11 @@ Also, implement regret based on linear regression, as this has the property of u
 
 Normalized on mean greedy order value, plotted on x axis by stdevs from this
 
-for noise level 0.0 - 1.0
+for noise 0.0 - 1.0
   for 100 instances:
     for 100 orderings: find mean, stdev
     run pagerank, normalize on found stdev
 
 OUT:
-|  data for noise level   |
+|  data for noise   |
 n=50 noise=0.1 instance: 7 mean: stdev: pagerank z score: regret z score:

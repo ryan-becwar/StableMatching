@@ -27,5 +27,9 @@ typedef struct NodeData {
 
 void writeNodeData(ostream &out, vector<NodeData> &nodes);
 Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight);
+Instance getLocationInstance(unsigned int width, double noise);
+Instance getGlobalProdInstance(unsigned int width, double noise);
+Instance getGlobalMinInstance(unsigned int width, double noise);
+
 
 #endif //STABLEMATCHING_GENERATEDATAFILE_H

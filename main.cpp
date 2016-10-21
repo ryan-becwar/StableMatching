@@ -7,6 +7,10 @@
 #define N 100
 #define INSTANCE_COUNT 100
 
+/*
+Writes out data in following column format:
+N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore
+*/
 int main(){
   //Instance I = read_instance();
 

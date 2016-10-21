@@ -1,11 +1,12 @@
 #include "GenerateDataFile.h"
 
+default_random_engine randomEngine;
 
 void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, double locationWeight){
     vector<Point> leftPoints;
     vector<Point> rightPoints;
     //Std random number generation
-    static default_random_engine randomEngine;
+    //static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(0.0, 1.0);
 
     //Assign random points
@@ -45,7 +46,7 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
 
 void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, double rankWeight){
     //Std random number generation
-    static default_random_engine randomEngine;
+    //static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(0.0, rankWeight);
 
     /*
@@ -78,15 +79,16 @@ void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, dou
 
     for(unsigned int i=0; i<left.size(); i++){
       for(unsigned int j=0; j<right.size(); j++){
-        left[i].preferenceList[j] += min(leftWeight[i], rightWeight[j]);
+        left[i].preferenceList[j] += leftWeight[i] * rightWeight[j];
+        //Change to this line to find min of global weights
+        //left[i].preferenceList[j] += min(leftWeight[i], rightWeight[j]);
       }
     }
-
 }
 
 void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double randomWeight){
 
-    static default_random_engine randomEngine;
+    //static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(-.5, .5);
 
     for(unsigned int i=0; i<left.size(); i++){

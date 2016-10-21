@@ -63,9 +63,7 @@ std::vector<unsigned int> generate_regret_order(std::vector<regret_projection> &
 }
 
 std::vector<unsigned int> regret_order(Instance& I){
-  //Readin Data
   unsigned long width = (unsigned long) I.lhsnodes.size();
-
 
   //get the edge values in matrix
   std::vector<std::vector<double> > values = get_value_matrix(I);
@@ -80,10 +78,13 @@ std::vector<unsigned int> regret_order(Instance& I){
   }
 
   std::vector<unsigned int> order = generate_regret_order(projections);
+
+  /*
   std::vector<pii> matches = find_matches(values, order, width);
   write_matches(I, matches);
   std::cout << "Regret matching value: " << get_value(I) << std::endl;
-
+  */
+  
   /*
   regret_projection projection;
   projection.setConnections(getColumn(values, 0));

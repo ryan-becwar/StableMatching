@@ -8,11 +8,10 @@ int main(){
 
   OrderingEvaluator evaluator(I, 100);
 
-  vector<unsigned int> testOrder(100);
-
-  vector<unsigned int> regretOrder = regret_order(I);
-  evaluator.evaluateOrder(regretOrder);
-
   vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
-  evaluator.evaluateOrder(pagerankOrder);
+  vector<unsigned int> regretOrder = regret_order(I);
+
+  evaluator.evaluateOrder("pagerank", pagerankOrder);
+  evaluator.evaluateOrder("regret", regretOrder);
+  evaluator.printPlotData(0.1, 0);
 }

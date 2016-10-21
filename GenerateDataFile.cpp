@@ -1,27 +1,4 @@
 #include "GenerateDataFile.h"
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <algorithm>
-#include <ctime>
-#include <cmath>
-#include "echo_instance.h"
-
-using namespace std;
-
-typedef pair<double, double> Point;
-
-typedef struct NodeData {
-    int listLength;
-    vector<double> preferenceList;
-
-    void init(int listLength){
-        this->listLength = listLength;
-        for(int i=0; i<listLength; i++){
-            preferenceList.push_back(0.0);
-        }
-    }
-} NodeData;
 
 
 void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, double locationWeight){
@@ -141,7 +118,7 @@ void writeNodeData(ostream &out, vector<NodeData> &nodes){
 }
 
 //Handles actual generation
-Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight) {
+Instance& generateWeightedData(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight) {
     Instance I;
     vector<NodeData> left, right;
 
@@ -196,15 +173,6 @@ Instance generateWeightedData(ostream &out, int lhsCount, int rhsCount, double l
         I.edges[i].value = left[l].preferenceList[r];
     }
 
-    /*
-    print_instance(I);
-
-    //Write out data
-    writeNodeData(out, left);
-    out << endl;
-    writeNodeData(out, right);
-    */
-
     return I;
 }
 
@@ -248,7 +216,7 @@ int main(int argc, char *argv[]){
     generateRandomData(out, lhsCount);
     */
 
-    Instance I = generateWeightedData(*out, lhsCount, rhsCount, locationWeight,
+    Instance I = generateWeightedData(lhsCount, rhsCount, locationWeight,
         globalRankWeight, randomWeight);
     print_instance(I);
 

@@ -5,3 +5,15 @@ Generate plot of data factoring in drafting distribution, global greedy, regret,
 Have 3 plots: one of noise -  global(product), noise - global(min), noise - location
 
 Also, implement regret based on linear regression, as this has the property of updating the regression in constant time
+
+
+Normalized on mean greedy order value, plotted on x axis by stdevs from this
+
+for noise level 0.0 - 1.0
+  for 100 instances:
+    for 100 orderings: find mean, stdev
+    run pagerank, normalize on found stdev
+
+OUT:
+|  data for noise level   |
+n=50 noise=0.1 instance: 7 mean: stdev: pagerank z score: regret z score:

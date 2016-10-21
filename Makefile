@@ -2,7 +2,7 @@ CC=gcc
 CPP=clang++
 CFLAGS=-g -std=c++11 -Wall
 
-BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o PageRank.o build_lp GenerateDataFile GreedyMatching regret_matching.o main
+BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o PageRank.o build_lp GenerateDataFile.o GreedyMatching regret_matching.o main
 
 all: $(BINS)
 
@@ -18,6 +18,9 @@ matching_utilities.o: matching_utilities.cpp matching_utilities.h echo_instance.
 ordering_evaluator.o: ordering_evaluator.cpp ordering_evaluator.h echo_instance.o matching_utilities.o
 	$(CPP) $(CFLAGS) -c ordering_evaluator.cpp
 
+GenerateDataFile.o: GenerateDataFile.cpp GenerateDataFile.h echo_instance.o
+	$(CPP) $(CFLAGS) -c GenerateDataFile.cpp
+
 PageRank.o:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
 	$(CPP) $(CFLAGS) -c PageRank.cpp
 
@@ -30,8 +33,8 @@ main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp
 
-GenerateDataFile: GenerateDataFile.cpp echo_instance.o
-	$(CPP) $(CFLAGS) -o GenerateDataFile GenerateDataFile.cpp echo_instance.o
+GenerateDataFile: GenerateDataFile.cpp GenerateDataFile.h runGenerate.cpp echo_instance.o
+	$(CPP) $(CFLAGS) -o GenerateDataFile runGenerate.cpp
 
 GreedyMatching: GreedyMatching.cpp echo_instance.o
 	$(CPP) $(CFLAGS) -o GreedyMatching GreedyMatching.cpp echo_instance.o

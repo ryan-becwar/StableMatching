@@ -28,7 +28,7 @@ regret_matching.o: regret_matching.cpp matrix.o echo_instance.o matching_utiliti
 	$(CPP) $(CFLAGS) -c regret_matching.cpp
 
 main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o
-	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o
+	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o GenerateDataFile.o
 
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp

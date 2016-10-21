@@ -26,7 +26,6 @@ typedef struct NodeData {
 } NodeData;
 
 void writeNodeData(ostream &out, vector<NodeData> &nodes);
-Instance& generateWeightedData(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight);
-
+Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight);
 
 #endif //STABLEMATCHING_GENERATEDATAFILE_H

@@ -79,9 +79,9 @@ void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, dou
 
     for(unsigned int i=0; i<left.size(); i++){
       for(unsigned int j=0; j<right.size(); j++){
-        left[i].preferenceList[j] += leftWeight[i] * rightWeight[j];
+        //left[i].preferenceList[j] += leftWeight[i] * rightWeight[j];
         //Change to this line to find min of global weights
-        //left[i].preferenceList[j] += min(leftWeight[i], rightWeight[j]);
+        left[i].preferenceList[j] += min(leftWeight[i], rightWeight[j]);
       }
     }
 }

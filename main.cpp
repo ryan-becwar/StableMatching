@@ -17,8 +17,8 @@ int main(){
 
   for(double noise = 0; noise <= 1.0; noise += NOISE_INCREMENT){
     for(unsigned int i=0; i<INSTANCE_COUNT; i++){
-      //Instance I = getGlobalMinInstance(N, noise);
-      Instance I = getLocationInstance(N, noise);
+      Instance I = getGlobalMinInstance(N, noise);
+      //Instance I = getLocationInstance(N, noise);
       OrderingEvaluator evaluator(I, N);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_order(I);

@@ -3,14 +3,15 @@
 #include "PageRank.h"
 #include "ordering_evaluator.h"
 #include "GenerateDataFile.h"
+#include "build_lp.h"
 
-#define N 100
+#define N 10
 #define INSTANCE_COUNT 100
 #define NOISE_INCREMENT 0.1
 
 /*
 Writes out data in following column format:
-N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore
+N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore optimal_value
 */
 int main(){
   //Instance I = read_instance();
@@ -22,10 +23,11 @@ int main(){
       OrderingEvaluator evaluator(I, N);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_order(I);
+      double optVal = lp_opt_result(N, get_value_matrix(I));
 
       evaluator.evaluateOrder("pagerank", pagerankOrder);
       evaluator.evaluateOrder("regret", regretOrder);
-      evaluator.printPlotData(noise, i);
+      evaluator.printPlotData(noise, i, optVal);
     }
   }
 }

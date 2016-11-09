@@ -76,6 +76,6 @@ void OrderingEvaluator::evaluateOrder(std::string title, vector<unsigned int> co
   */
 }
 
-void OrderingEvaluator::printPlotData(double noise, unsigned int instanceNum){
-  std::cout << width << " " << noise << " " << instanceNum << " " << greedyMean << " " << greedyStdev << " " << zScores["pagerank"] << " " << zScores["regret"] << std::endl;
+void OrderingEvaluator::printPlotData(double noise, unsigned int instanceNum, double optVal){
+  std::cout << width << " " << noise << " " << instanceNum << " " << greedyMean << " " << greedyStdev << " " << zScores["pagerank"] << " " << zScores["regret"] << " " << optVal << std::endl;
 }

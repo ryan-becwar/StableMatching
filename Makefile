@@ -2,7 +2,7 @@ CC=gcc
 CPP=clang++
 CFLAGS=-g -std=c++11 -Wall
 
-BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o PageRank.o build_lp GenerateDataFile.o GreedyMatching regret_matching.o main
+BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o PageRank.o GenerateDataFile.o GreedyMatching regret_matching.o build_lp.o main
 
 all: $(BINS)
 
@@ -27,8 +27,11 @@ PageRank.o:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o ordering
 regret_matching.o: regret_matching.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
 	$(CPP) $(CFLAGS) -c regret_matching.cpp
 
-main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o
-	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o GenerateDataFile.o
+build_lp.o: build_lp.cpp build_lp.h
+	$(CPP) $(CFLAGS) -c build_lp.cpp
+
+main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o build_lp.o
+	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o GenerateDataFile.o build_lp.o
 
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp

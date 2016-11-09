@@ -17,3 +17,11 @@ for noise 0.0 - 1.0
 OUT:
 |  data for noise   |
 n=50 noise=0.1 instance: 7 mean: stdev: pagerank z score: regret z score:
+
+
+Paper Preparation:
+Literature review:
+  consult john dabney's disertation references.
+  -potential criticisms:
+    running on random data, which may have particular behavioral characteristics.
+    DIMACS - research center - publishes inputs to problems such as TSP

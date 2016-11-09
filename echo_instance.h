@@ -25,7 +25,7 @@ struct Edge {
   msd attrs;
 
 
-  bool operator<(const Edge& rhs){
+  bool operator<(const Edge& rhs) const{
     return value > rhs.value;
   }
 };

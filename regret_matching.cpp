@@ -89,7 +89,8 @@ void getStats(std::vector<double>& set, std::vector<double>& difference, double&
   stDev = std::sqrt(sqSum / set.size());
 }
 
-std::vector<unsigned int> generate_regret_order(std::vector<double> &projectionSlopes){
+//Generates an ordering given a vector of projection slopes
+std::vector<unsigned int> generate_regret__order(std::vector<double> &projectionSlopes){
   std::vector<pid> slopeSort;
   for(unsigned int i=0; i<projectionSlopes.size(); i++){
     pid pair;
@@ -101,12 +102,6 @@ std::vector<unsigned int> generate_regret_order(std::vector<double> &projectionS
   std::sort(slopeSort.begin(), slopeSort.end(), sort_paird());
   std::reverse(slopeSort.begin(), slopeSort.end());
 
-  /*
-  for(unsigned int i=0; i<slopeSort.size(); i++){
-    std::cout << slopeSort[i].second << std::endl;
-  }
-  */
-
   std::vector<unsigned int> order;
   for(unsigned int i=0; i<slopeSort.size(); i++){
     order.push_back(slopeSort[i].first);
@@ -115,7 +110,7 @@ std::vector<unsigned int> generate_regret_order(std::vector<double> &projectionS
   return order;
 }
 
-std::vector<unsigned int> regret_order(Instance& I){
+std::vector<unsigned int> regret_projection_order(Instance& I){
   unsigned long width = (unsigned long) I.lhsnodes.size();
 
   //get the edge values in matrix
@@ -127,24 +122,30 @@ std::vector<unsigned int> regret_order(Instance& I){
     regret_projection projection;
     projection.setConnections(getColumn(values, i));
     projection.findRayProjection();
-    //projection.findLinearRegression();
     projectionSlopes.push_back(projection.projectionSlope);
   }
 
-  std::vector<unsigned int> order = generate_regret_order(projectionSlopes);
+  std::vector<unsigned int> order = generate_regret__order(projectionSlopes);
 
-  /*
-  std::vector<pii> matches = find_matches(values, order, width);
-  write_matches(I, matches);
-  std::cout << "Regret matching value: " << get_value(I) << std::endl;
-  */
+  return order;
+}
 
-  /*
-  regret_projection projection;
-  projection.setConnections(getColumn(values, 0));
-  projection.findRayProjection();
-  */
+std::vector<unsigned int> regret_regression_order(Instance& I){
+  unsigned long width = (unsigned long) I.lhsnodes.size();
 
+  //get the edge values in matrix
+  std::vector<std::vector<double> > values = get_value_matrix(I);
+
+  std::vector<double> projectionSlopes;
+  //TODO, make width represent row size
+  for(int i=0; i<width; i++){
+    regret_projection projection;
+    projection.setConnections(getColumn(values, i));
+    projection.findLinearRegression();
+    projectionSlopes.push_back(projection.projectionSlope);
+  }
+
+  std::vector<unsigned int> order = generate_regret__order(projectionSlopes);
 
   return order;
 }

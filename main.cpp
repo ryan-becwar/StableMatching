@@ -11,7 +11,7 @@
 
 /*
 Writes out data in following column format:
-N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore optimal_value
+N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore optimal_value
 */
 int main(){
   //Instance I = read_instance();
@@ -22,12 +22,14 @@ int main(){
       //Instance I = getLocationInstance(N, noise);
       OrderingEvaluator evaluator(I, N);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
-      vector<unsigned int> regretOrder = regret_order(I);
+      vector<unsigned int> regretOrder = regret_projection_order(I);
+      vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
       //double optVal = lp_opt_result(N, get_value_matrix(I));
       double optVal = 0;
 
       evaluator.evaluateOrder("pagerank", pagerankOrder);
       evaluator.evaluateOrder("regret", regretOrder);
+      evaluator.evaluateOrder("regretRegression", regretRegressionOrder);
       evaluator.printPlotData(noise, i, optVal);
     }
   }

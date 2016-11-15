@@ -5,7 +5,7 @@
 #include "GenerateDataFile.h"
 #include "build_lp.h"
 
-#define N 10
+#define N 100
 #define INSTANCE_COUNT 100
 #define NOISE_INCREMENT 0.1
 
@@ -23,7 +23,8 @@ int main(){
       OrderingEvaluator evaluator(I, N);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_order(I);
-      double optVal = lp_opt_result(N, get_value_matrix(I));
+      //double optVal = lp_opt_result(N, get_value_matrix(I));
+      double optVal = 0;
 
       evaluator.evaluateOrder("pagerank", pagerankOrder);
       evaluator.evaluateOrder("regret", regretOrder);

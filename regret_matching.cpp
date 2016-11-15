@@ -6,6 +6,8 @@ matching prospects among its lower priority matches.
 To evaluate this, best fit line is drawn (soon to be expanded to a quadratic)
 */
 
+void getStats(std::vector<double>& set, std::vector<double>& difference, double& mean, double& stDev);
+
 class regret_projection {
 public:
   void setConnections(std::vector<double> values){
@@ -32,16 +34,67 @@ public:
     //std::cout << projectionSlope << std::endl;
   }
 
+  //Find the fitting line of the form y = a + bx, where b is the projectionSlope
+  void findLinearRegression(){
+    double xStdev, yStdev, xMean, yMean, r = 0;
+    std::vector<double> xVals;
+    std::vector<double> xDifference(connectionValues.size());
+    std::vector<double> yDifference(connectionValues.size());
+
+    xVals.reserve(connectionValues.size());
+    for(unsigned int i=0; i<connectionValues.size(); i++){
+      xVals.push_back((double)i);
+    }
+
+
+    getStats(xVals, xDifference, xMean, xStdev);
+    getStats(connectionValues, yDifference, yMean, yStdev);
+
+    //Calculate r value
+    //r = sum(x diff * y diff) / xstdev * ystdev
+    double diffSum = 0;
+    for(unsigned int i=0; i<connectionValues.size(); i++){
+      diffSum += xDifference[i] * yDifference[i];
+    }
+    r = diffSum / (xStdev * yStdev);
+
+    projectionSlope = r * (yStdev / xStdev);
+    //a = yMean - projectionSlope * xMean;
+
+    /*
+    std::transform(set.begin(), set.end(), difference.begin(), [mean](double x) { return x - mean; });
+    //necessary for lambda capture list unless we wanted to pass all of this, which would be costly
+    double tmpMean(yMean);
+    //Creates a difference vector which contains the difference of each value from the mean
+    vector<double> yDifference(greedyResults.size());
+    std::transform(yResults.begin(), yResults.end(), yDifference.begin(), [tmpMean](double x) { return x - tmpMean; });
+
+    double ySqSum = std::inner_product(yDifference.begin(), yDifference.end(), yDifference.begin(), 0.0);
+    yStdev = std::sqrt(ySqSum / connectionValues.size());
+    */
+  }
+
   std::vector<double> connectionValues;
   double projectionSlope;
 };
 
-std::vector<unsigned int> generate_regret_order(std::vector<regret_projection> &projections){
+void getStats(std::vector<double>& set, std::vector<double>& difference, double& mean, double& stDev){
+
+  mean = std::accumulate(set.begin(), set.end(), 0) / set.size();
+
+  //Creates a difference vector which contains the difference of each value from the mean
+  std::transform(set.begin(), set.end(), difference.begin(), [mean](double x) { return x - mean; });
+
+  double sqSum = std::inner_product(difference.begin(), difference.end(), difference.begin(), 0.0);
+  stDev = std::sqrt(sqSum / set.size());
+}
+
+std::vector<unsigned int> generate_regret_order(std::vector<double> &projectionSlopes){
   std::vector<pid> slopeSort;
-  for(unsigned int i=0; i<projections.size(); i++){
+  for(unsigned int i=0; i<projectionSlopes.size(); i++){
     pid pair;
     pair.first = i;
-    pair.second = projections[i].projectionSlope;
+    pair.second = projectionSlopes[i];
     slopeSort.push_back(pair);
   }
 
@@ -68,23 +121,24 @@ std::vector<unsigned int> regret_order(Instance& I){
   //get the edge values in matrix
   std::vector<std::vector<double> > values = get_value_matrix(I);
 
-  std::vector<regret_projection> projections;
+  std::vector<double> projectionSlopes;
   //TODO, make width represent row size
   for(int i=0; i<width; i++){
     regret_projection projection;
     projection.setConnections(getColumn(values, i));
     projection.findRayProjection();
-    projections.push_back(projection);
+    //projection.findLinearRegression();
+    projectionSlopes.push_back(projection.projectionSlope);
   }
 
-  std::vector<unsigned int> order = generate_regret_order(projections);
+  std::vector<unsigned int> order = generate_regret_order(projectionSlopes);
 
   /*
   std::vector<pii> matches = find_matches(values, order, width);
   write_matches(I, matches);
   std::cout << "Regret matching value: " << get_value(I) << std::endl;
   */
-  
+
   /*
   regret_projection projection;
   projection.setConnections(getColumn(values, 0));

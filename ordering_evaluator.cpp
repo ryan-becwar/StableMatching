@@ -41,9 +41,10 @@ void OrderingEvaluator::generateGreedyResults(){
   double sum = std::accumulate(greedyResults.begin(), greedyResults.end(), 0);
   greedyMean = sum / greedyResults.size();
 
-  vector<double> difference(greedyResults.size());
   //necessary for lambda capture list unless we wanted to pass all of this, which would be costly
   double tmpMean(greedyMean);
+  //Creates a difference vector which contains the difference of each value from the mean
+  vector<double> difference(greedyResults.size());
   std::transform(greedyResults.begin(), greedyResults.end(), difference.begin(), [tmpMean](double x) { return x - tmpMean; });
 
   double sq_sum = std::inner_product(difference.begin(), difference.end(), difference.begin(), 0.0);

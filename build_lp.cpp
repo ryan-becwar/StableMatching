@@ -5,17 +5,6 @@ double **cost;
 double lp_opt_result(int n, vector<vector< double> > cost)
 {
   int L = n, R = n;
-  /*
-  int n;
-  cin >> n;
-
-  cost = new double *[L];
-  for (int i=0; i<L; i++) {
-    cost[i] = new double[R];
-    cin >> n;
-    for (int j=0; j<R; j++) cin >> cost[i][j];
-  }
-  */
 
   ofstream fout ("foo.lp");
 

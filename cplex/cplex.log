@@ -1,0 +1,33 @@
+
+Log started (V10.0.1) Tue Nov  8 20:08:24 2016
+
+
+Log started (V10.0.1) Tue Nov  8 20:09:01 2016
+
+
+Log started (V10.0.1) Tue Nov  8 20:11:22 2016
+
+
+Log started (V10.0.1) Tue Nov  8 20:21:09 2016
+
+
+Problem 'foo.lp' read.
+Read time =    0.00 sec.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time =    0.00 sec.
+
+Iteration log . . .
+Iteration:     1   Dual objective     =             0.635751
+
+Dual simplex - Optimal:  Objective =  1.9802540000e+00
+Solution time =    0.00 sec.  Iterations = 5 (0)
+
+
+Variable Name           Solution Value
+x0x0                          1.000000
+x1x4                          1.000000
+x2x3                          1.000000
+x3x1                          1.000000
+x4x2                          1.000000
+All other variables matching 'x*' are 0.

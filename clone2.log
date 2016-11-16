@@ -1,0 +1,1285 @@
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:35 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   181    Infeasibility =            25.000000
+Iteration:   259    Objective     =            34.331434
+Iteration:   374    Objective     =            29.698967
+Iteration:   476    Objective     =            26.705319
+Iteration:   589    Objective     =            25.820486
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:36 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   171    Infeasibility =            24.000000
+Iteration:   234    Objective     =            28.760459
+Iteration:   335    Objective     =            23.785296
+Iteration:   441    Objective     =            20.342085
+Iteration:   553    Objective     =            19.582064
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:36 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   171    Infeasibility =            31.000000
+Iteration:   284    Objective     =            28.612008
+Iteration:   394    Objective     =            24.254746
+Iteration:   504    Objective     =            22.029729
+Iteration:   616    Objective     =            21.099161
+Iteration:   736    Objective     =            20.814257
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:36 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   178    Infeasibility =            24.000000
+Iteration:   263    Objective     =            33.591711
+Iteration:   377    Objective     =            30.366746
+Iteration:   489    Objective     =            28.667979
+Iteration:   596    Objective     =            27.813707
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:37 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   169    Infeasibility =            30.000000
+Iteration:   270    Objective     =            30.910660
+Iteration:   375    Objective     =            26.759167
+Iteration:   480    Objective     =            23.342094
+Iteration:   589    Objective     =            22.374520
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:37 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            93.000000
+Iteration:   164    Infeasibility =            29.000000
+Iteration:   303    Objective     =            33.493737
+Iteration:   415    Objective     =            29.011081
+Iteration:   526    Objective     =            25.800004
+Iteration:   628    Objective     =            24.875552
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:37 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   167    Infeasibility =            29.000000
+Iteration:   246    Objective     =            32.833835
+Iteration:   367    Objective     =            27.966554
+Iteration:   468    Objective     =            24.585829
+Iteration:   582    Objective     =            23.600700
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:38 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   175    Infeasibility =            26.000000
+Iteration:   264    Objective     =            35.097838
+Iteration:   373    Objective     =            30.896144
+Iteration:   479    Objective     =            27.674169
+Iteration:   584    Objective     =            27.183059
+Iteration:   680    Objective     =            26.999472
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:38 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   165    Infeasibility =            31.000000
+Iteration:   269    Objective     =            32.993159
+Iteration:   371    Objective     =            28.211108
+Iteration:   478    Objective     =            24.375810
+Iteration:   598    Objective     =            23.954434
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:38 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   172    Infeasibility =            30.000000
+Iteration:   274    Objective     =            33.099729
+Iteration:   378    Objective     =            27.866038
+Iteration:   495    Objective     =            24.988518
+Iteration:   605    Objective     =            23.915676
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:39 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   166    Infeasibility =            36.000000
+Iteration:   309    Objective     =            31.262496
+Iteration:   415    Objective     =            28.712396
+Iteration:   523    Objective     =            25.833334
+Iteration:   626    Objective     =            24.923200
+Iteration:   733    Objective     =            24.708589
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:39 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   163    Infeasibility =            32.000000
+Iteration:   248    Objective     =            32.050372
+Iteration:   358    Objective     =            27.704602
+Iteration:   462    Objective     =            24.868360
+Iteration:   564    Objective     =            23.806315
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:39 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   175    Infeasibility =            22.000000
+Iteration:   276    Objective     =            36.325649
+Iteration:   388    Objective     =            32.372276
+Iteration:   501    Objective     =            28.828779
+Iteration:   616    Objective     =            27.667155
+Iteration:   731    Objective     =            27.298172
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:39 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   177    Infeasibility =            25.000000
+Iteration:   277    Objective     =            29.031585
+Iteration:   391    Objective     =            25.525911
+Iteration:   497    Objective     =            23.366125
+Iteration:   595    Objective     =            22.929612
+
+Dual simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:40 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   167    Infeasibility =            25.000000
+Iteration:   252    Objective     =            34.852487
+Iteration:   362    Objective     =            30.088889
+Iteration:   469    Objective     =            27.156115
+Iteration:   572    Objective     =            26.430854
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:40 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            92.000000
+Iteration:   181    Infeasibility =            16.000000
+Iteration:   232    Objective     =            34.494298
+Iteration:   333    Objective     =            28.250240
+Iteration:   429    Objective     =            25.023096
+Iteration:   540    Objective     =            24.156991
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:40 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   187    Infeasibility =            20.000000
+Iteration:   260    Objective     =            31.763629
+Iteration:   367    Objective     =            29.608379
+Iteration:   468    Objective     =            27.241719
+Iteration:   574    Objective     =            27.008832
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:41 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   166    Infeasibility =            29.000000
+Iteration:   243    Objective     =            31.135790
+Iteration:   349    Objective     =            26.952501
+Iteration:   459    Objective     =            25.121565
+Iteration:   555    Objective     =            24.017692
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:41 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   173    Infeasibility =            25.000000
+Iteration:   295    Infeasibility =             0.000000
+Iteration:   296    Objective     =            34.178488
+Iteration:   401    Objective     =            29.172500
+Iteration:   512    Objective     =            27.072346
+Iteration:   617    Objective     =            26.305533
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:41 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   186    Infeasibility =            18.000000
+Iteration:   296    Objective     =            38.092435
+Iteration:   398    Objective     =            33.990102
+Iteration:   500    Objective     =            30.874922
+Iteration:   615    Objective     =            30.173585
+Iteration:   717    Objective     =            29.696058
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:42 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   186    Infeasibility =            19.000000
+Iteration:   261    Objective     =            31.338461
+Iteration:   371    Objective     =            27.467805
+Iteration:   474    Objective     =            24.370238
+Iteration:   584    Objective     =            23.508642
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:42 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   192    Infeasibility =            19.000000
+Iteration:   255    Objective     =            34.176299
+Iteration:   368    Objective     =            30.490018
+Iteration:   485    Objective     =            28.635834
+Iteration:   605    Objective     =            27.976199
+Iteration:   719    Objective     =            27.722245
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:42 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   158    Infeasibility =            31.000000
+Iteration:   272    Objective     =            34.939659
+Iteration:   375    Objective     =            31.431986
+Iteration:   483    Objective     =            28.231905
+Iteration:   593    Objective     =            27.403272
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:42 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   186    Infeasibility =            19.000000
+Iteration:   277    Objective     =            33.812683
+Iteration:   382    Objective     =            30.741498
+Iteration:   482    Objective     =            28.092889
+Iteration:   582    Objective     =            27.208156
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:43 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   171    Infeasibility =            29.000000
+Iteration:   292    Objective     =            37.234481
+Iteration:   391    Objective     =            32.739616
+Iteration:   505    Objective     =            29.916835
+Iteration:   611    Objective     =            28.781289
+Iteration:   720    Objective     =            28.349237
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:43 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   189    Infeasibility =            19.000000
+Iteration:   258    Objective     =            35.518023
+Iteration:   358    Objective     =            30.764786
+Iteration:   473    Objective     =            27.371913
+Iteration:   580    Objective     =            26.882548
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:43 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   180    Infeasibility =            20.000000
+Iteration:   254    Objective     =            32.721182
+Iteration:   358    Objective     =            28.582326
+Iteration:   462    Objective     =            25.509218
+Iteration:   573    Objective     =            24.186717
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:44 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   186    Infeasibility =            19.000000
+Iteration:   293    Objective     =            33.841719
+Iteration:   403    Objective     =            27.663163
+Iteration:   504    Objective     =            23.988851
+Iteration:   607    Objective     =            23.043921
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:44 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   186    Infeasibility =            19.000000
+Iteration:   265    Objective     =            29.602770
+Iteration:   370    Objective     =            26.210748
+Iteration:   472    Objective     =            23.428008
+Iteration:   581    Objective     =            22.213806
+Iteration:   687    Objective     =            21.947255
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:44 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   171    Infeasibility =            34.000000
+Iteration:   294    Objective     =            36.345884
+Iteration:   399    Objective     =            30.314114
+Iteration:   502    Objective     =            26.981269
+Iteration:   608    Objective     =            26.087001
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:44 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   164    Infeasibility =            27.000000
+Iteration:   258    Objective     =            37.688007
+Iteration:   373    Objective     =            33.329757
+Iteration:   478    Objective     =            31.343613
+Iteration:   583    Objective     =            29.527898
+Iteration:   689    Objective     =            29.248591
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:45 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   177    Infeasibility =            21.000000
+Iteration:   247    Objective     =            31.452011
+Iteration:   355    Objective     =            28.874391
+Iteration:   453    Objective     =            25.969972
+Iteration:   544    Objective     =            25.095509
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:45 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   194    Infeasibility =            16.000000
+Iteration:   252    Objective     =            35.048663
+Iteration:   364    Objective     =            31.486305
+Iteration:   480    Objective     =            28.077573
+Iteration:   589    Objective     =            26.208651
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:45 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   178    Infeasibility =            25.000000
+Iteration:   280    Objective     =            35.874005
+Iteration:   382    Objective     =            30.555610
+Iteration:   479    Objective     =            26.618956
+Iteration:   591    Objective     =            25.452720
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:46 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   172    Infeasibility =            28.000000
+Iteration:   258    Objective     =            34.493365
+Iteration:   377    Objective     =            30.084180
+Iteration:   484    Objective     =            26.951781
+Iteration:   593    Objective     =            26.450823
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:46 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   164    Infeasibility =            34.000000
+Iteration:   294    Infeasibility =             5.000000
+Iteration:   338    Objective     =            33.883072
+Iteration:   445    Objective     =            31.209933
+Iteration:   567    Objective     =            27.967489
+Iteration:   666    Objective     =            26.997222
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:46 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   178    Infeasibility =            30.000000
+Iteration:   274    Objective     =            32.439087
+Iteration:   377    Objective     =            28.748196
+Iteration:   475    Objective     =            26.746003
+Iteration:   589    Objective     =            26.084517
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:47 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   182    Infeasibility =            24.000000
+Iteration:   287    Objective     =            35.123825
+Iteration:   393    Objective     =            32.265709
+Iteration:   498    Objective     =            29.454667
+Iteration:   610    Objective     =            28.004354
+Iteration:   715    Objective     =            27.628475
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:47 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   185    Infeasibility =            19.000000
+Iteration:   268    Objective     =            35.110212
+Iteration:   368    Objective     =            31.340109
+Iteration:   482    Objective     =            29.028901
+Iteration:   588    Objective     =            28.355789
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:47 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   177    Infeasibility =            26.000000
+Iteration:   264    Objective     =            35.156981
+Iteration:   378    Objective     =            29.500954
+Iteration:   490    Objective     =            27.288752
+Iteration:   587    Objective     =            26.607651
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:48 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   164    Infeasibility =            34.000000
+Iteration:   267    Objective     =            34.116746
+Iteration:   382    Objective     =            28.527666
+Iteration:   489    Objective     =            25.452350
+Iteration:   602    Objective     =            25.082693
+Iteration:   700    Objective     =            24.979662
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:48 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   195    Infeasibility =            17.000000
+Iteration:   260    Objective     =            31.192316
+Iteration:   370    Objective     =            27.739976
+Iteration:   475    Objective     =            25.988993
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:48 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   179    Infeasibility =            27.000000
+Iteration:   271    Objective     =            32.033692
+Iteration:   389    Objective     =            28.539376
+Iteration:   496    Objective     =            25.098147
+Iteration:   604    Objective     =            23.981949
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:48 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   176    Infeasibility =            19.000000
+Iteration:   244    Objective     =            38.229003
+Iteration:   356    Objective     =            32.093547
+Iteration:   469    Objective     =            30.203743
+Iteration:   574    Objective     =            29.963560
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:49 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   158    Infeasibility =            35.000000
+Iteration:   246    Objective     =            32.628529
+Iteration:   349    Objective     =            29.827622
+Iteration:   462    Objective     =            27.685072
+Iteration:   577    Objective     =            27.349037
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:49 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   181    Infeasibility =            19.000000
+Iteration:   273    Objective     =            34.519342
+Iteration:   389    Objective     =            30.223777
+Iteration:   499    Objective     =            26.973967
+Iteration:   604    Objective     =            26.083327
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:50 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   181    Infeasibility =            18.000000
+Iteration:   244    Objective     =            34.362255
+Iteration:   355    Objective     =            27.269729
+Iteration:   464    Objective     =            25.106296
+Iteration:   576    Objective     =            24.777134
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:50 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   176    Infeasibility =            31.000000
+Iteration:   284    Objective     =            33.656560
+Iteration:   392    Objective     =            29.734220
+Iteration:   500    Objective     =            26.056852
+Iteration:   612    Objective     =            24.750872
+Iteration:   716    Objective     =            24.404510
+
+Dual simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:50 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            90.000000
+Iteration:   188    Infeasibility =            18.000000
+Iteration:   265    Objective     =            32.220389
+Iteration:   375    Objective     =            27.031528
+Iteration:   481    Objective     =            24.528022
+Iteration:   595    Objective     =            24.168885
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:50 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            91.000000
+Iteration:   179    Infeasibility =            25.000000
+Iteration:   255    Objective     =            31.922481
+Iteration:   368    Objective     =            27.212406
+Iteration:   462    Objective     =            25.367196
+Iteration:   573    Objective     =            23.965766
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:51 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   168    Infeasibility =            32.000000
+Iteration:   286    Objective     =            31.877424
+Iteration:   386    Objective     =            27.463476
+Iteration:   495    Objective     =            23.672291
+Iteration:   603    Objective     =            22.389873
+Iteration:   708    Objective     =            22.257829
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:51 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   178    Infeasibility =            20.000000
+Iteration:   247    Objective     =            31.202462
+Iteration:   351    Objective     =            27.272224
+Iteration:   470    Objective     =            23.932023
+Iteration:   577    Objective     =            23.112787
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:51 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   178    Infeasibility =            27.000000
+Iteration:   269    Objective     =            33.700225
+Iteration:   369    Objective     =            30.173495
+Iteration:   471    Objective     =            26.652681
+Iteration:   580    Objective     =            26.091526
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:52 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   166    Infeasibility =            29.000000
+Iteration:   248    Objective     =            32.846375
+Iteration:   350    Objective     =            28.795276
+Iteration:   457    Objective     =            25.900087
+Iteration:   558    Objective     =            25.139777
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:52 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   187    Infeasibility =            18.000000
+Iteration:   278    Objective     =            28.442293
+Iteration:   393    Objective     =            24.776834
+Iteration:   503    Objective     =            20.648065
+Iteration:   614    Objective     =            19.573130
+Iteration:   720    Objective     =            19.373038
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:52 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   185    Infeasibility =            19.000000
+Iteration:   243    Objective     =            34.848392
+Iteration:   348    Objective     =            28.110840
+Iteration:   459    Objective     =            25.579543
+Iteration:   570    Objective     =            25.057768
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:53 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   185    Infeasibility =            22.000000
+Iteration:   301    Infeasibility =             0.000000
+Iteration:   302    Objective     =            30.782818
+Iteration:   408    Objective     =            26.142016
+Iteration:   517    Objective     =            23.275117
+Iteration:   631    Objective     =            22.404877
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:53 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            91.000000
+Iteration:   174    Infeasibility =            28.000000
+Iteration:   290    Objective     =            33.115454
+Iteration:   401    Objective     =            29.416510
+Iteration:   512    Objective     =            26.044173
+Iteration:   623    Objective     =            25.156924
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:53 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   189    Infeasibility =            19.000000
+Iteration:   256    Objective     =            34.814724
+Iteration:   369    Objective     =            29.746412
+Iteration:   470    Objective     =            27.666070
+Iteration:   580    Objective     =            26.624328
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:53 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   165    Infeasibility =            30.000000
+Iteration:   293    Infeasibility =             2.000000
+Iteration:   300    Objective     =            31.113245
+Iteration:   417    Objective     =            26.965376
+Iteration:   525    Objective     =            23.602526
+Iteration:   637    Objective     =            23.170930
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:54 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   186    Infeasibility =            18.000000
+Iteration:   256    Objective     =            35.235500
+Iteration:   361    Objective     =            29.926669
+Iteration:   469    Objective     =            26.387106
+Iteration:   576    Objective     =            25.619239
+Iteration:   685    Objective     =            25.269694
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:54 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   172    Infeasibility =            24.000000
+Iteration:   261    Objective     =            31.204879
+Iteration:   366    Objective     =            27.983892
+Iteration:   471    Objective     =            24.985234
+Iteration:   573    Objective     =            24.117514
+Iteration:   685    Objective     =            23.975464
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:54 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   180    Infeasibility =            19.000000
+Iteration:   276    Objective     =            32.122757
+Iteration:   391    Objective     =            29.075980
+Iteration:   502    Objective     =            25.945275
+Iteration:   617    Objective     =            24.808209
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:55 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   177    Infeasibility =            24.000000
+Iteration:   285    Objective     =            32.529087
+Iteration:   386    Objective     =            27.618214
+Iteration:   495    Objective     =            24.900306
+Iteration:   601    Objective     =            23.901716
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:55 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   159    Infeasibility =            33.000000
+Iteration:   259    Objective     =            36.154661
+Iteration:   367    Objective     =            29.794222
+Iteration:   478    Objective     =            27.225420
+Iteration:   587    Objective     =            26.156801
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:55 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            95.000000
+Iteration:   158    Infeasibility =            35.000000
+Iteration:   262    Objective     =            30.497726
+Iteration:   374    Objective     =            27.305383
+Iteration:   484    Objective     =            25.035105
+Iteration:   587    Objective     =            23.657512
+Iteration:   697    Objective     =            23.129201
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:56 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   165    Infeasibility =            29.000000
+Iteration:   269    Objective     =            31.521825
+Iteration:   392    Objective     =            26.151543
+Iteration:   500    Objective     =            24.810003
+Iteration:   615    Objective     =            24.127458
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:56 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   159    Infeasibility =            38.000000
+Iteration:   264    Objective     =            34.181947
+Iteration:   375    Objective     =            30.664749
+Iteration:   486    Objective     =            26.386084
+Iteration:   597    Objective     =            25.524823
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:56 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   177    Infeasibility =            21.000000
+Iteration:   241    Objective     =            36.086477
+Iteration:   354    Objective     =            32.397623
+Iteration:   468    Objective     =            29.051263
+Iteration:   579    Objective     =            27.987691
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:57 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   172    Infeasibility =            31.000000
+Iteration:   262    Objective     =            35.434931
+Iteration:   368    Objective     =            30.791672
+Iteration:   482    Objective     =            27.074815
+Iteration:   594    Objective     =            26.327340
+Iteration:   696    Objective     =            25.753596
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:57 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   175    Infeasibility =            29.000000
+Iteration:   265    Objective     =            34.758375
+Iteration:   381    Objective     =            27.098610
+Iteration:   495    Objective     =            24.831170
+Iteration:   593    Objective     =            24.350422
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:57 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   171    Infeasibility =            23.000000
+Iteration:   234    Objective     =            28.145756
+Iteration:   347    Objective     =            23.863388
+Iteration:   456    Objective     =            20.777104
+Iteration:   557    Objective     =            20.146324
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:57 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   191    Infeasibility =            16.000000
+Iteration:   248    Objective     =            33.436239
+Iteration:   362    Objective     =            27.717551
+Iteration:   463    Objective     =            25.302077
+Iteration:   577    Objective     =            24.411811
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:58 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   184    Infeasibility =            23.000000
+Iteration:   287    Objective     =            32.169811
+Iteration:   391    Objective     =            28.633840
+Iteration:   493    Objective     =            24.491226
+Iteration:   611    Objective     =            23.624796
+Iteration:   712    Objective     =            23.159844
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:58 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   169    Infeasibility =            31.000000
+Iteration:   253    Objective     =            31.423742
+Iteration:   358    Objective     =            28.008843
+Iteration:   460    Objective     =            24.933296
+Iteration:   572    Objective     =            24.182696
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:58 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   167    Infeasibility =            31.000000
+Iteration:   287    Objective     =            30.492462
+Iteration:   411    Objective     =            25.439097
+Iteration:   524    Objective     =            22.693561
+Iteration:   629    Objective     =            22.069953
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:59 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   171    Infeasibility =            34.000000
+Iteration:   287    Objective     =            36.336479
+Iteration:   391    Objective     =            31.713454
+Iteration:   493    Objective     =            29.477524
+Iteration:   598    Objective     =            28.662456
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:59 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   175    Infeasibility =            29.000000
+Iteration:   263    Objective     =            35.729488
+Iteration:   375    Objective     =            30.382693
+Iteration:   499    Objective     =            27.501611
+Iteration:   615    Objective     =            26.681707
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:59 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   191    Infeasibility =            15.000000
+Iteration:   234    Objective     =            29.971740
+Iteration:   344    Objective     =            26.475211
+Iteration:   449    Objective     =            24.047258
+Iteration:   555    Objective     =            23.565653
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:19:59 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   157    Infeasibility =            35.000000
+Iteration:   270    Objective     =            33.483010
+Iteration:   380    Objective     =            28.120043
+Iteration:   489    Objective     =            26.084285
+Iteration:   602    Objective     =            25.060957
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:00 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            96.000000
+Iteration:   166    Infeasibility =            32.000000
+Iteration:   279    Objective     =            33.150998
+Iteration:   387    Objective     =            29.532989
+Iteration:   498    Objective     =            26.820202
+Iteration:   601    Objective     =            25.933187
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:00 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   167    Infeasibility =            30.000000
+Iteration:   272    Objective     =            31.037889
+Iteration:   386    Objective     =            28.446290
+Iteration:   492    Objective     =            25.322572
+Iteration:   605    Objective     =            24.914168
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:00 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   166    Infeasibility =            34.000000
+Iteration:   261    Objective     =            34.649076
+Iteration:   370    Objective     =            29.996981
+Iteration:   480    Objective     =            27.415650
+Iteration:   592    Objective     =            25.953105
+Iteration:   696    Objective     =            25.516407
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:01 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   186    Infeasibility =            19.000000
+Iteration:   250    Objective     =            33.834365
+Iteration:   359    Objective     =            30.416184
+Iteration:   457    Objective     =            27.356612
+Iteration:   569    Objective     =            25.904906
+Iteration:   691    Objective     =            25.331066
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:01 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   166    Infeasibility =            31.000000
+Iteration:   247    Objective     =            34.185330
+Iteration:   352    Objective     =            30.074271
+Iteration:   469    Objective     =            26.936753
+Iteration:   578    Objective     =            26.619863
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:01 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   188    Infeasibility =            15.000000
+Iteration:   245    Objective     =            36.736852
+Iteration:   356    Objective     =            33.758031
+Iteration:   468    Objective     =            29.994078
+Iteration:   593    Objective     =            28.950270
+Iteration:   690    Objective     =            28.690424
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:02 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   181    Infeasibility =            18.000000
+Iteration:   260    Objective     =            34.141124
+Iteration:   367    Objective     =            29.287125
+Iteration:   471    Objective     =            26.806433
+Iteration:   577    Objective     =            26.534512
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:02 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   165    Infeasibility =            33.000000
+Iteration:   263    Objective     =            36.913170
+Iteration:   369    Objective     =            32.985663
+Iteration:   485    Objective     =            30.804767
+Iteration:   593    Objective     =            29.882299
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:02 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            94.000000
+Iteration:   177    Infeasibility =            24.000000
+Iteration:   261    Objective     =            31.166091
+Iteration:   372    Objective     =            26.228984
+Iteration:   474    Objective     =            23.645511
+Iteration:   582    Objective     =            23.006898
+
+Primal simplex solved model.
+
+
+Log for 'foo.lp' Clone_2 (V12.6.3.0) Wed Nov 16 09:20:03 2016
+
+
+Iteration log . . .
+Iteration:     1    Infeasibility =            97.000000
+Iteration:   169    Infeasibility =            26.000000
+Iteration:   249    Objective     =            31.433928
+Iteration:   347    Objective     =            28.272767
+Iteration:   445    Objective     =            24.147711
+Iteration:   552    Objective     =            23.522377
+
+Primal simplex solved model.
+

@@ -1,6 +1,6 @@
 CC=gcc
-CPP=clang++
-CFLAGS=-g -std=c++11 -Wall
+CPP=g++
+CFLAGS=-g -std=c++0x -Wall
 
 BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o PageRank.o GenerateDataFile.o GreedyMatching regret_matching.o build_lp.o main
 

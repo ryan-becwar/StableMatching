@@ -24,8 +24,8 @@ int main(){
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_projection_order(I);
       vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
-      //double optVal = lp_opt_result(N, get_value_matrix(I));
-      double optVal = 0;
+      double optVal = lp_opt_result(N, get_value_matrix(I));
+      //double optVal = 0;
 
       evaluator.evaluateOrder("pagerank", pagerankOrder);
       evaluator.evaluateOrder("regret", regretOrder);

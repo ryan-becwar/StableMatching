@@ -12,3 +12,5 @@ GenerateDataFile
 GreedyMatching
 build_lp
 *.o
+*.log
+*.lp

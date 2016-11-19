@@ -45,20 +45,20 @@ int main(int argc, char *argv[]){
 	}
 
 	cout << "costs: " << endl;
-	printMatrix(costs);
+	print_matrix(costs);
 	vector<vector<double> > cT = transpose(costs);
-//	printMatrix(cT);
+//	print_matrix(cT);
 
 	vector<vector<double> > t = multiply(costs, cT);
-//	printMatrix(t);
+//	print_matrix(t);
 
-	vector<vector<double> > p = transitionMat(costs);
-	printMatrix(p);
+	vector<vector<double> > p = transition_mat(costs);
+	print_matrix(p);
 
-	printMatrix(transpose(p));
+	print_matrix(transpose(p));
 
 	vector<vector<double> > ppt = multiply(p, transpose(p));
-	printMatrix(ppt);
+	print_matrix(ppt);
 
 	const double a = .8;
 	//Vector to be repeatedly multiplied by ppt
@@ -70,12 +70,12 @@ int main(int argc, char *argv[]){
 		x.push_back(row);
 	}
 
-	printMatrix(x);
+	print_matrix(x);
 	for(int i=0; i<5; i++){
-		x = scalarMult(x, a);
+		x = scalar_mult(x, a);
 		x = multiply(ppt, x);
 		printf("Iteration %d\n", i);
-		printMatrix(x);
+		print_matrix(x);
 	}
 
 	//Create vector to sort elements in x based off of transition probability

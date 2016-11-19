@@ -13,7 +13,7 @@ using namespace std;
 
 typedef pair<double, double> Point;
 
-typedef struct NodeData {
+typedef struct node_data {
     int listLength;
     vector<double> preferenceList;
 
@@ -23,13 +23,13 @@ typedef struct NodeData {
             preferenceList.push_back(0.0);
         }
     }
-} NodeData;
+} node_data;
 
-void writeNodeData(ostream &out, vector<NodeData> &nodes);
-Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight);
-Instance getLocationInstance(unsigned int width, double noise);
-Instance getGlobalProdInstance(unsigned int width, double noise);
-Instance getGlobalMinInstance(unsigned int width, double noise);
+void write_node_data(ostream &out, vector<node_data> &nodes);
+Instance generate_weighted_data(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight);
+Instance get_location_instance(unsigned int width, double noise);
+Instance get_global_prod_instance(unsigned int width, double noise);
+Instance get_global_min_instance(unsigned int width, double noise);
 
 
 #endif //STABLEMATCHING_GENERATEDATAFILE_H

@@ -1,4 +1,4 @@
-#include "GenerateDataFile.h"
+#include "generate_data_file.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -144,7 +144,7 @@ void writePersonListData(ofstream &out, vector<Person> &people){
     }
 }
 
-void generateWeightedData(ofstream &out, int personCount, double locationWeight, double rankWeight, double randomWeight) {
+void generate_weighted_data(ofstream &out, int personCount, double locationWeight, double rankWeight, double randomWeight) {
     vector<Person> men;
     vector<Person> women;
 
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]){
     generateRandomData(out, personCount);
     */
 
-    generateWeightedData(out, personCount, locationWeight, globalRankWeight, randomWeight);
+    generate_weighted_data(out, personCount, locationWeight, globalRankWeight, randomWeight);
 
     out.close();
     return 0;

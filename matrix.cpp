@@ -1,7 +1,7 @@
 #include "matrix.h"
 
 //Testing function that prints the contents of a std::vector matrix
-void printMatrix(std::vector<std::vector<double> > a){
+void print_matrix(std::vector<std::vector<double> > a){
 	for(unsigned int i=0; i<a.size(); i++){
 		for(unsigned int j=0; j<a[i].size(); j++){
 			std::cout << a[i][j] << " ";
@@ -42,7 +42,7 @@ std::vector<std::vector<double> > multiply(std::vector<std::vector<double > > a,
 }
 
 //Multiplies a matrix by a scalar value
-std::vector<std::vector<double> > scalarMult(std::vector<std::vector<double> > a, double x){
+std::vector<std::vector<double> > scalar_mult(std::vector<std::vector<double> > a, double x){
 	std::vector<std::vector<double> > prod;
 	for(unsigned int i=0; i<a.size(); i++){
 		std::vector<double> row;
@@ -79,7 +79,7 @@ std::vector<std::vector<double> > transpose(std::vector<std::vector<double> > a)
 }
 
 //inverts the values of the provided matrix and scales to make each row sum to 1
-std::vector<std::vector<double> > transitionMat(std::vector<std::vector<double> > costs){
+std::vector<std::vector<double> > transition_mat(std::vector<std::vector<double> > costs){
 	unsigned int width = costs[0].size();
 	unsigned int height = costs.size();
 
@@ -105,7 +105,7 @@ std::vector<std::vector<double> > transitionMat(std::vector<std::vector<double> 
 	return trans;
 }
 
-std::vector<double> sumRows(std::vector<std::vector<double> > p){
+std::vector<double> sum_rows(std::vector<std::vector<double> > p){
 	std::vector<double> sums;
 	for(unsigned int i=0; i<p.size(); i++){
 		double sum = 0;
@@ -118,12 +118,12 @@ std::vector<double> sumRows(std::vector<std::vector<double> > p){
 }
 
 //get a vector of values in the specified column
-std::vector<double> getColumn(std::vector<std::vector<double> >& matrix, unsigned int index){
+std::vector<double> get_column(std::vector<std::vector<double> >& matrix, unsigned int index){
 	std::vector<double> column;
 
 	//handle error cases
 	if(matrix.size() == 0){
-		std::cerr << "Empty matrix provided to getColumn function" << std::endl;
+		std::cerr << "Empty matrix provided to get_column function" << std::endl;
 		return column;
 	}
 

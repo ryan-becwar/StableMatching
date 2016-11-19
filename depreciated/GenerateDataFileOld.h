@@ -6,7 +6,7 @@
 #define STABLEMATCHING_GENERATEDATAFILE_H
 
 
-class GenerateDataFile {
+class generate_data_file {
 
 };
 

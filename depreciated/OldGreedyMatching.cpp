@@ -1,4 +1,4 @@
-#include "GreedyMatching.h"
+#include "greedy_matching.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>

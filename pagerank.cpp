@@ -1,4 +1,4 @@
-#include "PageRank.h"
+#include "pagerank.h"
 
 #define LARGE 10000000
 #define PAGERANK_EXP_VALUE .8
@@ -15,7 +15,7 @@ std::vector<unsigned int> generate_pagerank_order(Instance& I){
 	std::vector<std::vector<double> > values = get_value_matrix(I);
 	unsigned int width = values.size();
 
-	std::vector<std::vector<double> > p = transitionMat(values);
+	std::vector<std::vector<double> > p = transition_mat(values);
 	std::vector<std::vector<double> > ppt = multiply(p, transpose(p));
 
 	//Vector to be repeatedly multiplied by ppt
@@ -29,21 +29,21 @@ std::vector<unsigned int> generate_pagerank_order(Instance& I){
 
 	#ifdef VERBOSE
 		std::cout << "p:" << std::endl;
-		printMatrix(p);
+		print_matrix(p);
 
 		std::cout << "ppt:" << std::endl;
-		printMatrix(ppt);
+		print_matrix(ppt);
 
 		std::cout << "x\n";
-		printMatrix(x);
+		print_matrix(x);
 	#endif
 
 	for(int i=0; i<PAGERANK_STEP_COUNT; i++){
-		x = scalarMult(x, PAGERANK_EXP_VALUE);
+		x = scalar_mult(x, PAGERANK_EXP_VALUE);
 		x = multiply(ppt, x);
 		#ifdef VERBOSE
 		printf("Iteration %d\n", i);
-		printMatrix(x);
+		print_matrix(x);
 		#endif
 	}
 

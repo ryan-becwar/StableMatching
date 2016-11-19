@@ -1,8 +1,8 @@
 #include <iostream>
 #include "regret_matching.h"
-#include "PageRank.h"
+#include "pagerank.h"
 #include "ordering_evaluator.h"
-#include "GenerateDataFile.h"
+#include "generate_data_file.h"
 #include "build_lp.h"
 
 #define N 100
@@ -18,19 +18,19 @@ int main(){
 
   for(double noise = 0; noise <= 1.0; noise += NOISE_INCREMENT){
     for(unsigned int i=0; i<INSTANCE_COUNT; i++){
-      Instance I = getGlobalMinInstance(N, noise);
-      //Instance I = getLocationInstance(N, noise);
-      OrderingEvaluator evaluator(I, N);
+      Instance I = get_global_min_instance(N, noise);
+      //Instance I = get_location_instance(N, noise);
+      ordering_evaluator evaluator(I, N);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_projection_order(I);
       vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
-      double optVal = lp_opt_result(N, get_value_matrix(I));
-      //double optVal = 0;
+      //double optVal = lp_opt_result(N, get_value_matrix(I));
+      double optVal = 0;
 
-      evaluator.evaluateOrder("pagerank", pagerankOrder);
-      evaluator.evaluateOrder("regret", regretOrder);
-      evaluator.evaluateOrder("regretRegression", regretRegressionOrder);
-      evaluator.printPlotData(noise, i, optVal);
+      evaluator.evaluate_order("pagerank", pagerankOrder);
+      evaluator.evaluate_order("regret", regretOrder);
+      evaluator.evaluate_order("regretRegression", regretRegressionOrder);
+      evaluator.print_plot_data(noise, i, optVal);
     }
   }
 }

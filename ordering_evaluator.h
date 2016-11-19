@@ -1,20 +1,20 @@
 #include "matching_utilities.h"
 
 
-class OrderingEvaluator {
+class ordering_evaluator {
 public:
-  OrderingEvaluator(Instance& I, unsigned int greedyCount);
+  ordering_evaluator(Instance& I, unsigned int greedyCount);
 
-  void evaluateOrder(std::string title, vector<unsigned int> const& order);
-  void printPlotData(double noise, unsigned int instanceNum, double optVal);
+  void evaluate_order(std::string title, vector<unsigned int> const& order);
+  void print_plot_data(double noise, unsigned int instanceNum, double optVal);
 
-  static default_random_engine& getRandomEngine(){
+  static default_random_engine& get_random_engine(){
     static default_random_engine engine;
     return engine;
   }
 
 private:
-  void generateGreedyResults();
+  void generate_greedy_results();
 
   Instance &I;
   unsigned int greedyCount;

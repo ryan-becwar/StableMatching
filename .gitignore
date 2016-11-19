@@ -8,8 +8,8 @@ pagerank
 regret
 a.out
 readAnnotationFormat
-GenerateDataFile
-GreedyMatching
+generate_data_file
+greedy_matching
 build_lp
 *.o
 *.log

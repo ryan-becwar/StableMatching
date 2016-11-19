@@ -4,10 +4,10 @@
 
 using namespace std;
 
-void printMatrix(vector<vector<double> > a);
+void print_matrix(vector<vector<double> > a);
 vector<vector<double> > multiply(vector<vector<double > > a, vector<vector<double > > b);
-vector<vector<double> > scalarMult(vector<vector<double> > a, double x);
+vector<vector<double> > scalar_mult(vector<vector<double> > a, double x);
 vector<vector<double> > transpose(vector<vector<double> > a);
-vector<vector<double> > transitionMat(vector<vector<double> > costs);
-vector<double> sumRows(vector<vector<double> > p);
+vector<vector<double> > transition_mat(vector<vector<double> > costs);
+vector<double> sum_rows(vector<vector<double> > p);
 

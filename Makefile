@@ -2,7 +2,7 @@ CC=gcc
 CPP=g++
 CFLAGS=-g -std=c++0x -Wall
 
-BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o PageRank.o GenerateDataFile.o GreedyMatching regret_matching.o build_lp.o main
+BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o pagerank.o generate_data_file.o greedy_matching regret_matching.o build_lp.o main
 
 all: $(BINS)
 
@@ -18,11 +18,11 @@ matching_utilities.o: matching_utilities.cpp matching_utilities.h echo_instance.
 ordering_evaluator.o: ordering_evaluator.cpp ordering_evaluator.h echo_instance.o matching_utilities.o
 	$(CPP) $(CFLAGS) -c ordering_evaluator.cpp
 
-GenerateDataFile.o: GenerateDataFile.cpp GenerateDataFile.h echo_instance.o
-	$(CPP) $(CFLAGS) -c GenerateDataFile.cpp
+generate_data_file.o: generate_data_file.cpp generate_data_file.h echo_instance.o
+	$(CPP) $(CFLAGS) -c generate_data_file.cpp
 
-PageRank.o:  PageRank.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
-	$(CPP) $(CFLAGS) -c PageRank.cpp
+pagerank.o:  pagerank.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
+	$(CPP) $(CFLAGS) -c pagerank.cpp
 
 regret_matching.o: regret_matching.cpp matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o
 	$(CPP) $(CFLAGS) -c regret_matching.cpp
@@ -30,17 +30,17 @@ regret_matching.o: regret_matching.cpp matrix.o echo_instance.o matching_utiliti
 build_lp.o: build_lp.cpp build_lp.h
 	$(CPP) $(CFLAGS) -c build_lp.cpp
 
-main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o build_lp.o
-	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o PageRank.o matching_utilities.o matrix.o GenerateDataFile.o build_lp.o
+main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o pagerank.o matching_utilities.o matrix.o build_lp.o
+	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o pagerank.o matching_utilities.o matrix.o generate_data_file.o build_lp.o
 
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp
 
-GenerateDataFile: GenerateDataFile.cpp GenerateDataFile.h runGenerate.cpp echo_instance.o
-	$(CPP) $(CFLAGS) -o GenerateDataFile runGenerate.cpp
+generate_data_file: generate_data_file.cpp generate_data_file.h runGenerate.cpp echo_instance.o
+	$(CPP) $(CFLAGS) -o generate_data_file runGenerate.cpp
 
-GreedyMatching: GreedyMatching.cpp echo_instance.o
-	$(CPP) $(CFLAGS) -o GreedyMatching GreedyMatching.cpp echo_instance.o
+greedy_matching: greedy_matching.cpp echo_instance.o
+	$(CPP) $(CFLAGS) -o greedy_matching greedy_matching.cpp echo_instance.o
 
 clean:
 	rm $(BINS) cplex/build_lp

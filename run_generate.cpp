@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
     generateRandomData(out, lhsCount);
     */
 
-    Instance I = generateWeightedData(lhsCount, rhsCount, locationWeight,
+    Instance I = generate_weighted_data(lhsCount, rhsCount, locationWeight,
         globalRankWeight, randomWeight);
     print_instance(I);
 

@@ -1,6 +1,6 @@
 #include "ordering_evaluator.h"
 
-OrderingEvaluator::OrderingEvaluator(Instance& I, unsigned int greedyCount) :
+ordering_evaluator::ordering_evaluator(Instance& I, unsigned int greedyCount) :
   I(I),
   greedyCount(greedyCount),
   greedyResults(),
@@ -12,13 +12,13 @@ OrderingEvaluator::OrderingEvaluator(Instance& I, unsigned int greedyCount) :
 
   values = get_value_matrix(I);
   width = values.size();
-  generateGreedyResults();
+  generate_greedy_results();
 
 }
 
-void OrderingEvaluator::generateGreedyResults(){
+void ordering_evaluator::generate_greedy_results(){
   //random engine needed for random ordering
-  default_random_engine& randomEngine = getRandomEngine();
+  default_random_engine& randomEngine = get_random_engine();
 
   for(unsigned int i=0; i<greedyCount; i++){
     //generate random order vector
@@ -52,7 +52,7 @@ void OrderingEvaluator::generateGreedyResults(){
 
 }
 
-void OrderingEvaluator::evaluateOrder(std::string title, vector<unsigned int> const& order){
+void ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> const& order){
   //Compare order to greedy
   write_matches(I, find_matches(values, order, width));
   double result = get_value(I);
@@ -77,7 +77,7 @@ void OrderingEvaluator::evaluateOrder(std::string title, vector<unsigned int> co
   */
 }
 
-void OrderingEvaluator::printPlotData(double noise, unsigned int instanceNum, double optVal){
+void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum, double optVal){
   std::cout << width << " " << noise << " " << instanceNum << " " << greedyMean << " " << greedyStdev << " "
     << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"] << " " <<optVal << std::endl;
 }

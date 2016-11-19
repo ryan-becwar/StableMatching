@@ -1,8 +1,8 @@
-#include "GenerateDataFile.h"
+#include "generate_data_file.h"
 
 default_random_engine randomEngine;
 
-void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, double locationWeight){
+void assignLocationWeight(vector<node_data> &left, vector<node_data> &right, double locationWeight){
     vector<Point> leftPoints;
     vector<Point> rightPoints;
     //Std random number generation
@@ -44,7 +44,7 @@ void assignLocationWeight(vector<NodeData> &left, vector<NodeData> &right, doubl
 
 }
 
-void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, double rankWeight){
+void assignGlobalRankWeight(vector<node_data> &left, vector<node_data> &right, double rankWeight){
     //Std random number generation
     //static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(0.0, rankWeight);
@@ -86,7 +86,7 @@ void assignGlobalRankWeight(vector<NodeData> &left, vector<NodeData> &right, dou
     }
 }
 
-void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double randomWeight){
+void assignRandomWeight(vector<node_data> &left, vector<node_data> &right, double randomWeight){
 
     //static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(-.5, .5);
@@ -108,7 +108,7 @@ void assignRandomWeight(vector<NodeData> &left, vector<NodeData> &right, double 
     }
 }
 
-void writeNodeData(ostream &out, vector<NodeData> &nodes){
+void write_node_data(ostream &out, vector<node_data> &nodes){
     out << nodes.size() << endl;
     for(unsigned int i=0; i<nodes.size(); i++){
         out << nodes[i].listLength << " ";
@@ -120,9 +120,9 @@ void writeNodeData(ostream &out, vector<NodeData> &nodes){
 }
 
 //Handles actual generation
-Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight) {
+Instance generate_weighted_data(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight) {
     Instance I;
-    vector<NodeData> left, right;
+    vector<node_data> left, right;
 
     //lhs
     for(int i=0; i<lhsCount; i++){
@@ -153,11 +153,11 @@ Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight,
 
     //Set up data structures
     for(int i=0; i<lhsCount; i++){
-        NodeData m;
+        node_data m;
         m.init(lhsCount);
         left.push_back(m);
 
-        NodeData w;
+        node_data w;
         w.init(lhsCount);
         right.push_back(w);
     }
@@ -178,23 +178,23 @@ Instance generateWeightedData(int lhsCount, int rhsCount, double locationWeight,
     return I;
 }
 
-Instance getLocationInstance(unsigned int width, double noise){
+Instance get_location_instance(unsigned int width, double noise){
   if(noise > 1) noise = 1;
   if(noise < 0) noise = 0;
 
-  return(generateWeightedData(width, width, 1 - noise, 0, noise));
+  return(generate_weighted_data(width, width, 1 - noise, 0, noise));
 }
 
-Instance getGlobalProdInstance(unsigned int width, double noise){
+Instance get_global_prod_instance(unsigned int width, double noise){
   if(noise > 1) noise = 1;
   if(noise < 0) noise = 0;
 
-  return(generateWeightedData(width, width, 0, 1 - noise, noise));
+  return(generate_weighted_data(width, width, 0, 1 - noise, noise));
 }
 
-Instance getGlobalMinInstance(unsigned int width, double noise){
+Instance get_global_min_instance(unsigned int width, double noise){
   if(noise > 1) noise = 1;
   if(noise < 0) noise = 0;
 
-  return(generateWeightedData(width, width, 0, 1 - noise, noise));
+  return(generate_weighted_data(width, width, 0, 1 - noise, noise));
 }

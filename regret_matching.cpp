@@ -6,11 +6,11 @@ matching prospects among its lower priority matches.
 To evaluate this, best fit line is drawn (soon to be expanded to a quadratic)
 */
 
-void getStats(std::vector<double>& set, std::vector<double>& difference, double& mean, double& stDev);
+void get_stats(std::vector<double>& set, std::vector<double>& difference, double& mean, double& stDev);
 
 class regret_projection {
 public:
-  void setConnections(std::vector<double> values){
+  void set_connections(std::vector<double> values){
     std::sort(values.begin(), values.end(), std::greater<double>());
     connectionValues = values;
   }
@@ -19,7 +19,7 @@ public:
   Estimates the regret by calculating the average slope of ray to points
   drawn from the initial point
   */
-  void findRayProjection(){
+  void find_ray_projection(){
     const double weightDecayRate = 0.9;
     double weight = 1.0;
     double weightDivisor = 0, sum = 0;
@@ -35,7 +35,7 @@ public:
   }
 
   //Find the fitting line of the form y = a + bx, where b is the projectionSlope
-  void findLinearRegression(){
+  void find_linear_regression(){
     double xStdev, yStdev, xMean, yMean, r = 0;
     std::vector<double> xVals;
     std::vector<double> xDifference(connectionValues.size());
@@ -47,8 +47,8 @@ public:
     }
 
 
-    getStats(xVals, xDifference, xMean, xStdev);
-    getStats(connectionValues, yDifference, yMean, yStdev);
+    get_stats(xVals, xDifference, xMean, xStdev);
+    get_stats(connectionValues, yDifference, yMean, yStdev);
 
     //Calculate r value
     //r = sum(x diff * y diff) / xstdev * ystdev
@@ -60,25 +60,13 @@ public:
 
     projectionSlope = r * (yStdev / xStdev);
     //a = yMean - projectionSlope * xMean;
-
-    /*
-    std::transform(set.begin(), set.end(), difference.begin(), [mean](double x) { return x - mean; });
-    //necessary for lambda capture list unless we wanted to pass all of this, which would be costly
-    double tmpMean(yMean);
-    //Creates a difference vector which contains the difference of each value from the mean
-    vector<double> yDifference(greedyResults.size());
-    std::transform(yResults.begin(), yResults.end(), yDifference.begin(), [tmpMean](double x) { return x - tmpMean; });
-
-    double ySqSum = std::inner_product(yDifference.begin(), yDifference.end(), yDifference.begin(), 0.0);
-    yStdev = std::sqrt(ySqSum / connectionValues.size());
-    */
   }
 
   std::vector<double> connectionValues;
   double projectionSlope;
 };
 
-void getStats(std::vector<double>& set, std::vector<double>& difference, double& mean, double& stDev){
+void get_stats(std::vector<double>& set, std::vector<double>& difference, double& mean, double& stDev){
 
   mean = std::accumulate(set.begin(), set.end(), 0) / set.size();
 
@@ -118,10 +106,10 @@ std::vector<unsigned int> regret_projection_order(Instance& I){
 
   std::vector<double> projectionSlopes;
   //TODO, make width represent row size
-  for(int i=0; i<width; i++){
+  for(unsigned int i=0; i<width; i++){
     regret_projection projection;
-    projection.setConnections(getColumn(values, i));
-    projection.findRayProjection();
+    projection.set_connections(get_column(values, i));
+    projection.find_ray_projection();
     projectionSlopes.push_back(projection.projectionSlope);
   }
 
@@ -138,10 +126,10 @@ std::vector<unsigned int> regret_regression_order(Instance& I){
 
   std::vector<double> projectionSlopes;
   //TODO, make width represent row size
-  for(int i=0; i<width; i++){
+  for(unsigned int i=0; i<width; i++){
     regret_projection projection;
-    projection.setConnections(getColumn(values, i));
-    projection.findLinearRegression();
+    projection.set_connections(get_column(values, i));
+    projection.find_linear_regression();
     projectionSlopes.push_back(projection.projectionSlope);
   }
 

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include "HungarianAlgorithm.h"
-#include "GreedyMatching.h"
+#include "greedy_matching.h"
 
 using namespace std;
 

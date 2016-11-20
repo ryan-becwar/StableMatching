@@ -52,6 +52,7 @@ void ordering_evaluator::generate_greedy_results(){
 
 }
 
+//Find the value of a given order and compares it to the distribution of random orders
 void ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> const& order){
   //Compare order to greedy
   write_matches(I, find_matches(values, order, width));
@@ -59,25 +60,9 @@ void ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> 
 
   double stdevsAbove = (result - greedyMean) / greedyStdev;
   zScores.insert(std::make_pair(title, stdevsAbove));
-
-
-  /*
-  std::sort(greedyResults.begin(), greedyResults.end(), std::greater<double>());
-  for(unsigned int i=0; i<greedyResults.size(); i++){
-  	std::cout << greedyResults[i] << std::endl;
-  }
-  unsigned int rank;
-  for(rank = 0; rank < greedyCount &&
-  	result < greedyResults[rank]; rank++);
-
-
-  std::cout<< "order" << std::endl << "Mean: " << greedyMean << " Stdev: " << greedyStdev << std::endl;
-  std::cout << "Rank: " << rank << " out of " << greedyResults.size() << std::endl;
-  std::cout << "Value: " << result << " Stdev's above mean: " << stdevsAbove << std::endl;
-  */
 }
 
-void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum, double optVal){
+void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum, double greedyVal, double optVal){
   std::cout << width << " " << noise << " " << instanceNum << " " << greedyMean << " " << greedyStdev << " "
-    << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"] << " " <<optVal << std::endl;
+    << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"]  << " " << greedyVal << " " <<optVal << std::endl;
 }

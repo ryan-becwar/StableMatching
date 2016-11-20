@@ -4,6 +4,7 @@
 #include "ordering_evaluator.h"
 #include "generate_data_file.h"
 #include "build_lp.h"
+#include "greedy_matching.h"
 
 #define N 100
 #define INSTANCE_COUNT 100
@@ -24,13 +25,14 @@ int main(){
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_projection_order(I);
       vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
+      double globalGreedyVal = global_greedy_value(I);
       //double optVal = lp_opt_result(N, get_value_matrix(I));
       double optVal = 0;
 
       evaluator.evaluate_order("pagerank", pagerankOrder);
       evaluator.evaluate_order("regret", regretOrder);
       evaluator.evaluate_order("regretRegression", regretRegressionOrder);
-      evaluator.print_plot_data(noise, i, optVal);
+      evaluator.print_plot_data(noise, i, globalGreedyVal, optVal);
     }
   }
 }

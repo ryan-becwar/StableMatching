@@ -1,8 +1,8 @@
 #ifndef STABLEMATCHING_GREEDYMATCHING_H
 #define STABLEMATCHING_GREEDYMATCHING_H
+#include "echo_instance.h"
 
-double runGreedyLong(int argc, char *argv[]);
-double runGreedy();
+double global_greedy_value(Instance I);
 
 
 #endif //STABLEMATCHING_GREEDYMATCHING_H

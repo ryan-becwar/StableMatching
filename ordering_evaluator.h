@@ -6,7 +6,7 @@ public:
   ordering_evaluator(Instance& I, unsigned int greedyCount);
 
   void evaluate_order(std::string title, vector<unsigned int> const& order);
-  void print_plot_data(double noise, unsigned int instanceNum, double optVal);
+  void print_plot_data(double noise, unsigned int instanceNum, double greedyVal, double optVal);
 
   static default_random_engine& get_random_engine(){
     static default_random_engine engine;

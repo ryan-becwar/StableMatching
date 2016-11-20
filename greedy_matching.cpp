@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-#include "echo_instance.h"
 
 using namespace std;
 
@@ -20,8 +19,7 @@ typedef struct Matching {
 } Matching;
 
 
-void greedy(Instance I){
-    cout << "Greedy Matching" << endl;
+double global_greedy_value(Instance I){
 
     sort(I.edges.begin(), I.edges.end());
 
@@ -38,15 +36,8 @@ void greedy(Instance I){
     }
 
     order_edges(I);
-    print_instance(I);
+    //print_instance(I);
+    //cout << "value: " << get_value(I) << endl;
 
-    cout << "value: " << get_value(I) << endl;
-}
-
-int main(int argc, char* argv[]){
-  Instance I = read_instance();
-
-  greedy(I);
-
-  return 0;
+    return get_value(I);
 }

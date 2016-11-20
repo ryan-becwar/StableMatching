@@ -12,7 +12,7 @@
 
 /*
 Writes out data in following column format:
-N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore optimal_value
+N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore global_greedy_value optimal_value
 */
 int main(){
   //Instance I = read_instance();
@@ -25,7 +25,8 @@ int main(){
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_projection_order(I);
       vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
-      double globalGreedyVal = global_greedy_value(I);
+      //double globalGreedyVal = global_greedy_value(I);
+      double globalGreedyVal = 0;
       //double optVal = lp_opt_result(N, get_value_matrix(I));
       double optVal = 0;
 

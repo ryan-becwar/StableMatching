@@ -2,9 +2,9 @@ CC=gcc
 CPP=g++
 CFLAGS=-g -std=c++0x -Wall
 
-BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o pagerank.o generate_data_file.o regret_matching.o build_lp.o greedy_matching.o main
+BINS= matrix.o echo_instance.o matching_utilities.o ordering_evaluator.o pagerank.o generate_data_file.o regret_matching.o build_lp.o greedy_matching.o
 
-all: $(BINS)
+all: $(BINS) main
 
 matrix.o: matrix.cpp matrix.h
 	$(CPP) $(CFLAGS) -c matrix.cpp
@@ -33,8 +33,8 @@ greedy_matching.o: greedy_matching.cpp greedy_matching.h echo_instance.o
 build_lp.o: build_lp.cpp build_lp.h
 	$(CPP) $(CFLAGS) -c build_lp.cpp
 
-main: main.cpp echo_instance.o ordering_evaluator.o regret_matching.o pagerank.o matching_utilities.o matrix.o build_lp.o greedy_matching.o
-	$(CPP) $(CFLAGS) -o main main.cpp echo_instance.o ordering_evaluator.o regret_matching.o pagerank.o matching_utilities.o matrix.o generate_data_file.o build_lp.o greedy_matching.o
+main: main.cpp $(BINS)
+	$(CPP) $(CFLAGS) -o main main.cpp $(BINS)
 
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp
@@ -43,7 +43,7 @@ generate_data_file: generate_data_file.cpp generate_data_file.h runGenerate.cpp 
 	$(CPP) $(CFLAGS) -o generate_data_file runGenerate.cpp
 
 clean:
-	rm $(BINS) cplex/build_lp
+	rm $(BINS)
 
 build_lp: cplex/build_lp.cpp
 	$(CPP) $(CFLAGS) -o cplex/build_lp cplex/build_lp.cpp

@@ -30,6 +30,20 @@ int main(){
       //double optVal = lp_opt_result(N, get_value_matrix(I));
       double optVal = 0;
 
+      //Grabbing learning values:
+      /*
+      Write instance to file
+
+      system call (python < instance > order.txt)
+
+      read order.txt into vector<unsigned int>
+
+      evaluator,evaluater_order("learning", learningOrder);
+      */
+
+
+
+
       evaluator.evaluate_order("pagerank", pagerankOrder);
       evaluator.evaluate_order("regret", regretOrder);
       evaluator.evaluate_order("regretRegression", regretRegressionOrder);

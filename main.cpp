@@ -7,12 +7,12 @@
 #include "greedy_matching.h"
 
 #define N 100
-#define INSTANCE_COUNT 100
+#define INSTANCE_COUNT 50
 #define NOISE_INCREMENT 0.1
 
 /*
 Writes out data in following column format:
-N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore global_greedy_value optimal_value
+N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore optimal_zscore
 */
 int main(){
   //Instance I = read_instance();
@@ -27,8 +27,8 @@ int main(){
       vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
       //double globalGreedyVal = global_greedy_value(I);
       double globalGreedyVal = 0;
-      //double optVal = lp_opt_result(N, get_value_matrix(I));
-      double optVal = 0;
+      double optVal = lp_opt_result(N, get_value_matrix(I));
+      //double optVal = 0;
 
 
       //Grabbing learning values psuedocode:

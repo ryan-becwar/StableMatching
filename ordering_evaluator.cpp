@@ -70,5 +70,5 @@ void ordering_evaluator::evaluate_value(std::string title, double value) {
 
 void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum){
   std::cout << width << " " << noise << " " << instanceNum << " " << greedyMean << " " << greedyStdev << " "
-    << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"]  << " " << zScores["greedy"] << " " << zScores["optimal"] << std::endl;
+    << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"]  << " " << zScores["optimal"] << std::endl;
 }

@@ -8,7 +8,7 @@ double lp_opt_result(int n, vector<vector< double> > cost)
 
   ofstream fout ("foo.lp");
 
-  fout << "Minimize";
+  fout << "Maximize";
   for (int i=0; i<L; i++)
     for (int j=0; j<R; j++)
       fout << ((cost[i][j]>=0) ? " +" : " ")
@@ -50,8 +50,6 @@ double lp_opt_result(int n, vector<vector< double> > cost)
     total += amt * cost[a][b];
   }
   results.close();
-
-  cout << "Total cost of optimal solution: " << total << "\n";
 
 
   return total;

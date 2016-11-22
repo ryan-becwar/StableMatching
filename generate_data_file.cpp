@@ -49,25 +49,6 @@ void assignGlobalRankWeight(vector<node_data> &left, vector<node_data> &right, d
     //static default_random_engine randomEngine;
     uniform_real_distribution<double> distribution(0.0, rankWeight);
 
-    /*
-    //value left, assign right's preference weights
-    for(unsigned int i=0; i<left.size(); i++){
-        double globalRank = distribution(randomEngine);
-        globalRank *= rankWeight;
-        for(unsigned int j=0; j<right.size(); j++){
-            right[j].preferenceList[i] += globalRank;
-        }
-    }
-
-    //value right, assign left's preference weights
-    for(unsigned int i=0; i<right.size(); i++){
-        double globalRank = distribution(randomEngine);
-        globalRank *= rankWeight;
-        for(unsigned int j=0; j<left.size(); j++){
-            left[j].preferenceList[i] += globalRank;
-        }
-    }
-    */
 
     vector<double> leftWeight, rightWeight;
     for(unsigned int i=0; i<left.size(); i++){
@@ -183,13 +164,6 @@ Instance get_location_instance(unsigned int width, double noise){
   if(noise < 0) noise = 0;
 
   return(generate_weighted_data(width, width, 1 - noise, 0, noise));
-}
-
-Instance get_global_prod_instance(unsigned int width, double noise){
-  if(noise > 1) noise = 1;
-  if(noise < 0) noise = 0;
-
-  return(generate_weighted_data(width, width, 0, 1 - noise, noise));
 }
 
 Instance get_global_min_instance(unsigned int width, double noise){

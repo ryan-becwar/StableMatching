@@ -62,7 +62,13 @@ void ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> 
   zScores.insert(std::make_pair(title, stdevsAbove));
 }
 
-void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum, double greedyVal, double optVal){
+//For compairing the strength of a known value to the greedy distribution, such as the global greedy or optimal score
+void ordering_evaluator::evaluate_value(std::string title, double value) {
+  double stdevsAbove = (value - greedyMean) / greedyStdev;
+  zScores.insert(std::make_pair(title, stdevsAbove));
+}
+
+void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum){
   std::cout << width << " " << noise << " " << instanceNum << " " << greedyMean << " " << greedyStdev << " "
-    << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"]  << " " << greedyVal << " " <<optVal << std::endl;
+    << zScores["pagerank"] << " " << zScores["regret"] << " " << zScores["regretRegression"]  << " " << zScores["greedy"] << " " << zScores["optimal"] << std::endl;
 }

@@ -30,7 +30,8 @@ int main(){
       //double optVal = lp_opt_result(N, get_value_matrix(I));
       double optVal = 0;
 
-      //Grabbing learning values:
+
+      //Grabbing learning values psuedocode:
       /*
       Write instance to file
 
@@ -42,12 +43,12 @@ int main(){
       */
 
 
-
-
       evaluator.evaluate_order("pagerank", pagerankOrder);
       evaluator.evaluate_order("regret", regretOrder);
       evaluator.evaluate_order("regretRegression", regretRegressionOrder);
-      evaluator.print_plot_data(noise, i, globalGreedyVal, optVal);
+      evaluator.evaluate_value("greedy", globalGreedyVal);
+      evaluator.evaluate_value("optimal", optVal);
+      evaluator.print_plot_data(noise, i);
     }
   }
 }

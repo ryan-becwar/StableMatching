@@ -51,8 +51,5 @@ double lp_opt_result(int n, vector<vector< double> > cost)
   }
   results.close();
 
-  cout << "Total cost of optimal solution: " << total << "\n";
-
-
   return total;
 }

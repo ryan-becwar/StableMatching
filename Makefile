@@ -39,8 +39,8 @@ main: main.cpp $(BINS)
 readAnnotationFormat: readAnnotationFormat.cpp
 		$(CPP) $(CFLAGS) -o readAnnotationFormat readAnnotationFormat.cpp
 
-generate_data_file: generate_data_file.cpp generate_data_file.h runGenerate.cpp echo_instance.o
-	$(CPP) $(CFLAGS) -o generate_data_file runGenerate.cpp
+generate_data_file: generate_data_file.cpp generate_data_file.h run_generate.cpp echo_instance.o
+	$(CPP) $(CFLAGS) -o generate_data_file run_generate.cpp
 
 clean:
 	rm $(BINS)

@@ -2,6 +2,7 @@
 #define ECHO_INSTANCE__h
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <string>
 #include <algorithm>
@@ -46,6 +47,7 @@ struct order_edge{
 };
 
 Instance read_instance(void);
+Instance read_csv_instance();
 void print_instance(Instance &I);
 double get_value(Instance &I);
 void order_edges(Instance &I);

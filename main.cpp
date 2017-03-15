@@ -18,7 +18,9 @@ N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscor
 int main(){
   //Instance I = read_instance();
 
-  for(double noise = 0; noise <= 1.0; noise += 1/NOISE_TIERS){
+  std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
+
+  for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
     for(unsigned int i=0; i<INSTANCE_COUNT; i++){
       Instance I = get_global_min_instance(N, noise);
       //Instance I = get_location_instance(N, noise);
@@ -50,6 +52,7 @@ int main(){
       evaluator.evaluate_order("regretRegression", regretRegressionOrder);
       evaluator.evaluate_value("greedy", globalGreedyVal);
       evaluator.evaluate_value("optimal", optVal);
+
       evaluator.print_plot_data(noise, i);
     }
   }

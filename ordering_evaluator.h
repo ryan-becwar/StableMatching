@@ -24,6 +24,7 @@ private:
   double greedyStdev;
 
   std::map<std::string, double> zScores;
+  std::map<std::string, double> rawScores;
 
   vector<vector<double> > values;
   unsigned long width;

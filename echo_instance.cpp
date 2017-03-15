@@ -55,6 +55,13 @@ Instance read_instance(void)
   return I;
 }
 
+Instance read_csv_instance(string path){
+  Instance I;
+  std::ifstream file(path);
+
+  return I;
+}
+
 void print_instance(Instance &I)
 {
   cout << I.lhsnodes.size() << " " << I.rhsnodes.size() << " " << I.edges.size() << "\n";

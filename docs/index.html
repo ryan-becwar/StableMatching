@@ -1,124 +1,127 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script type="text/javascript">
-window.onload = function () {
-	var chart1 = new CanvasJS.Chart("chartContainer1", {
-		theme: "theme2",//theme1
-		title:{
-			text: "Basic Column Chart - CanvasJS"
-		},
-		animationEnabled: true,   // change to true
-		data: [
-		{
-			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "column",
-			dataPoints: [
-				{ label: "apple",  y: 10  },
-				{ label: "orange", y: 15  },
-				{ label: "banana", y: 25  },
-				{ label: "mango",  y: 30  },
-				{ label: "grape",  y: 28  }
-			]
-		}
-		]
-	});
-	chart1.render();
-        var chart2 = new CanvasJS.Chart("chartContainer2", {
-		theme: "theme2",//theme1
-		title:{
-			text: "Basic Bar Chart - CanvasJS"
-		},
-		animationEnabled: true,   // change to true
-		data: [
-		{
-			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "bar",
-			dataPoints: [
-				{ label: "apple",  y: 10  },
-				{ label: "orange", y: 15  },
-				{ label: "banana", y: 25  },
-				{ label: "mango",  y: 30  },
-				{ label: "grape",  y: 28  }
-			]
-		}
-		]
-	});
-	chart2.render();
-        var chart3 = new CanvasJS.Chart("chartContainer3", {
-		theme: "theme2",//theme1
-		title:{
-			text: "Basic Area Chart - CanvasJS"
-		},
-		animationEnabled: true,   // change to true
-		data: [
-		{
-			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "area",
-			dataPoints: [
-				{ label: "apple",  y: 10  },
-				{ label: "orange", y: 15  },
-				{ label: "banana", y: 25  },
-				{ label: "mango",  y: 30  },
-				{ label: "grape",  y: 28  }
-			]
-		}
-		]
-	});
-	chart3.render();
-        var chart4 = new CanvasJS.Chart("chartContainer4", {
-		theme: "theme2",//theme1
-		title:{
-			text: "Basic Spline Chart - CanvasJS"
-		},
-		animationEnabled: true,   // change to true
-		data: [
-		{
-			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "spline",
-			dataPoints: [
-				{ label: "apple",  y: 10  },
-				{ label: "orange", y: 15  },
-				{ label: "banana", y: 25  },
-				{ label: "mango",  y: 30  },
-				{ label: "grape",  y: 28  }
-			]
-		}
-		]
-	});
-	chart4.render();
-        var chart5 = new CanvasJS.Chart("chartContainer5", {
-		theme: "theme2",//theme1
-		title:{
-			text: "Basic Pie Chart - CanvasJS"
-		},
-		animationEnabled: true,   // change to true
-		data: [
-		{
-			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "pie",
-			dataPoints: [
-				{ label: "apple",  y: 10  },
-				{ label: "orange", y: 15  },
-				{ label: "banana", y: 25  },
-				{ label: "mango",  y: 30  },
-				{ label: "grape",  y: 28  }
-			]
-		}
-		]
-	});
-	chart5.render();
-}
-</script>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="http://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
+
+    <style>
+        .axis path {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+        .axis text {
+            font-family: Lato;
+            font-size: 13px;
+        }
+    </style>
 
 </head>
+
 <body>
-<div id="chartContainer1" style="height: 300px; width: 100%;"></div>
-<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
-<div id="chartContainer3" style="height: 300px; width: 100%;"></div>
-<div id="chartContainer4" style="height: 300px; width: 100%;"></div>
-<div id="chartContainer5" style="height: 300px; width: 100%;"></div>
+
+    <div class="container">
+
+        <div class="jumbotron">
+
+            <svg id="visualisation" width="1000" height="500"></svg>
+            <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <script>
+                function InitChart() {
+                    var data = [{
+                        "sale": "202",
+                        "year": "2000"
+                    }, {
+                        "sale": "215",
+                        "year": "2002"
+                    }, {
+                        "sale": "179",
+                        "year": "2004"
+                    }, {
+                        "sale": "199",
+                        "year": "2006"
+                    }, {
+                        "sale": "134",
+                        "year": "2008"
+                    }, {
+                        "sale": "176",
+                        "year": "2010"
+                    }];
+                    var data2 = [{
+                        "sale": "152",
+                        "year": "2000"
+                    }, {
+                        "sale": "189",
+                        "year": "2002"
+                    }, {
+                        "sale": "179",
+                        "year": "2004"
+                    }, {
+                        "sale": "199",
+                        "year": "2006"
+                    }, {
+                        "sale": "134",
+                        "year": "2008"
+                    }, {
+                        "sale": "176",
+                        "year": "2010"
+                    }];
+                    var vis = d3.select("#visualisation"),
+                        WIDTH = 1000,
+                        HEIGHT = 500,
+                        MARGINS = {
+                            top: 20,
+                            right: 20,
+                            bottom: 20,
+                            left: 50
+                        },
+                        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([2000, 2010]),
+                        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([134, 215]),
+                        xAxis = d3.svg.axis()
+                        .scale(xScale),
+                        yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left");
+
+                    vis.append("svg:g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+                        .call(xAxis);
+                    vis.append("svg:g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+                        .call(yAxis);
+                    var lineGen = d3.svg.line()
+                        .x(function(d) {
+                            return xScale(d.year);
+                        })
+                        .y(function(d) {
+                            return yScale(d.sale);
+                        })
+                        .interpolate("basis");
+
+//Change stroke-width to get variable line widths
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data))
+                        .attr('stroke', 'green')
+                        .attr('stroke-width', 20)
+                        .attr('fill', 'none');
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data2))
+                        .attr('stroke', 'blue')
+                        .attr('stroke-width', 10)
+                        .attr('fill', 'none');
+                }
+                InitChart();
+            </script>
+        </div>
+
+    </div>
+
 </body>
+
 </html>

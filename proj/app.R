@@ -1,7 +1,9 @@
 library(ggplot2)
-library(Cairo)   # For nicer ggplot2 output when deployed on Linux
 library(networkD3)
 
+# -------------------------------------------------------------------
+# USER INTERFACE
+# -------------------------------------------------------------------
 ui <- fluidPage(
   titlePanel("Data Science Project 2017"),
 
@@ -13,7 +15,8 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Simple Network", simpleNetworkOutput("simple")),
-        tabPanel("Force Network", forceNetworkOutput("force"))
+        tabPanel("Force Network", forceNetworkOutput("force")),
+        tabPanel("Simple Network")
       )
     )
   ),
@@ -24,22 +27,26 @@ ui <- fluidPage(
       plotOutput("plot1", height = 300)
       ),
 
-    column(width = 8, class = "well",
+    column(width = 4, class = "well",
       h4("Network Graph"),
-      plotOutput("plot2")
+      plotOutput("plot2", height = 300)
     ),
 
     column(width = 4, class = "well",
-    plotOutput("plot3", height = 300)
+       h4("Another title"),
+       plotOutput("plot3", height = 300)
     )
    )
 )
 
+# -------------------------------------------------------------------
+# SERVER PORTION
+# -------------------------------------------------------------------
 server <- function(input, output) {
 
+  ##### NETWORK GRAPHS #####
   data(MisLinks)
   data(MisNodes)
-
 
   output$simple <- renderSimpleNetwork({
     src <- c("A", "A", "A", "A", "B", "B", "C", "C", "D")
@@ -48,14 +55,17 @@ server <- function(input, output) {
     simpleNetwork(networkData, opacity = input$opacity)
   })
 
+  bhnodes <- read.csv("bh1987_nodes.csv")
+  bhlinks <- read.csv("bh1987_links.csv")
+  
   output$force <- renderForceNetwork({
-    forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source",
+    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Group = "group", opacity = input$opacity)
+                 Group = "group", Nodesize = "degree", opacity = input$opacity,
+                 fontSize = 14)
   })
 
-  # -------------------------------------------------------------------
-  # Single zoomable plot (on left)
+  ##### GRAPH STUFF #####
   ranges <- reactiveValues(x = NULL, y = NULL)
 
   data = read.csv("value_data.csv")

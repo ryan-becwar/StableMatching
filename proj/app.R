@@ -1,4 +1,5 @@
 library(ggplot2)
+library(plotly)
 library(networkD3)
 
 # -------------------------------------------------------------------
@@ -9,13 +10,13 @@ ui <- fluidPage(
 
   sidebarLayout(
     sidebarPanel(
-      sliderInput("opacity", "Opacity (not for Sankey)", 0.6, min = 0.1,
+      sliderInput("opacity", "Opacity", 0.8, min = 0.1,
                     max = 1, step = .1)
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Simple Network", simpleNetworkOutput("simple")),
-        tabPanel("Force Network", forceNetworkOutput("force")),
+        tabPanel("Simple Network", simpleNetworkOutput("force2")),
+        tabPanel("Force Network", forceNetworkOutput("force1")),
         tabPanel("Simple Network")
       )
     )
@@ -23,8 +24,8 @@ ui <- fluidPage(
 
   fluidRow(
     column(width = 4, class = "well",
-      h4("Brush and double-click to zoom"),
-      plotOutput("plot1", height = 300)
+      h4("Plotly Example"),
+      plotlyOutput("plot1", height = 300)
       ),
 
     column(width = 4, class = "well",
@@ -45,10 +46,8 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   ##### NETWORK GRAPHS #####
-  data(MisLinks)
-  data(MisNodes)
 
-  output$simple <- renderSimpleNetwork({
+  output$force2 <- renderSimpleNetwork({
     src <- c("A", "A", "A", "A", "B", "B", "C", "C", "D")
     target <- c("B", "C", "D", "J", "E", "F", "G", "H", "I")
     networkData <- data.frame(src, target)
@@ -58,11 +57,11 @@ server <- function(input, output) {
   bhnodes <- read.csv("bh1987_nodes.csv")
   bhlinks <- read.csv("bh1987_links.csv")
   
-  output$force <- renderForceNetwork({
+  output$force1 <- renderForceNetwork({
     forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Group = "group", Nodesize = "degree", opacity = input$opacity,
-                 fontSize = 14)
+                 Group = "genus", Nodesize = "degree", opacity = input$opacity,
+                 fontSize = 16)
   })
 
   ##### GRAPH STUFF #####
@@ -73,29 +72,21 @@ server <- function(input, output) {
                   greedy=data$greedy_mean, 
                   pagerank=data$pagerank_value, 
                   optimal=data$optimal_value) 
-    
-  output$plot1 <- renderPlot({
-    ggplot(df, aes(x=noise)) + geom_point(aes(y=greedy)) + geom_line(aes(y=pagerank), color="blue")
- })
-
-  # When a double-click happens, check if there's a brush on the plot.
-  # If so, zoom to the brush bounds; if not, reset the zoom.
-  observeEvent(input$plot1_dblclick, {
-    brush <- input$plot1_brush
-    if (!is.null(brush)) {
-      ranges$x <- c(brush$xmin, brush$xmax)
-      ranges$y <- c(brush$ymin, brush$ymax)
-
-    } else {
-      ranges$x <- NULL
-      ranges$y <- NULL
-    }
-  })
 
   # -------------------------------------------------------------------
   # Linked plots (middle and right)
   ranges2 <- reactiveValues(x = NULL, y = NULL)
 
+  data = read.csv("value_data.csv")
+  df = data.frame(noise= data$noise, 
+                  greedy=data$greedy_mean, 
+                  pagerank=data$pagerank_value, 
+                  optimal=data$optimal_value) 
+  
+  output$plot1 <- renderPlotly({
+    plot_ly(df, x = ~noise, y = ~greedy)
+  })
+  
   output$plot2 <- renderPlot({
     ggplot(mtcars, aes(wt, mpg)) +
       geom_point() +

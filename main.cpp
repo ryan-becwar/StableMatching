@@ -18,6 +18,9 @@ N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscor
 int main(){
   //Instance I = read_instance();
 
+  //Test reading in CSV:
+  Instance I = read_csv_instance("barrett_matr_f.csv");
+
   std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
 
   for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){

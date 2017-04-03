@@ -45,14 +45,6 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   ##### NETWORK GRAPHS #####
-
-  output$force2 <- renderSimpleNetwork({
-    src <- c("A", "A", "A", "A", "B", "B", "C", "C", "D")
-    target <- c("B", "C", "D", "J", "E", "F", "G", "H", "I")
-    networkData <- data.frame(src, target)
-    simpleNetwork(networkData, opacity = input$opacity)
-  })
-
   bhnodes <- read.csv("bh1987_nodes.csv")
   bhlinks <- read.csv("bh1987_links.csv")
   
@@ -61,6 +53,16 @@ server <- function(input, output) {
                  Target = "target", Value = "value", NodeID = "name",
                  Group = "genus", Nodesize = "degree", opacity = input$opacity,
                  fontSize = 16)
+  })
+  
+  kbnodes <- read.csv("kb2009_nodes.csv")
+  kblinks <- read.csv("kb2009_links.csv")
+  
+  output$force2 <- renderForceNetwork({
+    forceNetwork(Links = kblinks, Nodes = kbnodes, Source = "source",
+                 Target = "target", Value = "value", NodeID = "name",
+                 Group = "origin", Nodesize = "degree", opacity = input$opacity,
+                 fontSize = 16, zoom=TRUE)
   })
 
   ##### GRAPH STUFF #####

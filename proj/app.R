@@ -16,8 +16,7 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Simple Network", simpleNetworkOutput("force2")),
-        tabPanel("Force Network", forceNetworkOutput("force1")),
-        tabPanel("Simple Network")
+        tabPanel("Force Network", forceNetworkOutput("force1"))
       )
     )
   ),
@@ -29,13 +28,13 @@ ui <- fluidPage(
       ),
 
     column(width = 4, class = "well",
-      h4("Network Graph"),
-      plotOutput("plot2", height = 300)
+      h4("Another Graph"),
+      plotlyOutput("plot2", height = 300)
     ),
 
     column(width = 4, class = "well",
-       h4("Another title"),
-       plotOutput("plot3", height = 300)
+       h4("A Third Graph"),
+       plotlyOutput("plot3", height = 300)
     )
    )
 )
@@ -84,19 +83,15 @@ server <- function(input, output) {
                   optimal=data$optimal_value) 
   
   output$plot1 <- renderPlotly({
-    plot_ly(df, x = ~noise, y = ~greedy)
+    plot_ly(df, x = ~noise, y = ~greedy, type="scatter", mode="lines")
   })
   
-  output$plot2 <- renderPlot({
-    ggplot(mtcars, aes(wt, mpg)) +
-      geom_point() +
-      coord_cartesian(xlim = ranges2$x, ylim = ranges2$y, expand = FALSE)
+  output$plot2 <- renderPlotly({
+    plot_ly(df, x = ~noise, y = ~optimal, type="scatter", mode="lines")
   })
 
-  output$plot3 <- renderPlot({
-    ggplot(mtcars, aes(wt, mpg)) +
-      geom_point() +
-      coord_cartesian(xlim = ranges2$x, ylim = ranges2$y, expand = FALSE)
+  output$plot3 <- renderPlotly({
+    plot_ly(df, x = ~noise, y = ~pagerank, type="scatter", mode="lines")
   })
 
   # When a double-click happens, check if there's a brush on the plot.

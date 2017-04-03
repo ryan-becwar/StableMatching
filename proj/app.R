@@ -11,12 +11,18 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       sliderInput("opacity", "Opacity", 0.8, min = 0.1,
-                    max = 1, step = .1)
+                    max = 1, step = .1),
+      
+      selectInput("dataset", label = h4("Choose a dataset."),
+                   choices = list("BH1987", "KB2009")),
+      
+      radioButtons("algorithim", label = h4("Choose an alogorithim."),
+                   choices = list("Algorithim1" = 1, "Algorithim2" = 2,
+                                  "Algorithim3" = 3),selected = 1)
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Simple Network", simpleNetworkOutput("force2")),
-        tabPanel("Force Network", forceNetworkOutput("force1"))
+        tabPanel("My Network", forceNetworkOutput("force1"))
       )
     )
   ),
@@ -48,34 +54,31 @@ server <- function(input, output) {
   bhnodes <- read.csv("bh1987_nodes.csv")
   bhlinks <- read.csv("bh1987_links.csv")
   
-  output$force1 <- renderForceNetwork({
-    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
-                 Target = "target", Value = "value", NodeID = "name",
-                 Group = "genus", Nodesize = "degree", opacity = input$opacity,
-                 fontSize = 16)
-  })
-  
   kbnodes <- read.csv("kb2009_nodes.csv")
   kblinks <- read.csv("kb2009_links.csv")
   
+  all_nodes <- list(kbnodes, bhnodes)
+  all_links <- list(kblinks, bhlinks)
+  
+  get_nodes <- reactive({switch(input$dataset,"KB2009" = kbnodes,"BH1987" = bhnodes)})
+  get_links <- reactive({switch(input$dataset,"KB2009" = kblinks,"BH1987" = bhlinks)})
+  
+  output$force1 <- renderForceNetwork({
+    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
+                 Target = "target", Value = "value", NodeID = "name",
+                 Nodesize = "degree", Group = "group", opacity = input$opacity,
+                 fontSize = 16)
+  })
+  
   output$force2 <- renderForceNetwork({
-    forceNetwork(Links = kblinks, Nodes = kbnodes, Source = "source",
+    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Group = "origin", Nodesize = "degree", opacity = input$opacity,
-                 fontSize = 16, zoom=TRUE)
+                 fontSize = 16, zoom=input$checkbox)
   })
 
   ##### GRAPH STUFF #####
   ranges <- reactiveValues(x = NULL, y = NULL)
-
-  data = read.csv("value_data.csv")
-  df = data.frame(noise= data$noise, 
-                  greedy=data$greedy_mean, 
-                  pagerank=data$pagerank_value, 
-                  optimal=data$optimal_value) 
-
-  # -------------------------------------------------------------------
-  # Linked plots (middle and right)
   ranges2 <- reactiveValues(x = NULL, y = NULL)
 
   data = read.csv("value_data.csv")
@@ -95,21 +98,6 @@ server <- function(input, output) {
   output$plot3 <- renderPlotly({
     plot_ly(df, x = ~noise, y = ~pagerank, type="scatter", mode="lines")
   })
-
-  # When a double-click happens, check if there's a brush on the plot.
-  # If so, zoom to the brush bounds; if not, reset the zoom.
-  observe({
-    brush <- input$plot2_brush
-    if (!is.null(brush)) {
-      ranges2$x <- c(brush$xmin, brush$xmax)
-      ranges2$y <- c(brush$ymin, brush$ymax)
-
-    } else {
-      ranges2$x <- NULL
-      ranges2$y <- NULL
-    }
-  })
-
 }
 
 shinyApp(ui, server)

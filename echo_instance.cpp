@@ -151,6 +151,17 @@ void print_instance(Instance &I)
 
 }
 
+void print_instance_csv(Instance &I){
+  vector<vector<double> > mat = get_value_matrix(I);
+
+  for(unsigned int i=0; i<mat.size(); i++){
+    for(unsigned int j=0; j<mat[i].size(); j++){
+      cout << mat[i][j] << ",";
+    }
+    cout << endl;
+  }
+}
+
 double get_value(Instance &I){
   double sum = 0;
   for(unsigned int i=0; i<I.edges.size(); i++){

@@ -19,7 +19,7 @@ int main(){
   //Instance I = read_instance();
 
   //Test reading in CSV:
-  Instance I = read_csv_instance("barrett_matr_f.csv");
+  //Instance I = read_csv_instance("barrett_matr_f.csv");
 
   std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
 

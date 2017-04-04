@@ -82,7 +82,8 @@ server <- function(input, output) {
     forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Nodesize = "degree", Group = "group", opacity = input$opacity, zoom=TRUE,
-                 fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"))
+                 fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
+                 legend = TRUE)
   })
   
   output$force2 <- renderForceNetwork({

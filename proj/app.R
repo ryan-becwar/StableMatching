@@ -22,7 +22,9 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("My Network", forceNetworkOutput("force1"))
+        tabPanel("Raw Network", forceNetworkOutput("force1")),
+        tabPanel("Network with Priority"),
+        tabPanel("Final Pairing")
       )
     )
   ),
@@ -33,16 +35,28 @@ ui <- fluidPage(
       plotlyOutput("plot1", height = 300)
       ),
 
-    column(width = 4, class = "well",
+    column(width = 8, class = "well",
       h4("Another Graph"),
       plotlyOutput("plot2", height = 300)
-    ),
-
-    column(width = 4, class = "well",
-       h4("A Third Graph"),
-       plotlyOutput("plot3", height = 300)
     )
-   )
+   ),
+  
+  fluidRow(
+    column(width = 4, class = "well",
+           h4("Here are some buttons"),
+           checkboxGroupInput("datasetGroup", 
+                              label = h3("Pick datasets to view."), 
+                              choices = list("Dataset1" = 1, 
+                                             "Dataset2" = 2, "Dataset3" = 3),
+                              selected = 1)
+    ),
+    column(width = 4, class = "well",
+           h4("We can compare this graph")
+    ),
+    column(width = 4, class = "well",
+           h4("with this graph")
+    )
+  )
 )
 
 # -------------------------------------------------------------------
@@ -50,7 +64,7 @@ ui <- fluidPage(
 # -------------------------------------------------------------------
 server <- function(input, output) {
 
-  ##### NETWORK GRAPHS #####
+  #-- Load Network Visualization Dataframes --#
   bhnodes <- read.csv("bh1987_nodes.csv")
   bhlinks <- read.csv("bh1987_links.csv")
   
@@ -60,27 +74,26 @@ server <- function(input, output) {
   all_nodes <- list(kbnodes, bhnodes)
   all_links <- list(kblinks, bhlinks)
   
+  #-- Get Dataset for Network from User Input --#
   get_nodes <- reactive({switch(input$dataset,"KB2009" = kbnodes,"BH1987" = bhnodes)})
   get_links <- reactive({switch(input$dataset,"KB2009" = kblinks,"BH1987" = bhlinks)})
   
   output$force1 <- renderForceNetwork({
     forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = "group", opacity = input$opacity,
-                 fontSize = 16)
+                 Nodesize = "degree", Group = "group", opacity = input$opacity, zoom=TRUE,
+                 fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
+                 legend = TRUE)
   })
   
   output$force2 <- renderForceNetwork({
     forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Group = "origin", Nodesize = "degree", opacity = input$opacity,
-                 fontSize = 16, zoom=input$checkbox)
+                 fontSize = 16, zoom=TRUE)
   })
 
-  ##### GRAPH STUFF #####
-  ranges <- reactiveValues(x = NULL, y = NULL)
-  ranges2 <- reactiveValues(x = NULL, y = NULL)
-
+  #-- Line Graph Visualizations --#
   data = read.csv("value_data.csv")
   df = data.frame(noise= data$noise, 
                   greedy=data$greedy_mean, 

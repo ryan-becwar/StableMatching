@@ -43,13 +43,12 @@ ui <- fluidPage(
   
   fluidRow(
     column(width = 4, class = "well",
-           h4("Dataset Comparison"),
-           radioButtons("datasetA", label = h4("Dataset A"),
-                        choices = list("Dataset1" = 1, "Dataset2" = 2,
-                                       "Dataset3" = 3),selected = 1),
-           radioButtons("datasetB", label = h4("Dataset B"),
-                        choices = list("Dataset1" = 1, "Dataset2" = 2,
-                                       "Dataset3" = 3),selected = 1)
+           h4("Here are some buttons"),
+           checkboxGroupInput("datasetGroup", 
+                              label = h3("Pick datasets to view."), 
+                              choices = list("Dataset1" = 1, 
+                                             "Dataset2" = 2, "Dataset3" = 3),
+                              selected = 1)
     ),
     column(width = 4, class = "well",
            h4("We can compare this graph")

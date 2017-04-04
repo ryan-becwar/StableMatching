@@ -7,7 +7,6 @@ import csv
 
 # node file columns
 name = []
-origin = []
 degree = []
 group = []
 
@@ -29,18 +28,21 @@ col_range = range(4, 67)
 # Get name, origin, and degree of row species
 for i in row_range :
     name.append(rows[i][0]) 
-    origin.append(int(rows[i][2]))
-    degree.append(1)
+    degree.append(0)
 
     for j in col_range :
         if float(rows[i][j]) > 0.0 :
             degree[-1] = degree[-1] + 1
 
+    if degree[-1] > 3 :
+        group.append("high-connected animal")
+    else :
+        group.append("animal")
+
 # Get name, origin, and degree of column species
 for i in col_range :
     name.append(rows[0][i])
-    origin.append(rows[2][i])
-    degree.append(1)            # give each node a default degree of 1
+    degree.append(0)            # give each node a default degree of 1
 
     for j in row_range :
         if float(rows[j][i]) > 0.0 :
@@ -48,17 +50,20 @@ for i in col_range :
             # this will make the node bigger in the final graph
             degree[-1] = degree[-1] + 1     
 
-for i in range(0, len(name)) :
+    if degree[-1] > 3 :
+        group.append("highly-connected plant")
+    else :
+        group.append("plant")
 
 # Find all interactions
 for i in row_range :
     for j in col_range :
-        if float(rows[i][j]) > 0 :
+        if float(rows[i][j]) > 0.0 :
             # record the interaction value -- this will be the weight in
             # the final graph
-            value = int(float(rows[i][j]) * 10)
+            value = float(rows[i][j])
 
-            if value > 0 :
+            if value > 0.0 :
                 src.append(i - 4)          # add species number, subtracting row offset
                 tgt.append(j - 4 + 99)    # add species number subtracting column offset 
                 val.append(value)
@@ -67,7 +72,7 @@ for i in row_range :
 
 # Write everything out!
 link_headers = ["source", "target", "value"]
-node_headers = ["origin", "name", "degree"] 
+node_headers = ["group", "name", "degree"] 
 
 link_rows = []
 node_rows = []
@@ -77,7 +82,7 @@ node_rows.append(node_headers)
 
 for i in range(0, len(name)) :
     node_row = []
-    node_row.append(origin[i])
+    node_row.append(group[i])
     node_row.append(name[i])
     node_row.append(degree[i])
 

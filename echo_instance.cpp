@@ -156,7 +156,9 @@ void print_instance_csv(Instance &I){
 
   for(unsigned int i=0; i<mat.size(); i++){
     for(unsigned int j=0; j<mat[i].size(); j++){
-      cout << mat[i][j] << ",";
+      cout << mat[i][j];
+      if(j+1 < mat[i].size())
+        cout << ",";
     }
     cout << endl;
   }

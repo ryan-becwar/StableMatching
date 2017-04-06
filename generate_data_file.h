@@ -27,8 +27,8 @@ typedef struct node_data {
 
 void write_node_data(ostream &out, vector<node_data> &nodes);
 Instance generate_weighted_data(int lhsCount, int rhsCount, double locationWeight, double rankWeight, double randomWeight);
-Instance get_location_instance(unsigned int width, double noise);
-Instance get_global_min_instance(unsigned int width, double noise);
+Instance get_location_instance(unsigned int leftSize, unsigned int righSize, double noise);
+Instance get_global_min_instance(unsigned int leftSize, unsigned int rightSize, double noise);
 
 
 #endif //STABLEMATCHING_GENERATEDATAFILE_H

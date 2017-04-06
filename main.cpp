@@ -21,12 +21,16 @@ int main(){
   //Test reading in CSV:
   //Instance I = read_csv_instance("barrett_matr_f.csv");
 
+  //Instance I = get_global_min_instance(15, 60, 0.2);
+  //print_instance_csv(I);
+
+
   std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
 
   for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
     for(unsigned int i=0; i<INSTANCE_COUNT; i++){
-      Instance I = get_global_min_instance(N, noise);
-      //Instance I = get_location_instance(N, noise);
+      Instance I = get_global_min_instance(N, N, noise);
+      //Instance I = get_location_instance(N, N, noise);
       ordering_evaluator evaluator(I, GREEDYCOUNT);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_projection_order(I);
@@ -49,7 +53,6 @@ int main(){
       evaluator,evaluater_order("learning", learningOrder);
       */
 
-
       evaluator.evaluate_order("pagerank", pagerankOrder);
       evaluator.evaluate_order("regret", regretOrder);
       evaluator.evaluate_order("regretRegression", regretRegressionOrder);
@@ -59,4 +62,5 @@ int main(){
       evaluator.print_plot_data(noise, i);
     }
   }
+
 }

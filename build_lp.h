@@ -9,6 +9,6 @@ using namespace std;
 
 //int L, R;
 
-double lp_opt_result(int n, vector<vector<double> > cost);
+double lp_opt_result(int l, int r, vector<vector<double> > cost);
 
 #endif

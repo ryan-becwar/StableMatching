@@ -13,6 +13,11 @@
 #define GREEDYCOUNT 100
 
 /*
+USAGE:
+./main [-opt] [<input_data_path.csv>]
+If optimal flag is present, the program will attempt to calculate the optimal value via CPLEX.  If CPLEX is not installed, the program will fail.
+If no input data path is supplied, the program will generate data sets independently.
+
 Writes out data in following column format:
 N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore optimal_zscore
 */
@@ -30,7 +35,7 @@ void process_real_data(string path, bool opt){
 
   double optVal;
   if(opt){
-    optVal = lp_opt_result(N, get_value_matrix(I));
+    optVal = lp_opt_result(I.lhsnodes.size(), I.rhsnodes.size(), get_value_matrix(I));
   } else {
     optVal = 0;
   }
@@ -79,7 +84,7 @@ int main(int argc, char *argv[]){
 
         double optVal;
         if(opt){
-          optVal = lp_opt_result(N, get_value_matrix(I));
+          optVal = lp_opt_result(N, N, get_value_matrix(I));
         } else {
           optVal = 0;
         }

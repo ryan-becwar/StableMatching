@@ -20,23 +20,11 @@ ui <- fluidPage(
       )
     )
   ),
-
-  fluidRow(
-    column(width = 4, class = "well",
-      h4("Plotly Example"),
-      plotlyOutput("plot1", height = 300)
-      ),
-
-    column(width = 4, class = "well",
-      h4("Another Graph"),
-      plotlyOutput("plot2", height = 300)
-    ),
-
-    column(width = 4, class = "well",
-       h4("A Third Graph"),
-       plotlyOutput("plot3", height = 300)
-    )
-   )
+  tabsetPanel(
+    tabPanel("Plot 1", plotlyOutput("plot1", height = 300)),
+    tabPanel("Plot 2", plotlyOutput("plot2", height = 300)),
+    tabPanel("Plot 3", plotlyOutput("plot3", height = 300))
+  )
 )
 
 # -------------------------------------------------------------------
@@ -47,17 +35,17 @@ server <- function(input, output) {
   ##### NETWORK GRAPHS #####
   bhnodes <- read.csv("bh1987_nodes.csv")
   bhlinks <- read.csv("bh1987_links.csv")
-  
+
   output$force1 <- renderForceNetwork({
     forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Group = "genus", Nodesize = "degree", opacity = input$opacity,
                  fontSize = 16)
   })
-  
+
   kbnodes <- read.csv("kb2009_nodes.csv")
   kblinks <- read.csv("kb2009_links.csv")
-  
+
   output$force2 <- renderForceNetwork({
     forceNetwork(Links = kblinks, Nodes = kbnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
@@ -69,25 +57,25 @@ server <- function(input, output) {
   ranges <- reactiveValues(x = NULL, y = NULL)
 
   data = read.csv("value_data.csv")
-  df = data.frame(noise= data$noise, 
-                  greedy=data$greedy_mean, 
-                  pagerank=data$pagerank_value, 
-                  optimal=data$optimal_value) 
+  df = data.frame(noise= data$noise,
+                  greedy=data$greedy_mean,
+                  pagerank=data$pagerank_value,
+                  optimal=data$optimal_value)
 
   # -------------------------------------------------------------------
   # Linked plots (middle and right)
   ranges2 <- reactiveValues(x = NULL, y = NULL)
 
   data = read.csv("value_data.csv")
-  df = data.frame(noise= data$noise, 
-                  greedy=data$greedy_mean, 
-                  pagerank=data$pagerank_value, 
-                  optimal=data$optimal_value) 
-  
+  df = data.frame(noise= data$noise,
+                  greedy=data$greedy_mean,
+                  pagerank=data$pagerank_value,
+                  optimal=data$optimal_value)
+
   output$plot1 <- renderPlotly({
     plot_ly(df, x = ~noise, y = ~greedy, type="scatter", mode="lines")
   })
-  
+
   output$plot2 <- renderPlotly({
     plot_ly(df, x = ~noise, y = ~optimal, type="scatter", mode="lines")
   })

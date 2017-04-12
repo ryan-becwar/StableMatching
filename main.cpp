@@ -19,14 +19,32 @@ int main(){
   //Instance I = read_instance();
 
   //Test reading in CSV:
-  //Instance I = read_csv_instance("barrett_matr_f.csv");
+  Instance I = read_csv_instance("barrett_transpose.csv");
+  ordering_evaluator evaluator(I, GREEDYCOUNT);
+  vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
+  vector<unsigned int> regretOrder = regret_projection_order(I);
+  vector<unsigned int> regretRegressionOrder = regret_projection_order(I);
+  //double globalGreedyVal = global_greedy_value(I);
+  double globalGreedyVal = 0;
+
+  //double optVal = lp_opt_result(N, get_value_matrix(I));
+  double optVal = 0;
+
+  evaluator.evaluate_order("pagerank", pagerankOrder);
+  evaluator.evaluate_order("regret", regretOrder);
+  evaluator.evaluate_order("regretRegression", regretRegressionOrder);
+  evaluator.evaluate_value("greedy", globalGreedyVal);
+  evaluator.evaluate_value("optimal", optVal);
+
+  evaluator.print_plot_data(0.0, 0);
+
 
   //Instance I = get_global_min_instance(15, 60, 0.2);
   //print_instance_csv(I);
 
 
   std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
-
+/*
   for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
     for(unsigned int i=0; i<INSTANCE_COUNT; i++){
       Instance I = get_global_min_instance(N, N, noise);
@@ -34,7 +52,7 @@ int main(){
       ordering_evaluator evaluator(I, GREEDYCOUNT);
       vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
       vector<unsigned int> regretOrder = regret_projection_order(I);
-      vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
+      vector<unsigned int> regretRegressionOrder = regret_projection_order(I);
       //double globalGreedyVal = global_greedy_value(I);
       double globalGreedyVal = 0;
 
@@ -43,7 +61,7 @@ int main(){
 
 
       //Grabbing learning values psuedocode:
-      /*
+
       Write instance to file
 
       system call (python < instance > order.txt)
@@ -51,7 +69,7 @@ int main(){
       read order.txt into vector<unsigned int>
 
       evaluator,evaluater_order("learning", learningOrder);
-      */
+
 
       evaluator.evaluate_order("pagerank", pagerankOrder);
       evaluator.evaluate_order("regret", regretOrder);
@@ -62,5 +80,5 @@ int main(){
       evaluator.print_plot_data(noise, i);
     }
   }
-
+*/
 }

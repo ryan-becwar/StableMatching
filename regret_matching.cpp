@@ -78,7 +78,7 @@ void get_stats(std::vector<double>& set, std::vector<double>& difference, double
 }
 
 //Generates an ordering given a vector of projection slopes
-std::vector<unsigned int> generate_regret__order(std::vector<double> &projectionSlopes){
+std::vector<unsigned int> generate_regret_order(std::vector<double> &projectionSlopes){
   std::vector<pid> slopeSort;
   for(unsigned int i=0; i<projectionSlopes.size(); i++){
     pid pair;
@@ -108,12 +108,12 @@ std::vector<unsigned int> regret_projection_order(Instance& I){
   //TODO, make width represent row size
   for(unsigned int i=0; i<width; i++){
     regret_projection projection;
-    projection.set_connections(get_column(values, i));
+    projection.set_connections(values[i]);
     projection.find_ray_projection();
     projectionSlopes.push_back(projection.projectionSlope);
   }
 
-  std::vector<unsigned int> order = generate_regret__order(projectionSlopes);
+  std::vector<unsigned int> order = generate_regret_order(projectionSlopes);
 
   return order;
 }
@@ -133,7 +133,7 @@ std::vector<unsigned int> regret_regression_order(Instance& I){
     projectionSlopes.push_back(projection.projectionSlope);
   }
 
-  std::vector<unsigned int> order = generate_regret__order(projectionSlopes);
+  std::vector<unsigned int> order = generate_regret_order(projectionSlopes);
 
   return order;
 }

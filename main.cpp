@@ -35,7 +35,7 @@ void process_real_data(string path, bool opt){
 
   double optVal;
   if(opt){
-    optVal = lp_opt_result(N, get_value_matrix(I));
+    optVal = lp_opt_result(I.lhsnodes.size(), I.rhsnodes.size(), get_value_matrix(I));
   } else {
     optVal = 0;
   }
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
 
         double optVal;
         if(opt){
-          optVal = lp_opt_result(N, get_value_matrix(I));
+          optVal = lp_opt_result(N, N, get_value_matrix(I));
         } else {
           optVal = 0;
         }

@@ -1,10 +1,11 @@
 #include "build_lp.h"
+#include <algorithm>
 
 double **cost;
 
-double lp_opt_result(int n, vector<vector< double> > cost)
+double lp_opt_result(int l, int r, vector<vector< double> > cost)
 {
-  int L = n, R = n;
+  int L = l, R = r;
 
   ofstream fout ("foo.lp");
 
@@ -42,7 +43,7 @@ double lp_opt_result(int n, vector<vector< double> > cost)
 
   ifstream results("results.txt");
   double total = 0.0;
-  for (int i=0; i<n; i++) {
+  for (int i=0; i<min(L,R); i++) {
     int a, b;
     double amt;
     results >> a >> b >> amt;

@@ -108,6 +108,7 @@ std::vector<unsigned int> regret_projection_order(Instance& I){
   //TODO, make width represent row size
   for(unsigned int i=0; i<width; i++){
     regret_projection projection;
+    //projection.set_connections(get_column(values, i));
     projection.set_connections(values[i]);
     projection.find_ray_projection();
     projectionSlopes.push_back(projection.projectionSlope);

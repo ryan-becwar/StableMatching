@@ -1,6 +1,7 @@
 library(ggplot2)
 library(plotly)
 library(networkD3)
+require(data.table)
 
 # -------------------------------------------------------------------
 # USER INTERFACE
@@ -38,7 +39,12 @@ ui <- fluidPage(
     column(width = 8, class = "well",
       h4("Another Graph"),
       plotlyOutput("plot2", height = 300)
-    )
+    ),
+
+  column(width = 8, class = "well",
+    h4("Another Graph"),
+    plotlyOutput("plot3", height = 300)
+  )
    ),
 
   fluidRow(
@@ -116,17 +122,23 @@ server <- function(input, output) {
                   greedy=data$greedy_mean,
                   pagerank=data$pagerank_value,
                   optimal=data$optimal_value)
+  dfReduced = data.frame(noise= data$noise,
+             greedy= data$greedy_mean)
+  dt <- data.table(dfReduced)
+  dfMax = dt[ , max(greedy), by = noise]
+  dfMin = dt[ , min(greedy), by = noise]
+  dfAvg = dt[ , mean(greedy), by = noise]
 
   output$plot1 <- renderPlotly({
-    plot_ly(df, x = ~noise, y = ~greedy, type="scatter", mode="lines")
+    plot_ly(as.data.frame(dfMax), x = ~noise, y = ~V1, type="scatter", mode="lines")
   })
 
   output$plot2 <- renderPlotly({
-    plot_ly(df, x = ~noise, y = ~optimal, type="scatter", mode="lines")
+    plot_ly(as.data.frame(dfMin), x = ~noise, y = ~V1, type="scatter", mode="lines")
   })
 
   output$plot3 <- renderPlotly({
-    plot_ly(df, x = ~noise, y = ~pagerank, type="scatter", mode="lines")
+    plot_ly(as.data.frame(dfAvg), x = ~noise, y = ~V1, type="scatter", mode="lines")
   })
 }
 

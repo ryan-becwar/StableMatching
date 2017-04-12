@@ -47,8 +47,9 @@ struct order_edge{
 };
 
 Instance read_instance(void);
-Instance read_csv_instance();
+Instance read_csv_instance(string path);
 void print_instance(Instance &I);
+void print_instance_csv(Instance &I);
 double get_value(Instance &I);
 void order_edges(Instance &I);
 vector<vector<double> > get_value_matrix(Instance &I);

@@ -30,23 +30,35 @@ row_range = range(3, 105)
 for i in row_range :
     name.append(rows[i][0][0] + " " + rows[i][1])
     genus.append(rows[i][0])
-    degree.append(1)
+    degree.append(0)
 
     for j in col_range :
         if int(rows[i][j]) > 0 :
             degree[-1] = degree[-1] + 1
 
+    if degree[-1] > 3 :
+        group.append("highly-connected pollinator")
+    else :
+        group.append("pollinator")
+    
+        
+
 # Get name, genus, and degree of column species
 for i in col_range :
     name.append(rows[0][i][0] + " " + rows[1][i])
     genus.append(rows[0][i])
-    degree.append(1)            # give each node a default degree of 1
+    degree.append(0)            # give each node a default degree of 1
 
     for j in row_range :
         if int(rows[j][i]) > 0 :
             # increase degree count with each identified neighbor
             # this will make the node bigger in the final graph
             degree[-1] = degree[-1] + 1     
+
+    if degree[-1] > 3 :
+        group.append("highly-connected plant")
+    else :
+        group.append("plant")
 
 # Find all interactions
 for i in row_range :
@@ -63,14 +75,14 @@ for i in row_range :
             print name[i-3] + " -- " + name[j - 3 + 102]
 
 # assign each genus an integer value for the network
-curr = genus[0]                                                                           
-group_num = 0
-for i in range(0, len(genus)) :
-    if genus[i] != curr :
-        curr = genus[i]
-        group_num = group_num + 1
+#curr = genus[0]                                                                         
+#group_num = 0
+#for i in range(0, len(genus)) :
+#    if genus[i] != curr :
+#        curr = genus[i]
+#        group_num = group_num + 1
 
-    group.append(group_num)
+#    group.append(group_num)
 
 # Write everything out!
 link_headers = ["source", "target", "value"]

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "regret_matching.h"
 #include "pagerank.h"
 #include "ordering_evaluator.h"
@@ -15,45 +16,99 @@
 Writes out data in following column format:
 N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore optimal_zscore
 */
-int main(){
+
+
+//Reads in a csv with a predefined data set and evaluates algorithms on it
+void process_real_data(string path, bool opt){
+  Instance I = read_csv_instance("barrett_transpose.csv");
+  ordering_evaluator evaluator(I, GREEDYCOUNT);
+  vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
+  vector<unsigned int> regretOrder = regret_projection_order(I);
+  vector<unsigned int> regretRegressionOrder = regret_projection_order(I);
+  //double globalGreedyVal = global_greedy_value(I);
+  double globalGreedyVal = 0;
+
+  double optVal;
+  if(opt){
+    optVal = lp_opt_result(N, get_value_matrix(I));
+  } else {
+    optVal = 0;
+  }
+
+  evaluator.evaluate_order("pagerank", pagerankOrder);
+  evaluator.evaluate_order("regret", regretOrder);
+  evaluator.evaluate_order("regretRegression", regretRegressionOrder);
+  evaluator.evaluate_value("greedy", globalGreedyVal);
+  evaluator.evaluate_value("optimal", optVal);
+
+  evaluator.print_plot_data(0.0, 0);
+}
+
+int main(int argc, char *argv[]){
   //Instance I = read_instance();
 
-  std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
+  bool opt = false, realData = false;
+  string realPath;
 
-  for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
-    for(unsigned int i=0; i<INSTANCE_COUNT; i++){
-      Instance I = get_global_min_instance(N, noise);
-      //Instance I = get_location_instance(N, noise);
-      ordering_evaluator evaluator(I, GREEDYCOUNT);
-      vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
-      vector<unsigned int> regretOrder = regret_projection_order(I);
-      vector<unsigned int> regretRegressionOrder = regret_regression_order(I);
-      //double globalGreedyVal = global_greedy_value(I);
-      double globalGreedyVal = 0;
-
-      //double optVal = lp_opt_result(N, get_value_matrix(I));
-      double optVal = 0;
-
-
-      //Grabbing learning values psuedocode:
-      /*
-      Write instance to file
-
-      system call (python < instance > order.txt)
-
-      read order.txt into vector<unsigned int>
-
-      evaluator,evaluater_order("learning", learningOrder);
-      */
-
-
-      evaluator.evaluate_order("pagerank", pagerankOrder);
-      evaluator.evaluate_order("regret", regretOrder);
-      evaluator.evaluate_order("regretRegression", regretRegressionOrder);
-      evaluator.evaluate_value("greedy", globalGreedyVal);
-      evaluator.evaluate_value("optimal", optVal);
-
-      evaluator.print_plot_data(noise, i);
+  for(int i=1; i<argc; i++){
+    if(argv[i][0] == '-'){
+      if(strcmp(argv[i], "-opt") == 0){
+        opt = true;
+      }
+    } else {
+      realData = true;
+      realPath = argv[i];
     }
   }
+
+  if(realData){
+    process_real_data("realPath", opt);
+  } else {
+    std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
+
+    for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
+      for(unsigned int i=0; i<INSTANCE_COUNT; i++){
+        Instance I = get_global_min_instance(N, N, noise);
+        //Instance I = get_location_instance(N, N, noise);
+        ordering_evaluator evaluator(I, GREEDYCOUNT);
+        vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
+        vector<unsigned int> regretOrder = regret_projection_order(I);
+        vector<unsigned int> regretRegressionOrder = regret_projection_order(I);
+        //double globalGreedyVal = global_greedy_value(I);
+        double globalGreedyVal = 0;
+
+        double optVal;
+        if(opt){
+          optVal = lp_opt_result(N, get_value_matrix(I));
+        } else {
+          optVal = 0;
+        }
+
+
+        //Grabbing learning values psuedocode:
+        /*
+        Write instance to file
+
+        system call (python < instance > order.txt)
+
+        read order.txt into vector<unsigned int>
+
+        evaluator,evaluater_order("learning", learningOrder);
+        */
+
+        evaluator.evaluate_order("pagerank", pagerankOrder);
+        evaluator.evaluate_order("regret", regretOrder);
+        evaluator.evaluate_order("regretRegression", regretRegressionOrder);
+        evaluator.evaluate_value("greedy", globalGreedyVal);
+        evaluator.evaluate_value("optimal", optVal);
+
+        evaluator.print_plot_data(noise, i);
+      }
+    }
+  }
+
+  //Instance I = get_global_min_instance(15, 60, 0.2);
+  //print_instance_csv(I);
+
+
 }

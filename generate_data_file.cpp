@@ -54,7 +54,7 @@ void assignGlobalRankWeight(vector<node_data> &left, vector<node_data> &right, d
     for(unsigned int i=0; i<left.size(); i++){
       leftWeight.push_back(distribution(randomEngine));
     }
-    for(unsigned int i=0; i<left.size(); i++){
+    for(unsigned int i=0; i<right.size(); i++){
       rightWeight.push_back(distribution(randomEngine));
     }
 
@@ -159,16 +159,16 @@ Instance generate_weighted_data(int lhsCount, int rhsCount, double locationWeigh
     return I;
 }
 
-Instance get_location_instance(unsigned int width, double noise){
+Instance get_location_instance(unsigned int leftSize, unsigned int rightSize, double noise){
   if(noise > 1) noise = 1;
   if(noise < 0) noise = 0;
 
-  return(generate_weighted_data(width, width, 1 - noise, 0, noise));
+  return(generate_weighted_data(leftSize, rightSize, 1 - noise, 0, noise));
 }
 
-Instance get_global_min_instance(unsigned int width, double noise){
+Instance get_global_min_instance(unsigned int leftSize, unsigned int rightSize, double noise){
   if(noise > 1) noise = 1;
   if(noise < 0) noise = 0;
 
-  return(generate_weighted_data(width, width, 0, 1 - noise, noise));
+  return(generate_weighted_data(leftSize, rightSize, 0, 1 - noise, noise));
 }

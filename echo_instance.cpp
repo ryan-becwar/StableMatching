@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <string>
 #include "echo_instance.h"
@@ -58,6 +59,56 @@ Instance read_instance(void)
 Instance read_csv_instance(string path){
   Instance I;
   std::ifstream file(path);
+  vector<vector<double> > contents;
+  std::string::size_type size;
+
+  vector<double> lineResult;
+  do {
+    string line, cell;
+    std::getline(file, line);
+    std::stringstream lineStream(line);
+
+    lineResult.clear();
+    while(std::getline(lineStream, cell, ','))
+      lineResult.push_back(std::stod(cell,&size));
+
+    //event of trailing comma at end of line
+    //if (!lineStream && cell.empty())
+    //  lineResult.push_back("");
+    if(!lineResult.empty())
+      contents.push_back(lineResult);
+  } while(!lineResult.empty());
+
+  file.close();
+
+  unsigned int Nlhs = contents.size();
+  unsigned int Nrhs = contents[0].size();
+
+  for(unsigned int i=0; i<Nlhs; i++){
+    Node n;
+    n.size = 1;
+    n.allocation = 0;
+    I.lhsnodes.push_back(n);
+  }
+  for(unsigned int i=0; i<Nrhs; i++){
+    Node n;
+    n.size = 1;
+    n.allocation = 0;
+    I.rhsnodes.push_back(n);
+  }
+
+  for(unsigned int i = 0; i<Nlhs; i++){
+    for(unsigned int j=0; j<Nrhs; j++){
+      Edge e;
+      e.start = i;
+      e.end = j;
+      e.size = 1;
+      e.allocation = 0;
+      e.value = contents[i][j];
+
+      I.edges.push_back(e);
+    }
+  }
 
   return I;
 }
@@ -98,6 +149,19 @@ void print_instance(Instance &I)
     cout << endl;
   }
 
+}
+
+void print_instance_csv(Instance &I){
+  vector<vector<double> > mat = get_value_matrix(I);
+
+  for(unsigned int i=0; i<mat.size(); i++){
+    for(unsigned int j=0; j<mat[i].size(); j++){
+      cout << mat[i][j];
+      if(j+1 < mat[i].size())
+        cout << ",";
+    }
+    cout << endl;
+  }
 }
 
 double get_value(Instance &I){

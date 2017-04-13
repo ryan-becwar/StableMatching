@@ -19,14 +19,15 @@ double lp_opt_result(int l, int r, vector<vector< double> > cost)
   for (int i=0; i<L; i++) {
     for (int j=0; j<R; j++)
       fout << ((j>0)?" +":" ") << "x" << i << "x" << j;
-    fout << " = 1\n";
+    fout << " <= 1\n";
   }
 
   for (int j=0; j<R; j++) {
     for (int i=0; i<L; i++)
       fout << ((i>0)?" +":" ") << "x" << i << "x" << j;
-    fout << " = 1\n";
+    fout << " <= 1\n";
   }
+
 
   fout << "End\n";
 

@@ -125,20 +125,62 @@ server <- function(input, output) {
   dfReduced = data.frame(noise= data$noise,
              greedy= data$greedy_mean)
   dt <- data.table(dfReduced)
-  dfMax = dt[ , max(greedy), by = noise]
-  dfMin = dt[ , min(greedy), by = noise]
-  dfAvg = dt[ , mean(greedy), by = noise]
 
+  #At each noise value, take only the max, min and mean value
+  dtMax = dt[ , max(greedy), by = noise]
+  dtMin = dt[ , min(greedy), by = noise]
+  dtAvg = dt[ , mean(greedy), by = noise]
+
+
+  #The above functions rename greedy to V1, so they must be renamed
+  dfMax <- as.data.frame(dtMax)
+  colnames(dfMax)[colnames(dfMax)=="V1"] <- "Max"
+
+  dfMin <- as.data.frame(dtMin)
+  colnames(dfMin)[colnames(dfMin)=="V1"] <- "Min"
+
+  dfAvg <- as.data.frame(dtAvg)
+  colnames(dfAvg)[colnames(dfAvg)=="V1"] <- "Avg"
+
+  dfComplete <- merge(merge(dfMax, dfMin, by = "noise"), dfAvg, by = "noise")
+
+  #Plots in filled lines
   output$plot1 <- renderPlotly({
-    plot_ly(as.data.frame(dfMax), x = ~noise, y = ~V1, type="scatter", mode="lines")
+    plot_ly(dfComplete, x = ~noise, y = ~Max, type = 'scatter', mode = 'lines',
+          line = list(color = 'transparent'),
+          showlegend = FALSE, name = 'Max') %>%
+    add_trace(y = ~Min, type = 'scatter', mode = 'lines',
+              fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
+              showlegend = FALSE, name = 'Min') %>%
+    add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
+              line = list(color='rgb(0,100,80)'),
+              name = 'Average') %>%
+    layout(title = "Average, Greedy Values in Algorithm",
+           paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
+           xaxis = list(title = "Noise",
+                        gridcolor = 'rgb(255,255,255)',
+                        showgrid = TRUE,
+                        showline = FALSE,
+                        showticklabels = TRUE,
+                        tickcolor = 'rgb(127,127,127)',
+                        ticks = 'outside',
+                        zeroline = FALSE),
+           yaxis = list(title = "Greedy Value",
+                        gridcolor = 'rgb(255,255,255)',
+                        showgrid = TRUE,
+                        showline = FALSE,
+                        showticklabels = TRUE,
+                        tickcolor = 'rgb(127,127,127)',
+                        ticks = 'outside',
+                        zeroline = FALSE))
   })
 
   output$plot2 <- renderPlotly({
-    plot_ly(as.data.frame(dfMin), x = ~noise, y = ~V1, type="scatter", mode="lines")
+    plot_ly(as.data.frame(dtMin), x = ~noise, y = ~V1, type="scatter", mode="lines")
   })
 
   output$plot3 <- renderPlotly({
-    plot_ly(as.data.frame(dfAvg), x = ~noise, y = ~V1, type="scatter", mode="lines")
+    plot_ly(as.data.frame(dtAvg), x = ~noise, y = ~V1, type="scatter", mode="lines")
   })
 }
 

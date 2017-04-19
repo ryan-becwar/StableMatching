@@ -42,7 +42,22 @@ double global_greedy_value(Instance I){
     return get_value(I);
 }
 
-vector<unsigned int> global_greedy_order(Instance &I){
+vector<unsigned int> global_greedy_order(Instance I){
   vector<unsigned int> order;
+
+  reset_allocation(I);
+  sort(I.edges.begin(), I.edges.end());
+  for(vector<Edge>::iterator it = I.edges.begin(); it != I.edges.end() && order.size() < I.lhsnodes.size(); it++){
+    int start = it->start;
+    int end = it->end;
+    if(I.lhsnodes[start].allocation < I.lhsnodes[start].size
+        && I.rhsnodes[end].allocation < I.rhsnodes[end].size
+        && it->allocation < it->size){
+          I.lhsnodes[start].allocation = I.lhsnodes[start].size;
+          I.rhsnodes[end].allocation = I.rhsnodes[end].size;
+          it->allocation = it->size;
+          order.push_back(start);
+    }
+  }
   return order;
 }

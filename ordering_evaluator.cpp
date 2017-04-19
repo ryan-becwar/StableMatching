@@ -79,5 +79,5 @@ void ordering_evaluator::print_plot_data(double noise, unsigned int instanceNum)
 //  std::cout << width << "," << noise << "," << instanceNum << "," << greedyMean << "," << greedyStdev << ","
 //    << zScores["pagerank"] << "," << zScores["regret"] << "," << zScores["optimal"] << std::endl;
   std::cout << width << "," << noise << "," << instanceNum << "," << greedyMean << "," << greedyStdev << ","
-    << rawScores["pagerank"] << "," << rawScores["regret"] << "," << rawScores["optimal"] << std::endl;
+    << rawScores["pagerank"] << "," << rawScores["regret"] << "," << rawScores["globalGreedy"] << "," << rawScores["optimal"] << std::endl;
 }

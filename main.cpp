@@ -62,8 +62,9 @@ void process_real_data(string path, bool opt){
   vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
   vector<unsigned int> regretOrder = regret_projection_order(I);
   vector<unsigned int> regretRegressionOrder = regret_projection_order(I);
+  vector<unsigned int> globalGreedyOrder = global_greedy_order(I);
   //double globalGreedyVal = global_greedy_value(I);
-  double globalGreedyVal = 0;
+  //double globalGreedyVal = 0;
 
   double optVal;
   if(opt){
@@ -75,11 +76,12 @@ void process_real_data(string path, bool opt){
   string outDir = "output/";
   format_algorithm_output(I, regretOrder, outDir + "regret.csv");
   format_algorithm_output(I, pagerankOrder, outDir + "pagerank.csv");
+  format_algorithm_output(I, globalGreedyOrder, outDir + "greedy.csv");
 
   evaluator.evaluate_order("pagerank", pagerankOrder);
   evaluator.evaluate_order("regret", regretOrder);
   evaluator.evaluate_order("regretRegression", regretRegressionOrder);
-  evaluator.evaluate_value("greedy", globalGreedyVal);
+  evaluator.evaluate_order("globalGreedy", globalGreedyOrder);
   evaluator.evaluate_value("optimal", optVal);
 
   evaluator.print_plot_data(0.0, 0);
@@ -115,8 +117,9 @@ int main(int argc, char *argv[]){
         vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
         vector<unsigned int> regretOrder = regret_projection_order(I);
         vector<unsigned int> regretRegressionOrder = regret_projection_order(I);
+        vector<unsigned int> globalGreedyOrder = global_greedy_order(I);
         //double globalGreedyVal = global_greedy_value(I);
-        double globalGreedyVal = 0;
+        //double globalGreedyVal = 0;
 
         double optVal;
         if(opt){
@@ -140,7 +143,7 @@ int main(int argc, char *argv[]){
         evaluator.evaluate_order("pagerank", pagerankOrder);
         evaluator.evaluate_order("regret", regretOrder);
         evaluator.evaluate_order("regretRegression", regretRegressionOrder);
-        evaluator.evaluate_value("greedy", globalGreedyVal);
+        evaluator.evaluate_order("globalGreedy", globalGreedyOrder);
         evaluator.evaluate_value("optimal", optVal);
 
         evaluator.print_plot_data(noise, i);

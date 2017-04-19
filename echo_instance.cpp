@@ -209,3 +209,17 @@ vector<vector<unsigned int> > get_allocation_matrix(Instance& I){
 
   return values;
 }
+
+void reset_allocation(Instance &I){
+  for(vector<Node>::iterator it = I.lhsnodes.begin(); it != I.lhsnodes.end(); it++){
+    it->allocation = 0;
+  }
+
+  for(vector<Node>::iterator it = I.rhsnodes.begin(); it != I.rhsnodes.end(); it++){
+    it->allocation = 0;
+  }
+
+  for(vector<Edge>::iterator it = I.edges.begin(); it != I.edges.end(); it++){
+    it->allocation = 0;
+  }
+}

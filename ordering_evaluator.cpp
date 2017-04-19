@@ -11,7 +11,10 @@ ordering_evaluator::ordering_evaluator(Instance& I, unsigned int greedyCount) :
   width() {
 
   values = get_value_matrix(I);
-  width = values.size();
+  if(values.size() > 0)
+    width = values[0].size();
+  else
+    width = 0;
   generate_greedy_results();
 
 }
@@ -23,7 +26,7 @@ void ordering_evaluator::generate_greedy_results(){
   for(unsigned int i=0; i<greedyCount; i++){
     //generate random order vector
     vector<unsigned int> randomOrder;
-    for(unsigned int j=0; j<width; j++){
+    for(unsigned int j=0; j<values.size(); j++){
       randomOrder.push_back(j);
     }
 
@@ -53,7 +56,7 @@ void ordering_evaluator::generate_greedy_results(){
 }
 
 //Find the value of a given order and compares it to the distribution of random orders
-void ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> const& order){
+double ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> const& order){
   //Compare order to greedy
   write_matches(I, find_matches(values, order, width));
   double result = get_value(I);
@@ -61,6 +64,8 @@ void ordering_evaluator::evaluate_order(std::string title, vector<unsigned int> 
   double stdevsAbove = (result - greedyMean) / greedyStdev;
   zScores.insert(std::make_pair(title, stdevsAbove));
   rawScores.insert(std::make_pair(title, result));
+
+  return result;
 }
 
 //For compairing the strength of a known value to the greedy distribution, such as the global greedy or optimal score

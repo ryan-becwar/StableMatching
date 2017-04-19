@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <sstream>
+#include <fstream>
 #include "regret_matching.h"
 #include "pagerank.h"
 #include "ordering_evaluator.h"
@@ -22,10 +24,40 @@ Writes out data in following column format:
 N noise_level instance_num greedy_mean greedy_stdev pagerank_zscore regret_zscore regret_regression_zscore optimal_zscore
 */
 
+string format_algorithm_output(Instance I, vector<unsigned int> order, string outPath){
+  write_matches(I, find_matches(get_value_matrix(I), order, I.rhsnodes.size()));
+  double result = get_value(I);
+  vector<vector<unsigned int> > matches = get_allocation_matrix(I);
+
+  stringstream ss;
+  ss << result << endl;
+  for(unsigned int i=0; i<order.size(); i++){
+    ss << order[i];
+    if(i+1 != order.size())
+      ss << ", ";
+  }
+  ss << endl;
+
+  for(unsigned int i=0; i<matches.size(); i++){
+    for(unsigned int j=0; j<matches[i].size(); j++){
+      ss << matches[i][j];
+      if(i+1 != matches[i].size())
+        ss << ", ";
+    }
+    ss << endl;
+  }
+
+  std::ofstream out;
+  out.open(outPath);
+  out << ss.rdbuf();
+  out.close();
+
+  return ss.str();
+}
 
 //Reads in a csv with a predefined data set and evaluates algorithms on it
 void process_real_data(string path, bool opt){
-  Instance I = read_csv_instance("barrett_transpose.csv");
+  Instance I = read_csv_instance(path);
   ordering_evaluator evaluator(I, GREEDYCOUNT);
   vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
   vector<unsigned int> regretOrder = regret_projection_order(I);
@@ -39,6 +71,10 @@ void process_real_data(string path, bool opt){
   } else {
     optVal = 0;
   }
+
+  string outDir = "output/";
+  format_algorithm_output(I, regretOrder, outDir + "regret.csv");
+  format_algorithm_output(I, pagerankOrder, outDir + "pagerank.csv");
 
   evaluator.evaluate_order("pagerank", pagerankOrder);
   evaluator.evaluate_order("regret", regretOrder);
@@ -67,7 +103,7 @@ int main(int argc, char *argv[]){
   }
 
   if(realData){
-    process_real_data("realPath", opt);
+    process_real_data(realPath, opt);
   } else {
     std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value\n";
 

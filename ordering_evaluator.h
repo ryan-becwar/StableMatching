@@ -5,7 +5,7 @@ class ordering_evaluator {
 public:
   ordering_evaluator(Instance& I, unsigned int greedyCount);
 
-  void evaluate_order(std::string title, vector<unsigned int> const& order);
+  double evaluate_order(std::string title, vector<unsigned int> const& order);
   void evaluate_value(std::string title, double value);
   void print_plot_data(double noise, unsigned int instanceNum);
 

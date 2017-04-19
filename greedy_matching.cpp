@@ -41,3 +41,8 @@ double global_greedy_value(Instance I){
 
     return get_value(I);
 }
+
+vector<unsigned int> global_greedy_order(Instance &I){
+  vector<unsigned int> order;
+  return order;
+}

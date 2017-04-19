@@ -28,25 +28,25 @@ vector<pii> find_matches(vector<vector<double>> values, vector<unsigned int> ord
 
 	//Initialize available array to true
 	vector<bool> available;
-	for(unsigned int i=0; i<order.size(); i++){
+	for(unsigned int i=0; i<width; i++){
 		available.push_back(true);
 	}
 
 
 	for(unsigned int i=0; i<order.size(); i++){
-		int r = order[i];
+		int l = order[i];
 		double maxVal = 0;
-		int maxIndex;
+		int maxIndex = 0;
 		for(unsigned int j=0; j<width; j++){
-			if(available[j] && values[j][r] > maxVal) {
-				maxVal = values[j][r];
+			if(available[j] && values[l][j] > maxVal) {
+				maxVal = values[l][j];
 				maxIndex = j;
 			}
 		}
 		available[maxIndex] = false;
 		pii p;
-		p.first = maxIndex;
-		p.second = r;
+		p.first = l;
+		p.second = maxIndex;
 		matches.push_back(p);
 	}
 

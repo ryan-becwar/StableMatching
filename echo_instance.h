@@ -53,5 +53,6 @@ void print_instance_csv(Instance &I);
 double get_value(Instance &I);
 void order_edges(Instance &I);
 vector<vector<double> > get_value_matrix(Instance &I);
+vector<vector<unsigned int> > get_allocation_matrix(Instance& I);
 
 #endif

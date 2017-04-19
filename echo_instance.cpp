@@ -194,3 +194,18 @@ vector<vector<double> > get_value_matrix(Instance& I){
 
   return values;
 }
+
+vector<vector<unsigned int> > get_allocation_matrix(Instance& I){
+  vector<vector<unsigned int> > values;
+  for(unsigned int i = 0; i<I.lhsnodes.size(); i++){
+    vector<unsigned int> rowValues;
+    rowValues.resize(I.rhsnodes.size());
+    values.push_back(rowValues);
+  }
+
+  for(unsigned int i=0; i<I.edges.size(); i++){
+    values[I.edges[i].start][I.edges[i].end] = I.edges[i].allocation;
+  }
+
+  return values;
+}

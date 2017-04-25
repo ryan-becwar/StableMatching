@@ -73,7 +73,7 @@ void process_real_data(string path, bool opt){
     optVal = 0;
   }
 
-  string outDir = "output/";
+  string outDir = "output/kaiser/";
   format_algorithm_output(I, regretOrder, outDir + "regret.csv");
   format_algorithm_output(I, pagerankOrder, outDir + "pagerank.csv");
   format_algorithm_output(I, globalGreedyOrder, outDir + "greedy.csv");
@@ -111,8 +111,8 @@ int main(int argc, char *argv[]){
 
     for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
       for(unsigned int i=0; i<INSTANCE_COUNT; i++){
-        Instance I = get_global_min_instance(N, N, noise);
-        //Instance I = get_location_instance(N, N, noise);
+        //Instance I = get_global_min_instance(N, N, noise);
+        Instance I = get_location_instance(N, N, noise);
         ordering_evaluator evaluator(I, GREEDYCOUNT);
         vector<unsigned int> pagerankOrder = generate_pagerank_order(I);
         vector<unsigned int> regretOrder = regret_projection_order(I);

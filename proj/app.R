@@ -163,7 +163,7 @@ server <- function(input, output) {
 
 
   #-- Line Graph Visualizations --#
-  data = read.csv("value_data.csv")
+  data = read.csv("../results/small_incr_results.csv")
   df = data.frame(noise= data$noise,
                   greedy=data$greedy_mean,
                   pagerank=data$pagerank_value,

@@ -31,25 +31,10 @@ ui <- fluidPage(
   ),
 
   fluidRow(
-    column(width = 4, class = "well",
+    column(width = 12, class = "well",
       h4("Plotly Example"),
-      plotlyOutput("plot1", height = 300)
-      ),
-
-    column(width = 8, class = "well",
-      h4("Another Graph"),
-      plotlyOutput("plot2", height = 300)
-    ),
-
-  column(width = 8, class = "well",
-    h4("Another Graph"),
-    plotlyOutput("plot3", height = 300)
-  ),
-
-  column(width = 8, class = "well",
-    h4("Another Graph"),
-    plotlyOutput("plot4", height = 300)
-  )
+      plotlyOutput("plot1", height = 700)
+      )
    ),
 
   fluidRow(
@@ -74,17 +59,17 @@ ui <- fluidPage(
 # Standard deviation function
 # -------------------------------------------------------------------
 sdevTop <-function(inputList) {
-inputAvg <- avg(inputList)
+inputAvg <- mean(inputList)
 inputsd <- sd(inputList)
-Output <- inputAvg + 3*inputsd
+Output <- inputAvg + inputsd
 return(Output)
 }
 
 sdevBot <-function(inputList) {
-inputAvg <- avg(inputList)
+inputAvg <- mean(inputList)
 inputsd <- sd(inputList)
-Output <- inputAvg - 3*inputsd
-return(Ouput)
+Output <- inputAvg - inputsd
+return(Output)
 }
 
 
@@ -151,20 +136,20 @@ server <- function(input, output) {
   dt <- data.table(df)
 
   #At each noise value, take only the max, min and mean value
-  greedyMax = dt[ , max(greedy), by = noise]
-  greedyMin = dt[ , min(greedy), by = noise]
+  greedyMax = dt[ , sdevTop(greedy), by = noise]
+  greedyMin = dt[ , sdevBot(greedy), by = noise]
   greedyAvg = dt[ , mean(greedy), by = noise]
 
-  pagerankMax = dt[ , max(pagerank), by = noise]
-  pagerankMin = dt[ , min(pagerank), by = noise]
+  pagerankMax = dt[ , sdevTop(pagerank), by = noise]
+  pagerankMin = dt[ , sdevBot(pagerank), by = noise]
   pagerankAvg = dt[ , mean(pagerank), by = noise]
 
-  regretMax = dt[ , max(regret), by = noise]
-  regretMin = dt[ , min(regret), by = noise]
+  regretMax = dt[ , sdevTop(regret), by = noise]
+  regretMin = dt[ , sdevBot(regret), by = noise]
   regretAvg = dt[ , mean(regret), by = noise]
 
-  optimalMax = dt[ , max(optimal), by = noise]
-  optimalMin = dt[ , min(optimal), by = noise]
+  optimalMax = dt[ , sdevTop(optimal), by = noise]
+  optimalMin = dt[ , sdevBot(optimal), by = noise]
   optimalAvg = dt[ , mean(optimal), by = noise]
 
 
@@ -222,37 +207,37 @@ server <- function(input, output) {
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
     add_trace(y = ~Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
+              fill = 'tonexty', fillcolor='rgba(27,158,229,0.2)', line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
     add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(0,100,80)'),
+              line = list(color='rgb(27,158,119)'),
               name = 'Average') %>%
     add_trace(x = ~noise, y = ~dfPagerankComplete$Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
     add_trace(y = dfPagerankComplete$Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(100,150,80,0.2)', line = list(color = 'transparent'),
+              fill = 'tonexty', fillcolor='rgba(217,95,2,0.2)', line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
     add_trace(x = ~noise, y = dfPagerankComplete$Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(100,150,80)'),
+              line = list(color='rgb(217,95,2)'),
               name = 'Average') %>%
     add_trace(x = ~noise, y = ~dfRegretComplete$Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
     add_trace(y = dfRegretComplete$Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(200,30,80,0.2)', line = list(color = 'transparent'),
+              fill = 'tonexty', fillcolor='rgba(117,112,179,0.2)', line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
     add_trace(x = ~noise, y = dfRegretComplete$Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(200,30,80)'),
+              line = list(color='rgb(117,112,179)'),
               name = 'Average') %>%
     add_trace(x = ~noise, y = ~dfOptimalComplete$Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
     add_trace(y = dfOptimalComplete$Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(0,50,200,0.2)', line = list(color = 'transparent'),
+              fill = 'tonexty', fillcolor='rgba(231,41,138,0.2)', line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
     add_trace(x = ~noise, y = dfOptimalComplete$Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(0,50,200)'),
+              line = list(color='rgb(231,41,138)'),
               name = 'Average') %>%
     layout(title = "Average, Greedy, Pagerank, Regret and Optimal Values in Algorithm",
            paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
@@ -264,7 +249,7 @@ server <- function(input, output) {
                         tickcolor = 'rgb(127,127,127)',
                         ticks = 'outside',
                         zeroline = FALSE),
-           yaxis = list(title = "Greedy Value",
+           yaxis = list(title = "Sum of Matched Values",
                         gridcolor = 'rgb(255,255,255)',
                         showgrid = TRUE,
                         showline = FALSE,

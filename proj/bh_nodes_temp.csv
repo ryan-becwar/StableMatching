@@ -1,0 +1,115 @@
+genus,name,degree,group,greedy_priority,regret_priority,pagerank_priority
+Acmaeopsoides,A rufula,1,pollinator,low priority,low priority,low priority
+Agiotes,A stabilis,1,pollinator,low priority,low priority,low priority
+Ancistrocerus,A sp.,1,pollinator,low priority,low priority,low priority
+Andrena,A melanochroa,1,pollinator,low priority,low priority,low priority
+Andrena,A miranda,2,pollinator,low priority,low priority,low priority
+Andrena,A nivalis,2,pollinator,low priority,low priority,low priority
+Andrena,A rufosignata,1,pollinator,low priority,low priority,low priority
+Andrena,A sigmundi,1,pollinator,low priority,low priority,low priority
+Andrena,A thaspii,1,pollinator,low priority,low priority,low priority
+Andrena,A wheeleri,1,pollinator,low priority,low priority,low priority
+Andrena,A wilkella,1,pollinator,low priority,low priority,low priority
+Andrena,A w-scripta,2,pollinator,low priority,low priority,low priority
+Anthaxia,A expansa,2,pollinator,low priority,low priority,low priority
+Anthonomus,A sp.,1,pollinator,low priority,low priority,low priority
+Blera,B badia,1,pollinator,low priority,low priority,low priority
+Blera,B confusa,1,pollinator,low priority,low priority,low priority
+Blera,B nigripes,1,pollinator,low priority,low priority,low priority
+Bombus,B perplexus,2,pollinator,low priority,low priority,low priority
+Bombus,B ternarius,2,pollinator,low priority,low priority,low priority
+Bombus,B terricola,4,highly-connected pollinator,low priority,low priority,low priority
+Bombus,B vagans,8,highly-connected pollinator,low priority,low priority,low priority
+Bombylius,B major,2,pollinator,low priority,low priority,low priority
+Bombylius,B pigmaeus,1,pollinator,low priority,low priority,low priority
+Cantharis,C sp.,1,pollinator,low priority,low priority,low priority
+Carposcalis,C confusus,5,highly-connected pollinator,low priority,low priority,low priority
+Carposcalis,C obscura,1,pollinator,low priority,low priority,low priority
+Cateres,C pennatus,1,pollinator,low priority,low priority,low priority
+Celastrina,C argiolus,1,pollinator,low priority,low priority,low priority
+Chalcosyrphus,C curvarius,1,pollinator,low priority,low priority,low priority
+Chalcosyrphus,C inarmatus,1,pollinator,low priority,low priority,low priority
+Chalcosyrphus,C memorum,1,pollinator,low priority,low priority,low priority
+Chalcosyrphus,C nigra,1,pollinator,low priority,low priority,low priority
+Cheilosia,C pallipes,1,pollinator,low priority,low priority,low priority
+Cheilosia,C sialia,1,pollinator,low priority,low priority,low priority
+Cheilosia,C slossonae,1,pollinator,low priority,low priority,low priority
+Cheilosia,C tristis,1,pollinator,low priority,low priority,low priority
+Crabro,C sp.,2,pollinator,low priority,low priority,low priority
+Dalopius,D sp.,1,pollinator,low priority,low priority,low priority
+Dialictus,D cressoni,4,highly-connected pollinator,low priority,low priority,low priority
+Dialictus,D imitatus,2,pollinator,low priority,low priority,low priority
+Dialictus,D sp.,8,highly-connected pollinator,low priority,low priority,low priority
+Eclimus,E harrisi,2,pollinator,low priority,low priority,low priority
+Ephemerella,E sp.,1,pollinator,low priority,low priority,low priority
+Eremomyioides,E setosa,1,pollinator,low priority,low priority,low priority
+Eudasyphora,E cyanicolor,1,pollinator,low priority,low priority,low priority
+Eupyses,E vestris,1,pollinator,low priority,low priority,low priority
+Eusphalerum,E convexum,2,pollinator,low priority,low priority,low priority
+Eusphalerum,E phothos,3,pollinator,low priority,low priority,low priority
+Eusphalerum,E sp.,5,highly-connected pollinator,low priority,low priority,low priority
+Evodinus,E monticola,1,pollinator,low priority,low priority,low priority
+Evylaeus,E divergens,2,pollinator,low priority,low priority,low priority
+Evylaeus,E quebecensis,4,highly-connected pollinator,low priority,low priority,low priority
+Fannia,F ungulata,1,pollinator,low priority,low priority,low priority
+Halictus,H confusus,1,pollinator,low priority,low priority,low priority
+Halictus,H rubicundus,2,pollinator,low priority,low priority,low priority
+Hoplitis,H producta,1,pollinator,low priority,low priority,low priority
+Hylaeus,H basalis,1,pollinator,low priority,low priority,low priority
+Hylaeus,H ellipticus,1,pollinator,low priority,low priority,low priority
+Hylaeus,H stevensi,1,pollinator,low priority,low priority,low priority
+Judolia,J montivagans,1,pollinator,low priority,low priority,low priority
+Lygus,L refidorsus,1,pollinator,low priority,low priority,low priority
+Mallota,M posticata,2,pollinator,low priority,low priority,low priority
+Melagyna,M lasiophthalma,2,pollinator,low priority,low priority,low priority
+Melanostoma,M sp.,1,pollinator,low priority,low priority,low priority
+Nomada,N cuneata,1,pollinator,low priority,low priority,low priority
+Nomada,N sayi,1,pollinator,low priority,low priority,low priority
+Orsodacne,O atra,1,pollinator,low priority,low priority,low priority
+Orthoneura,O pulchella,2,pollinator,low priority,low priority,low priority
+Osmia,O lignaria,1,pollinator,low priority,low priority,low priority
+Osmia,O proxima,2,pollinator,low priority,low priority,low priority
+Osmia,O pumila,1,pollinator,low priority,low priority,low priority
+Paramyia,P nitens,2,pollinator,low priority,low priority,low priority
+Parasyrphus,P relictus,3,pollinator,low priority,low priority,low priority
+Passaloecus,P sp.,1,pollinator,low priority,low priority,low priority
+Pegohylemyia,P fugax,1,pollinator,low priority,low priority,low priority
+Phalaenophana,P pyramusalis,1,pollinator,low priority,low priority,low priority
+Phaonia,P serva,2,pollinator,low priority,low priority,low priority
+Pidonia,P ruficolis,2,pollinator,low priority,low priority,low priority
+Pieris,P napi,1,pollinator,low priority,low priority,low priority
+Poanes,P hobomok,1,pollinator,low priority,low priority,low priority
+Psithyrus,P sp.,1,pollinator,low priority,low priority,low priority
+Pyrophaena,P rosarum,1,pollinator,low priority,low priority,low priority
+Rhopalum,R sp.,1,pollinator,low priority,low priority,low priority
+Sarcophaga,S nearctica,2,pollinator,low priority,low priority,low priority
+Sphaerophoria,S bifurcata,5,highly-connected pollinator,low priority,low priority,low priority
+Sphaerophoria,S longipilosa,1,pollinator,low priority,low priority,low priority
+Sphaerophoria,S sp.,3,pollinator,low priority,low priority,low priority
+Sphecodes,S sp.,1,pollinator,low priority,low priority,low priority
+Syritta,S pipiens,1,pollinator,low priority,low priority,low priority
+Syritta,S rectus,1,pollinator,low priority,low priority,low priority
+Temnostoma,T alternans,1,pollinator,low priority,low priority,low priority
+Temnostoma,T balyras,1,pollinator,low priority,low priority,low priority
+Temnostoma,T barberi,1,pollinator,low priority,low priority,low priority
+Thamnotettix,T confinis,1,pollinator,low priority,low priority,low priority
+Trachysida,T aspera,1,pollinator,low priority,low priority,low priority
+Tropidia,T quadrata,2,pollinator,low priority,low priority,low priority
+Tychius,T stephensi,1,pollinator,low priority,low priority,low priority
+Vespula,V arenaria,1,pollinator,low priority,low priority,low priority
+Xylota,X bigelowi,1,pollinator,low priority,low priority,low priority
+Xylota,X hinei,2,pollinator,low priority,low priority,low priority
+Xylota,X sp.,1,pollinator,low priority,low priority,low priority
+Zeraea,Z americana,2,pollinator,low priority,low priority,low priority
+Aralia,A nudicaulis,17,highly-connected plant,high priority,high priority,medium priority
+Chimaphila,C umbellata,3,plant,high priority,high priority,medium priority
+Clintonia,C borealis,15,highly-connected plant,medium priority,medium priority,medium priority
+Cornus,C canadensis,65,highly-connected plant,high priority,high priority,medium priority
+Cypripedium,C acaule,2,plant,high priority,medium priority,medium priority
+Linnaea,L borealis,21,highly-connected plant,high priority,medium priority,medium priority
+Maianthemum,M canadense,26,highly-connected plant,high priority,high priority,high priority
+Medeola,M virginiana,1,plant,high priority,medium priority,medium priority
+Oxalis,O montana,6,highly-connected plant,high priority,high priority,high priority
+Pyrola,P secunda,4,highly-connected plant,high priority,medium priority,medium priority
+Trientalis,T borealis,3,plant,high priority,medium priority,medium priority
+Trillium,T undulatum,4,highly-connected plant,high priority,medium priority,medium priority

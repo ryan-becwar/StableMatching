@@ -17,15 +17,15 @@ ui <- fluidPage(
       selectInput("dataset", label = h4("Choose a dataset."),
                    choices = list("BH1987", "KB2009")),
 
-      radioButtons("algorithim", label = h4("Choose an alogorithim."),
-                   choices = list("Algorithim1" = 1, "Algorithim2" = 2,
-                                  "Algorithim3" = 3),selected = 1)
+      radioButtons("stage", label = h4("Choose a stage in the matching process."),
+                   choices = list("Raw Network", "Network with Priority",
+                                  "Network with Final Pairings"), selected = "Raw Network")
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Raw Network", forceNetworkOutput("force1")),
-        tabPanel("Network with Priority"),
-        tabPanel("Final Pairing")
+        tabPanel("Greedy Algorithim", forceNetworkOutput("greedy")),
+        tabPanel("Pagerank Algorithim", forceNetworkOutput("pagerank")),
+        tabPanel("Regret Algorithim", forceNetworkOutput("regret"))
       )
     )
   ),
@@ -71,11 +71,11 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   #-- Load Network Visualization Dataframes --#
-  bhnodes <- read.csv("bh1987_nodes.csv")
-  bhlinks <- read.csv("bh1987_links.csv")
+  bhnodes <- read.csv("bh_nodes_temp.csv")
+  bhlinks <- read.csv("bh_links_temp.csv")
 
-  kbnodes <- read.csv("kb2009_nodes.csv")
-  kblinks <- read.csv("kb2009_links.csv")
+  kbnodes <- read.csv("kb_nodes.csv")
+  kblinks <- read.csv("kb_links.csv")
 
   all_nodes <- list(kbnodes, bhnodes)
   all_links <- list(kblinks, bhlinks)
@@ -83,22 +83,60 @@ server <- function(input, output) {
   #-- Get Dataset for Network from User Input --#
   get_nodes <- reactive({switch(input$dataset,"KB2009" = kbnodes,"BH1987" = bhnodes)})
   get_links <- reactive({switch(input$dataset,"KB2009" = kblinks,"BH1987" = bhlinks)})
+  
 
-
-  output$force1 <- renderForceNetwork({
-    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
+  greedy_group <- reactive({switch(input$stage, "Raw Network" = "group",
+                                      "Network with Priority" = "greedy_priority", 
+                                      "Network with Final Pairings" = "greedy_priority")})
+  
+  pagerank_group <- reactive({switch(input$stage, "Raw Network" = "group",
+                                      "Network with Priority" = "pagerank_priority", 
+                                      "Network with Final Pairings" = "pagerank_priority")})
+  
+  regret_group <- reactive({switch(input$stage, "Raw Network" = "group",
+                                      "Network with Priority" = "regret_priority", 
+                                      "Network with Final Pairings" = "regret_priority")})
+  
+  greedy_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
+                                   "Network with Priority" = bhlinks$value, 
+                                   "Network with Final Pairings" = bhlinks$greedy_pairing)})
+  
+  pagerank_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
+                                     "Network with Priority" = bhlinks$value, 
+                                     "Network with Final Pairings" = bhlinks$pagerank_pairing)})
+  
+  regret_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
+                                     "Network with Priority" = bhlinks$value, 
+                                     "Network with Final Pairings" = bhlinks$regret_pairing)})
+  
+  output$greedy <- renderForceNetwork({
+    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = "group", opacity = input$opacity, zoom=TRUE,
+                 Nodesize = "degree", Group = greedy_group(), 
+                 opacity = input$opacity, zoom=TRUE,
+                 linkColour = ifelse(greedy_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
                  legend = TRUE)
   })
 
-
-  output$force2 <- renderForceNetwork({
-    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
+  output$pagerank <- renderForceNetwork({
+    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Group = "origin", Nodesize = "degree", opacity = input$opacity,
-                 fontSize = 16, zoom=TRUE)
+                 Nodesize = "degree", Group = pagerank_group(), 
+                 opacity = input$opacity, zoom=TRUE,
+                 linkColour = ifelse(pagerank_pairing() > 0, "585C5C","F3F3F3"),
+                 fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
+                 legend = TRUE)
+  })
+  
+  output$regret <- renderForceNetwork({
+    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
+                 Target = "target", Value = "value", NodeID = "name",
+                 Nodesize = "degree", Group = regret_group(), 
+                 opacity = input$opacity, zoom=TRUE,
+                 linkColour = ifelse(regret_pairing() > 0, "585C5C","F3F3F3"),
+                 fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
+                 legend = TRUE)
   })
 
 
@@ -184,4 +222,5 @@ server <- function(input, output) {
   })
 }
 
+##################################
 shinyApp(ui, server)

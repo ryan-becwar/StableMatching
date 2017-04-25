@@ -55,6 +55,50 @@ string format_algorithm_output(Instance I, vector<unsigned int> order, string ou
   return ss.str();
 }
 
+string format_algorithm_output_opt(vector<vector<double> > mat, double result, string outPath){
+  vector<vector<unsigned int> > matches;
+  vector<unsigned int> order;
+
+  for(unsigned int i=0; i<mat.size(); i++){
+    vector<unsigned int> row;
+    for(unsigned int j=0; j<mat[0].size(); j++){
+      row.push_back(0);
+    }
+    matches.push_back(row);
+    order.push_back(i);
+  }
+
+  ifstream results("results.txt");
+  for (int i=0; i<min(L,R); i++) {
+    int a, b;
+    double amt;
+    results >> a >> b >> amt;
+    matches[a][b] = 1;
+    //    cout << amt << " assigned from " << a << " to " << b << "\n";
+  }
+  results.close();
+
+
+  stringstream ss;
+  ss << result << endl;
+  for(unsigned int i=0; i<order.size(); i++){
+    ss << order[i];
+    if(i+1 != order.size())
+      ss << ", ";
+  }
+  ss << endl;
+
+  for(unsigned int i=0; i<matches.size(); i++){
+    for(unsigned int j=0; j<matches[i].size(); j++){
+      ss << matches[i][j];
+      if(i+1 != matches[i].size())
+        ss << ", ";
+    }
+    ss << endl;
+  }
+
+}
+
 //Reads in a csv with a predefined data set and evaluates algorithms on it
 void process_real_data(string path, bool opt){
   Instance I = read_csv_instance(path);
@@ -65,15 +109,16 @@ void process_real_data(string path, bool opt){
   vector<unsigned int> globalGreedyOrder = global_greedy_order(I);
   //double globalGreedyVal = global_greedy_value(I);
   //double globalGreedyVal = 0;
+  string outDir = "output/kaiser/";
 
   double optVal;
   if(opt){
     optVal = lp_opt_result(I.lhsnodes.size(), I.rhsnodes.size(), get_value_matrix(I));
+    format_algorithm_output_opt(get_value_matrix(I), optVal, outDir + "optimal.csv");
   } else {
     optVal = 0;
   }
 
-  string outDir = "output/kaiser/";
   format_algorithm_output(I, regretOrder, outDir + "regret.csv");
   format_algorithm_output(I, pagerankOrder, outDir + "pagerank.csv");
   format_algorithm_output(I, globalGreedyOrder, outDir + "greedy.csv");

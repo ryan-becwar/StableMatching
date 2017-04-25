@@ -10,9 +10,9 @@
 #include "greedy_matching.h"
 
 #define N 100
-#define INSTANCE_COUNT 5
-#define NOISE_TIERS 10
-#define GREEDYCOUNT 10
+#define INSTANCE_COUNT 50
+#define NOISE_TIERS 100
+#define GREEDYCOUNT 50
 
 /*
 USAGE:

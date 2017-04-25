@@ -163,7 +163,7 @@ Instance get_location_instance(unsigned int leftSize, unsigned int rightSize, do
   if(noise > 1) noise = 1;
   if(noise < 0) noise = 0;
 
-  return(generate_weighted_data(leftSize, rightSize, 1 - noise, 0, noise));
+  return(generate_weighted_data(leftSize, rightSize, (1 - noise) / 2, 0, noise));
 }
 
 Instance get_global_min_instance(unsigned int leftSize, unsigned int rightSize, double noise){

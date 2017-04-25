@@ -69,7 +69,7 @@ string format_algorithm_output_opt(vector<vector<double> > mat, double result, s
   }
 
   ifstream results("results.txt");
-  for (int i=0; i<min(L,R); i++) {
+  for (unsigned int i=0; i<min(mat.size(), mat[0].size()); i++) {
     int a, b;
     double amt;
     results >> a >> b >> amt;
@@ -96,6 +96,13 @@ string format_algorithm_output_opt(vector<vector<double> > mat, double result, s
     }
     ss << endl;
   }
+  
+  std::ofstream out;
+  out.open(outPath);
+  out << ss.rdbuf();
+  out.close();
+
+  return ss.str();
 
 }
 
@@ -109,7 +116,7 @@ void process_real_data(string path, bool opt){
   vector<unsigned int> globalGreedyOrder = global_greedy_order(I);
   //double globalGreedyVal = global_greedy_value(I);
   //double globalGreedyVal = 0;
-  string outDir = "output/kaiser/";
+  string outDir = "output/barrett/";
 
   double optVal;
   if(opt){

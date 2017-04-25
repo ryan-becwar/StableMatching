@@ -152,7 +152,7 @@ int main(int argc, char *argv[]){
   if(realData){
     process_real_data(realPath, opt);
   } else {
-    std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank_value,regret_value,optimal value\n";
+    std::cout << "width,noise,instance_number, greedy_mean,greedy_stdev,pagerank_value,regret_value,global_greedy,optimal_value\n";
 
     for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
       for(unsigned int i=0; i<INSTANCE_COUNT; i++){

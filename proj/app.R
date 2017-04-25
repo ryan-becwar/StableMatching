@@ -308,16 +308,20 @@ server <- function(input, output) {
   })
 
   output$plot2 <- renderPlotly({
-    plot_ly(dfPagerankComplete, x = ~noise, y = ~Max, type = 'scatter', mode = 'lines',
+    for(item in input$choices) {
+      if(item == 1) {
+        p -> plot_ly(dfPagerankComplete, x = ~noise, y = ~Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
-          showlegend = FALSE, name = 'Max') %>%
-    add_trace(y = ~Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
-              showlegend = FALSE, name = 'Min') %>%
-    add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(0,100,80)'),
-              name = 'Average') %>%
-    layout(title = "Average, Greedy Values in Algorithm",
+          showlegend = FALSE, name = 'Max')
+        p -> add_trace(y = ~Min, type = 'scatter', mode = 'lines',
+                fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
+                showlegend = FALSE, name = 'Min')
+        p -> add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
+                line = list(color='rgb(0,100,80)'),
+                name = 'Average')
+      }
+    }
+    p -> layout(title = "Average, Greedy Values in Algorithm",
            paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
            xaxis = list(title = "Noise",
                         gridcolor = 'rgb(255,255,255)',
@@ -335,6 +339,9 @@ server <- function(input, output) {
                         tickcolor = 'rgb(127,127,127)',
                         ticks = 'outside',
                         zeroline = FALSE))
+    print(p)
+
+
   })
 
   output$plot3 <- renderPlotly({

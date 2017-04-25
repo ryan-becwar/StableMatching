@@ -34,7 +34,17 @@ ui <- fluidPage(
     column(width = 12, class = "well",
       h4("Plotly Example"),
       plotlyOutput("plot1", height = 700)
-      )
+      ),
+    column(width = 4, class = "well",
+           h4("Here are some buttons"),
+           checkboxGroupInput("datasetGroup",
+                              label = h3("Pick Algorithms to view."),
+                              choices = list("Greedy" = 1,
+                                             "Pagerank" = 2,
+                                             "Regret" = 3,
+                                             "Optimal" = 4),
+                              selected = 1)
+    )
    ),
 
   fluidRow(

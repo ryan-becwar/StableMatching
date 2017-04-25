@@ -1,4 +1,4 @@
-width,noise,instance number, greedy mean,greedy stdev,pagerank value,regret value,optimal value
+width,noise,instance_number, greedy_mean,greedy_stdev,pagerank_value,regret_value,optimal_value
 100,0,0,41.46,0.935882,42.3158,48.4085,48.4085
 100,0,1,37.64,1.00565,37.2178,44.3979,44.3979
 100,0,2,34.59,0.971573,35.1697,42.1351,42.1351

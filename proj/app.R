@@ -101,36 +101,36 @@ server <- function(input, output) {
   #-- Get Dataset for Network from User Input --#
   get_nodes <- reactive({switch(input$dataset,"KB2009" = kbnodes,"BH1987" = bhnodes)})
   get_links <- reactive({switch(input$dataset,"KB2009" = kblinks,"BH1987" = bhlinks)})
-  
+
 
   greedy_group <- reactive({switch(input$stage, "Raw Network" = "group",
-                                      "Network with Priority" = "greedy_priority", 
+                                      "Network with Priority" = "greedy_priority",
                                       "Network with Final Pairings" = "greedy_priority")})
-  
+
   pagerank_group <- reactive({switch(input$stage, "Raw Network" = "group",
-                                      "Network with Priority" = "pagerank_priority", 
+                                      "Network with Priority" = "pagerank_priority",
                                       "Network with Final Pairings" = "pagerank_priority")})
-  
+
   regret_group <- reactive({switch(input$stage, "Raw Network" = "group",
-                                      "Network with Priority" = "regret_priority", 
+                                      "Network with Priority" = "regret_priority",
                                       "Network with Final Pairings" = "regret_priority")})
-  
+
   greedy_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
-                                   "Network with Priority" = bhlinks$value, 
+                                   "Network with Priority" = bhlinks$value,
                                    "Network with Final Pairings" = bhlinks$greedy_pairing)})
-  
+
   pagerank_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
-                                     "Network with Priority" = bhlinks$value, 
+                                     "Network with Priority" = bhlinks$value,
                                      "Network with Final Pairings" = bhlinks$pagerank_pairing)})
-  
+
   regret_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
-                                     "Network with Priority" = bhlinks$value, 
+                                     "Network with Priority" = bhlinks$value,
                                      "Network with Final Pairings" = bhlinks$regret_pairing)})
-  
+
   output$greedy <- renderForceNetwork({
     forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = greedy_group(), 
+                 Nodesize = "degree", Group = greedy_group(),
                  opacity = input$opacity, zoom=TRUE,
                  linkColour = ifelse(greedy_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
@@ -140,17 +140,17 @@ server <- function(input, output) {
   output$pagerank <- renderForceNetwork({
     forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = pagerank_group(), 
+                 Nodesize = "degree", Group = pagerank_group(),
                  opacity = input$opacity, zoom=TRUE,
                  linkColour = ifelse(pagerank_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
                  legend = TRUE)
   })
-  
+
   output$regret <- renderForceNetwork({
     forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = regret_group(), 
+                 Nodesize = "degree", Group = regret_group(),
                  opacity = input$opacity, zoom=TRUE,
                  linkColour = ifelse(regret_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),

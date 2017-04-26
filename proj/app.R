@@ -39,25 +39,19 @@ ui <- fluidPage(
            h4("Here are some buttons"),
            checkboxGroupInput("datasetGroup",
                               label = h3("Pick Algorithms to view."),
-                              choices = list("Greedy" = 1,
-                                             "Pagerank" = 2,
-                                             "Regret" = 3,
-                                             "Optimal" = 4),
-                              selected = 1)
+                              choices = list("Greedy",
+                                             "Pagerank",
+                                             "Regret",
+                                             "Optimal"),
+                              selected = c("Greedy", "Pagerank"))
     )
    ),
 
   fluidRow(
     column(width = 4, class = "well",
-           h4("Here are some buttons"),
-           checkboxGroupInput("datasetGroup",
-                              label = h3("Pick datasets to view."),
-                              choices = list("Dataset1" = 1,
-                                             "Dataset2" = 2, "Dataset3" = 3),
-                              selected = 1)
-    ),
-    column(width = 4, class = "well",
-           h4("We can compare this graph")
+           h4("We can compare this graph"),
+           plotlyOutput("plot2", height = 700)
+
     ),
     column(width = 4, class = "well",
            h4("with this graph")
@@ -161,11 +155,11 @@ server <- function(input, output) {
   ##### GRAPH STUFF #####
   ranges <- reactiveValues(x = NULL, y = NULL)
 
-  data = read.csv("value_data.csv")
-  df = data.frame(noise= data$noise,
-                  greedy=data$greedy_mean,
-                  pagerank=data$pagerank_value,
-                  optimal=data$optimal_value)
+#  data = read.csv("value_data.csv")
+#  df = data.frame(noise= data$noise,
+#                  greedy=data$greedy_mean,
+#                  pagerank=data$pagerank_value,
+#                  optimal=data$optimal_value)
 
   # -------------------------------------------------------------------
   # Linked plots (middle and right)
@@ -308,16 +302,18 @@ server <- function(input, output) {
   })
 
   output$plot2 <- renderPlotly({
-    plot_ly(dfPagerankComplete, x = ~noise, y = ~Max, type = 'scatter', mode = 'lines',
+
+        p <- plot_ly(dfPagerankComplete, x = ~noise, y = ~Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
-          showlegend = FALSE, name = 'Max') %>%
-    add_trace(y = ~Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
-              showlegend = FALSE, name = 'Min') %>%
-    add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(0,100,80)'),
-              name = 'Average') %>%
-    layout(title = "Average, Greedy Values in Algorithm",
+          showlegend = FALSE, name = 'Max')
+        p <- add_trace(y = ~Min, type = 'scatter', mode = 'lines',
+                fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
+                showlegend = FALSE, name = 'Min')
+        p <- add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
+                line = list(color='rgb(0,100,80)'),
+                name = 'Average')
+
+    p <- layout(title = "Average, Greedy Values in Algorithm",
            paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
            xaxis = list(title = "Noise",
                         gridcolor = 'rgb(255,255,255)',
@@ -335,6 +331,9 @@ server <- function(input, output) {
                         tickcolor = 'rgb(127,127,127)',
                         ticks = 'outside',
                         zeroline = FALSE))
+    print(p)
+
+
   })
 
   output$plot3 <- renderPlotly({

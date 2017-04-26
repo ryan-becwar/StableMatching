@@ -23,9 +23,9 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Greedy Algorithim", forceNetworkOutput("greedy")),
-        tabPanel("Pagerank Algorithim", forceNetworkOutput("pagerank")),
-        tabPanel("Regret Algorithim", forceNetworkOutput("regret"))
+        tabPanel("Greedy Algorithm", forceNetworkOutput("greedy")),
+        tabPanel("Pagerank Algorithm", forceNetworkOutput("pagerank")),
+        tabPanel("Regret Algorithm", forceNetworkOutput("regret"))
       )
     )
   ),
@@ -48,13 +48,12 @@ ui <- fluidPage(
    ),
 
   fluidRow(
-    column(width = 4, class = "well",
+    column(width = 6, class = "well",
            h4("We can compare this graph"),
-           plotlyOutput("plot2", height = 700)
-
+           p("this is an example tex")
     ),
-    column(width = 4, class = "well",
-           h4("with this graph")
+    column(width = 6, class = "well",
+           plotlyOutput("bar_graph", height = 350)
     )
   )
 )
@@ -151,7 +150,22 @@ server <- function(input, output) {
                  legend = TRUE)
   })
 
-
+  ##### BAR GRAPH STUFF #####
+ 
+  x_vals <- c("regret", "greedy", "pagerank", "optimal")
+  bh_vals <- c(203, 203, 196, 206)
+  kb_vals <- c(125.042, 139.024, 46.083, 155.279 )
+  data <- data.frame(x_vals, bh_vals, kb_vals)
+  
+  output$bar_graph <- renderPlotly({
+    p <- plot_ly(data, x = ~x_vals, y = ~bh_vals, type = 'bar', name = 'BH Scores') %>%
+    add_trace(y = ~kb_vals, name = 'KB Scores') %>%
+    layout(title="Algorithm Performance on Real World Data", 
+           yaxis = list(title = 'Algorithim Score'), 
+           xaxis = list(title = ' '), 
+           barmode = 'group') 
+  })
+  
   ##### GRAPH STUFF #####
   ranges <- reactiveValues(x = NULL, y = NULL)
 

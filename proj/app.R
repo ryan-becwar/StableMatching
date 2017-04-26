@@ -82,8 +82,8 @@ server <- function(input, output) {
   bhnodes <- read.csv("bh_nodes_temp.csv")
   bhlinks <- read.csv("bh_links_temp.csv")
 
-  kbnodes <- read.csv("kb_nodes.csv")
-  kblinks <- read.csv("kb_links.csv")
+  kbnodes <- read.csv("kb_nodes_temp.csv")
+  kblinks <- read.csv("kb_links_temp.csv")
 
   all_nodes <- list(kbnodes, bhnodes)
   all_links <- list(kblinks, bhlinks)
@@ -105,20 +105,20 @@ server <- function(input, output) {
                                       "Network with Priority" = "regret_priority", 
                                       "Network with Final Pairings" = "regret_priority")})
   
-  greedy_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
-                                   "Network with Priority" = bhlinks$value, 
-                                   "Network with Final Pairings" = bhlinks$greedy_pairing)})
+  greedy_pairing <- reactive({switch(input$stage, "Raw Network" = get_links()$value,
+                                   "Network with Priority" = get_links()$value, 
+                                   "Network with Final Pairings" = get_links()$greedy_pairing)})
   
-  pagerank_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
-                                     "Network with Priority" = bhlinks$value, 
-                                     "Network with Final Pairings" = bhlinks$pagerank_pairing)})
+  pagerank_pairing <- reactive({switch(input$stage, "Raw Network" = get_links()$value,
+                                     "Network with Priority" = get_links()$value, 
+                                     "Network with Final Pairings" = get_links()$pagerank_pairing)})
   
-  regret_pairing <- reactive({switch(input$stage, "Raw Network" = bhlinks$value,
-                                     "Network with Priority" = bhlinks$value, 
-                                     "Network with Final Pairings" = bhlinks$regret_pairing)})
+  regret_pairing <- reactive({switch(input$stage, "Raw Network" = get_links()$value,
+                                     "Network with Priority" = get_links()$value, 
+                                     "Network with Final Pairings" = get_links()$regret_pairing)})
   
   output$greedy <- renderForceNetwork({
-    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
+    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Nodesize = "degree", Group = greedy_group(), 
                  opacity = input$opacity, zoom=TRUE,
@@ -128,7 +128,7 @@ server <- function(input, output) {
   })
 
   output$pagerank <- renderForceNetwork({
-    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
+    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Nodesize = "degree", Group = pagerank_group(), 
                  opacity = input$opacity, zoom=TRUE,
@@ -138,7 +138,7 @@ server <- function(input, output) {
   })
   
   output$regret <- renderForceNetwork({
-    forceNetwork(Links = bhlinks, Nodes = bhnodes, Source = "source",
+    forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
                  Nodesize = "degree", Group = regret_group(), 
                  opacity = input$opacity, zoom=TRUE,

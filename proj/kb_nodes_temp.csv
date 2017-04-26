@@ -1,0 +1,163 @@
+group,name,degree,greedy_priority,regret_priority,pagerank_priority
+animal,Agathidinae sp,1,low priority,low priority,low priority
+high-connected animal,Ahasverus advena Waltle,5,low priority,low priority,low priority
+high-connected animal,Allograpta nasuta Marquart,20,low priority,low priority,low priority
+high-connected animal,Apis mellifera Linnaeus,28,low priority,low priority,low priority
+animal,Atherigona orientalis Schiner ,1,low priority,low priority,low priority
+high-connected animal,Brachymyrmex sp ,12,low priority,low priority,low priority
+animal,Calopsilia florella Fabricius,1,low priority,low priority,low priority
+animal,Campopleginae sp 1,1,low priority,low priority,low priority
+animal,Cerambycidae sp 1,2,low priority,low priority,low priority
+animal,Cerambycidae sp 2,1,low priority,low priority,low priority
+animal,Cerambycidae sp 3,1,low priority,low priority,low priority
+animal,Ceratitis roas Karsch,1,low priority,low priority,low priority
+high-connected animal,Chaetocnema sp 1,34,low priority,low priority,low priority
+animal,Cheloninae sp 1,1,low priority,low priority,low priority
+animal,Cheloninae sp 3,1,low priority,low priority,low priority
+high-connected animal,Chrysomya megacephala Fabricius,17,low priority,low priority,low priority
+animal,Cixiidae sp 1,1,low priority,low priority,low priority
+animal,Cixiidae sp 2,1,low priority,low priority,low priority
+animal,Cotesia sp1,1,low priority,low priority,low priority
+animal,Cratopus psittacus Faimaire,1,low priority,low priority,low priority
+animal,Cryptocephalinae sp 1,1,low priority,low priority,low priority
+animal,Dasytinae sp 1,1,low priority,low priority,low priority
+high-connected animal,Dioxyna sororcula Wiedemann,7,low priority,low priority,low priority
+animal,Diptera sp 2,1,low priority,low priority,low priority
+animal,Diptera sp 3,1,low priority,low priority,low priority
+high-connected animal,Dysauxes florida Joan.,18,low priority,low priority,low priority
+high-connected animal,Episyrphus sp. near circularis Hull,12,low priority,low priority,low priority
+high-connected animal,Eristalinus flaveolus Bigot,11,low priority,low priority,low priority
+animal,Eumolpinae sp 2,1,low priority,low priority,low priority
+animal,Eumolpinae sp 3,2,low priority,low priority,low priority
+animal,Eurytonidae sp 1,1,low priority,low priority,low priority
+high-connected animal,Fannia pusio Wiedemann,11,low priority,low priority,low priority
+animal,Gelechioidea sp 1,1,low priority,low priority,low priority
+high-connected animal,Gelechioidea sp 2,5,low priority,low priority,low priority
+animal,Gelechioidea sp 3,2,low priority,low priority,low priority
+animal,Goniurellia or Dectodes sp,1,low priority,low priority,low priority
+animal,Graphomya maculata Scopoli,1,low priority,low priority,low priority
+animal,Henotesia narcissus Fabricius,2,low priority,low priority,low priority
+animal,Hippotion eson Cramer,1,low priority,low priority,low priority
+animal,Homoneura sp 2,1,low priority,low priority,low priority
+animal,Homoneura sp 3,1,low priority,low priority,low priority
+animal,Hydrotaea fuliginosa Robineau-Desvoidy,1,low priority,low priority,low priority
+high-connected animal,Ischiodon aegyptius Wiedemann,7,low priority,low priority,low priority
+animal,Lecithoceridae sp 1,3,low priority,low priority,low priority
+high-connected animal,Leptotes pirithous Linnaeus,5,low priority,low priority,low priority
+animal,Limnophora quaterna Loew,1,low priority,low priority,low priority
+animal,Lygaeidae sp 2,1,low priority,low priority,low priority
+animal,Lygaeidae sp 3,1,low priority,low priority,low priority
+animal,Lygaeidae sp 5,1,low priority,low priority,low priority
+high-connected animal,Lygistorrhina sp,11,low priority,low priority,low priority
+animal,Macroglossum milvus Boisduval,2,low priority,low priority,low priority
+high-connected animal,Mauritiborium undulatus,6,low priority,low priority,low priority
+animal,Melanagromyza sojae Zehntner,1,low priority,low priority,low priority
+high-connected animal,Melanostoma annulipes Macquart,10,low priority,low priority,low priority
+high-connected animal,Melanostoma bituberculatum Loew,6,low priority,low priority,low priority
+animal,Miridae sp 1,1,low priority,low priority,low priority
+animal,Mordellidae sp 1,1,low priority,low priority,low priority
+animal,Mordellidae sp 2,1,low priority,low priority,low priority
+animal,Mordellidae sp 3,1,low priority,low priority,low priority
+animal,Musca confiscata Speiser,1,low priority,low priority,low priority
+high-connected animal,Musca domestica Linnaeus,20,low priority,low priority,low priority
+high-connected animal,Nacoleia sp 1,20,low priority,low priority,low priority
+high-connected animal,Nacoleia sp 2,5,low priority,low priority,low priority
+animal,Nitidulidae sp 1,1,low priority,low priority,low priority
+animal,Nyctemera insulare Boisduval,1,low priority,low priority,low priority
+high-connected animal,Ophyra capensis Wiedemann,8,low priority,low priority,low priority
+animal,Orchisia costata Meigen,2,low priority,low priority,low priority
+high-connected animal,Ornidia obesa Fabricius,8,low priority,low priority,low priority
+animal,Orthellia albigena Stein,3,low priority,low priority,low priority
+high-connected animal,Pachycerina crinicornis Thomson,21,low priority,low priority,low priority
+animal,Palexorista sp 1,1,low priority,low priority,low priority
+high-connected animal,Panara naso Fabricius,11,low priority,low priority,low priority
+high-connected animal,Paragus borbonicus Macquart,9,low priority,low priority,low priority
+animal,Pelecophora intemipta All,3,low priority,low priority,low priority
+animal,Phalanta phalantha Drury,1,low priority,low priority,low priority
+animal,Pheidole megacephala Fabricius,1,low priority,low priority,low priority
+animal,Phelsuma cepediana Merrem,3,low priority,low priority,low priority
+high-connected animal,Phorinia sp,5,low priority,low priority,low priority
+high-connected animal,Polistes hebraeus Fabricius,13,low priority,low priority,low priority
+animal,Psyllidae sp 2,1,low priority,low priority,low priority
+high-connected animal,Sapromyza sp. near nudiuscula Lamb.,4,low priority,low priority,low priority
+high-connected animal,Sarcophaga arno Curran ,7,low priority,low priority,low priority
+animal,Scatopsidae sp,1,low priority,low priority,low priority
+animal,Scirtidae sp 1,1,low priority,low priority,low priority
+animal,Scirtidae sp 2,1,low priority,low priority,low priority
+animal,Scolia carniflex Coquillett,1,low priority,low priority,low priority
+animal,Scopariinae sp,2,low priority,low priority,low priority
+animal,Simulium (Byssodon) sp 2,1,low priority,low priority,low priority
+animal,Siphona sp,1,low priority,low priority,low priority
+high-connected animal,Stomorhina lunata Fabricius,30,low priority,low priority,low priority
+high-connected animal,Stomoxys calcitrans Linnaeus,10,low priority,low priority,low priority
+high-connected animal,Stomoxys niger Macquart,7,low priority,low priority,low priority
+animal,Syritta bulbus Walker ,1,low priority,low priority,low priority
+high-connected animal,Syritta nigrofemorata Macquart,8,low priority,low priority,low priority
+animal,Syritta sp. (near abyssinica Rondani),3,low priority,low priority,low priority
+high-connected animal,Technomyrmex albipes Smith,24,low priority,low priority,low priority
+animal,Thelairodrino sp,1,low priority,low priority,low priority
+animal,Thysanoplusia orichalcea Fabricius,1,low priority,low priority,low priority
+high-connected animal,Villa unifasciata Macquart,17,high priority,high priority,medium priority
+highly-connected plant,Antirhea borbonica,5,high priority,high priority,medium priority
+highly-connected plant,Aphloia theiformis,10,high priority,high priority,high priority
+highly-connected plant,Ardisia crenate,28,high priority,medium priority,medium priority
+plant,Badula insularis,0,high priority,medium priority,medium priority
+plant,Badula platiphylla,2,high priority,high priority,medium priority
+highly-connected plant,Bertiera zaluzania,5,high priority,high priority,high priority
+highly-connected plant,Calophyllum eputamen var eputamen,12,high priority,high priority,medium priority
+highly-connected plant,Casearia coriacea,4,high priority,high priority,high priority
+highly-connected plant,Chassalia coriacea var coriacea,4,high priority,high priority,medium priority
+highly-connected plant,Claoxylon linostachys ssp brachyphyllum,7,high priority,high priority,medium priority
+highly-connected plant,Clidemia hirta,4,high priority,medium priority,medium priority
+plant,Coffea macrocarpa,0,high priority,medium priority,medium priority
+highly-connected plant,Coffea mauritiana,4,high priority,medium priority,medium priority
+plant,Cordemoya integrifolia,1,high priority,medium priority,medium priority
+plant,Croton fothergillifolius,3,high priority,high priority,high priority
+highly-connected plant,Croton grangeroides,28,high priority,high priority,high priority
+highly-connected plant,Diospyros revaughanii,12,high priority,high priority,high priority
+plant,Dodonaea viscosa ,3,high priority,high priority,high priority
+highly-connected plant,Doratoxylon apetalum var diphyllum,19,high priority,high priority,medium priority
+plant,Dracaena reflexa var angustifolia,2,high priority,medium priority,medium priority
+highly-connected plant,Embelia angustifolia,13,high priority,medium priority,medium priority
+highly-connected plant,Erythrospermum monticolum var monticolum,6,high priority,medium priority,medium priority
+plant,Erythroxylum macrocarpum,0,high priority,high priority,high priority
+highly-connected plant,Eugenia orbiculata,29,high priority,medium priority,medium priority
+plant,Euodia chapelieri var chapelieri,1,high priority,medium priority,medium priority
+plant,Euodia obtusifolia ssp gigas var gigas,1,high priority,high priority,medium priority
+plant,Faujasiopsis flexuosa ssp erecta,1,high priority,high priority,high priority
+highly-connected plant,Flagellaria indica,9,high priority,medium priority,medium priority
+plant,Gaertnera psychotrioides/edentata,2,high priority,high priority,high priority
+highly-connected plant,Gaertnera rotundifolia,16,high priority,medium priority,medium priority
+plant,Grangeria borbonica,1,high priority,high priority,high priority
+highly-connected plant,Harungana madagascariensis,14,medium priority,medium priority,medium priority
+plant,Helichrysum proteoides,3,high priority,medium priority,medium priority
+highly-connected plant,Homalanthus populifolius,14,high priority,high priority,medium priority
+highly-connected plant,Labourdonnaisia callophylloides,18,high priority,medium priority,medium priority
+highly-connected plant,Molinaea alternifolia,5,high priority,medium priority,medium priority
+highly-connected plant,Molinaea macrantha,19,high priority,high priority,medium priority
+plant,Myonima violacea var ovata,3,high priority,medium priority,medium priority
+highly-connected plant,Ochna mauritiana,13,high priority,high priority,medium priority
+highly-connected plant,Olea lancea,16,high priority,medium priority,medium priority
+highly-connected plant,Ossaea marginata,5,medium priority,medium priority,medium priority
+plant,Phyllanthus phillyreifolius var telfairianus,0,high priority,high priority,medium priority
+highly-connected plant,Pittosporum senacia,10,medium priority,medium priority,medium priority
+plant,Psathura terniflora,0,high priority,high priority,medium priority
+plant,Psiadia terebinthina,2,high priority,medium priority,medium priority
+highly-connected plant,Psidium cattleianum,38,high priority,high priority,medium priority
+highly-connected plant,Rubus alcefolius,11,high priority,medium priority,medium priority
+highly-connected plant,Sideroxylon cinereum,4,high priority,high priority,medium priority
+highly-connected plant,Sideroxylon puberulum,30,high priority,medium priority,medium priority
+highly-connected plant,Smilax anceps,13,medium priority,medium priority,medium priority
+plant,Stillingia lineata ssp lineata,1,high priority,high priority,medium priority
+highly-connected plant,Syzygium commersonii,33,high priority,medium priority,medium priority
+plant,Syzygium coriaceum,2,high priority,high priority,medium priority
+highly-connected plant,Syzygium glomeratum,10,medium priority,medium priority,medium priority
+plant,Syzygium petrinese,2,medium priority,medium priority,medium priority
+highly-connected plant,Tabernaemontana persicarifolia,8,medium priority,medium priority,medium priority
+plant,Toddalia asiatica,3,high priority,high priority,medium priority
+highly-connected plant,Tristhema mauritiana,15,high priority,high priority,medium priority
+plant,Trochetia blackburniana,2,high priority,high priority,medium priority
+plant,Turraea rigida,2,high priority,medium priority,medium priority
+plant,Warneckea trinervis,1,medium priority,medium priority,medium priority
+plant,Wikstroemia indica,2,medium priority,medium priority,medium priority
+plant,Xylopia lamarckii ,1,medium priority,medium priority,medium priority

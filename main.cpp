@@ -10,9 +10,9 @@
 #include "greedy_matching.h"
 
 #define N 100
-#define INSTANCE_COUNT 5
-#define NOISE_TIERS 10
-#define GREEDYCOUNT 10
+#define INSTANCE_COUNT 50
+#define NOISE_TIERS 100
+#define GREEDYCOUNT 50
 
 /*
 USAGE:
@@ -55,6 +55,57 @@ string format_algorithm_output(Instance I, vector<unsigned int> order, string ou
   return ss.str();
 }
 
+string format_algorithm_output_opt(vector<vector<double> > mat, double result, string outPath){
+  vector<vector<unsigned int> > matches;
+  vector<unsigned int> order;
+
+  for(unsigned int i=0; i<mat.size(); i++){
+    vector<unsigned int> row;
+    for(unsigned int j=0; j<mat[0].size(); j++){
+      row.push_back(0);
+    }
+    matches.push_back(row);
+    order.push_back(i);
+  }
+
+  ifstream results("results.txt");
+  for (unsigned int i=0; i<min(mat.size(), mat[0].size()); i++) {
+    int a, b;
+    double amt;
+    results >> a >> b >> amt;
+    matches[a][b] = 1;
+    //    cout << amt << " assigned from " << a << " to " << b << "\n";
+  }
+  results.close();
+
+
+  stringstream ss;
+  ss << result << endl;
+  for(unsigned int i=0; i<order.size(); i++){
+    ss << order[i];
+    if(i+1 != order.size())
+      ss << ", ";
+  }
+  ss << endl;
+
+  for(unsigned int i=0; i<matches.size(); i++){
+    for(unsigned int j=0; j<matches[i].size(); j++){
+      ss << matches[i][j];
+      if(i+1 != matches[i].size())
+        ss << ", ";
+    }
+    ss << endl;
+  }
+  
+  std::ofstream out;
+  out.open(outPath);
+  out << ss.rdbuf();
+  out.close();
+
+  return ss.str();
+
+}
+
 //Reads in a csv with a predefined data set and evaluates algorithms on it
 void process_real_data(string path, bool opt){
   Instance I = read_csv_instance(path);
@@ -65,15 +116,16 @@ void process_real_data(string path, bool opt){
   vector<unsigned int> globalGreedyOrder = global_greedy_order(I);
   //double globalGreedyVal = global_greedy_value(I);
   //double globalGreedyVal = 0;
+  string outDir = "output/barrett/";
 
   double optVal;
   if(opt){
     optVal = lp_opt_result(I.lhsnodes.size(), I.rhsnodes.size(), get_value_matrix(I));
+    format_algorithm_output_opt(get_value_matrix(I), optVal, outDir + "optimal.csv");
   } else {
     optVal = 0;
   }
 
-  string outDir = "output/kaiser/";
   format_algorithm_output(I, regretOrder, outDir + "regret.csv");
   format_algorithm_output(I, pagerankOrder, outDir + "pagerank.csv");
   format_algorithm_output(I, globalGreedyOrder, outDir + "greedy.csv");
@@ -107,7 +159,7 @@ int main(int argc, char *argv[]){
   if(realData){
     process_real_data(realPath, opt);
   } else {
-    std::cout << "width,noise,instance number, greedy mean,greedy stdev,pagerank_value,regret_value,optimal value\n";
+    std::cout << "width,noise,instance_number, greedy_mean,greedy_stdev,pagerank_value,regret_value,global_greedy,optimal_value\n";
 
     for(double noise = 0; noise <= 1.0; noise += 1.0/NOISE_TIERS){
       for(unsigned int i=0; i<INSTANCE_COUNT; i++){

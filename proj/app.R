@@ -34,7 +34,17 @@ ui <- fluidPage(
     column(width = 12, class = "well",
       h4("Plotly Example"),
       plotlyOutput("plot1", height = 700)
-      )
+      ),
+    column(width = 4, class = "well",
+           h4("Here are some buttons"),
+           checkboxGroupInput("datasetGroup",
+                              label = h3("Pick Algorithms to view."),
+                              choices = list("Greedy" = 1,
+                                             "Pagerank" = 2,
+                                             "Regret" = 3,
+                                             "Optimal" = 4),
+                              selected = 1)
+    )
    ),
 
   fluidRow(
@@ -91,18 +101,18 @@ server <- function(input, output) {
   #-- Get Dataset for Network from User Input --#
   get_nodes <- reactive({switch(input$dataset,"KB2009" = kbnodes,"BH1987" = bhnodes)})
   get_links <- reactive({switch(input$dataset,"KB2009" = kblinks,"BH1987" = bhlinks)})
-  
+
 
   greedy_group <- reactive({switch(input$stage, "Raw Network" = "group",
-                                      "Network with Priority" = "greedy_priority", 
+                                      "Network with Priority" = "greedy_priority",
                                       "Network with Final Pairings" = "greedy_priority")})
-  
+
   pagerank_group <- reactive({switch(input$stage, "Raw Network" = "group",
-                                      "Network with Priority" = "pagerank_priority", 
+                                      "Network with Priority" = "pagerank_priority",
                                       "Network with Final Pairings" = "pagerank_priority")})
-  
+
   regret_group <- reactive({switch(input$stage, "Raw Network" = "group",
-                                      "Network with Priority" = "regret_priority", 
+                                      "Network with Priority" = "regret_priority",
                                       "Network with Final Pairings" = "regret_priority")})
   
   greedy_pairing <- reactive({switch(input$stage, "Raw Network" = get_links()$value,
@@ -120,7 +130,7 @@ server <- function(input, output) {
   output$greedy <- renderForceNetwork({
     forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = greedy_group(), 
+                 Nodesize = "degree", Group = greedy_group(),
                  opacity = input$opacity, zoom=TRUE,
                  linkColour = ifelse(greedy_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
@@ -130,17 +140,17 @@ server <- function(input, output) {
   output$pagerank <- renderForceNetwork({
     forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = pagerank_group(), 
+                 Nodesize = "degree", Group = pagerank_group(),
                  opacity = input$opacity, zoom=TRUE,
                  linkColour = ifelse(pagerank_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
                  legend = TRUE)
   })
-  
+
   output$regret <- renderForceNetwork({
     forceNetwork(Links = get_links(), Nodes = get_nodes(), Source = "source",
                  Target = "target", Value = "value", NodeID = "name",
-                 Nodesize = "degree", Group = regret_group(), 
+                 Nodesize = "degree", Group = regret_group(),
                  opacity = input$opacity, zoom=TRUE,
                  linkColour = ifelse(regret_pairing() > 0, "585C5C","F3F3F3"),
                  fontSize = 16, colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
@@ -163,7 +173,7 @@ server <- function(input, output) {
 
 
   #-- Line Graph Visualizations --#
-  data = read.csv("value_data.csv")
+  data = read.csv("../results/small_incr_results.csv")
   df = data.frame(noise= data$noise,
                   greedy=data$greedy_mean,
                   pagerank=data$pagerank_value,

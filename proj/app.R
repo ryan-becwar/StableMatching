@@ -7,10 +7,15 @@ require(data.table)
 # USER INTERFACE
 # -------------------------------------------------------------------
 ui <- fluidPage(
-  titlePanel("Data Science Project 2017"),
+  titlePanel("Comparison of Bipartite Matching Algorithms"),
 
   sidebarLayout(
     sidebarPanel(
+      h4("Dynamic Network Visualization"),
+      p("Welcome to a this application on Bipartite Matching Algorithms. Select a data set and 
+        network stage to compare how the various algorithms decide which nodes should be paired. 
+        In this case, our graphs are networks of plant-pollinator webs."),
+      
       sliderInput("opacity", "Opacity", 0.8, min = 0.1,
                     max = 1, step = .1),
 
@@ -31,27 +36,32 @@ ui <- fluidPage(
   ),
 
   fluidRow(
-    column(width = 12, class = "well",
-      h4("Plotly Example"),
-      plotlyOutput("plot1", height = 700)
+    column(width = 8, class = "well",
+      plotlyOutput("plot1", height = 680)
       ),
     column(width = 4, class = "well",
-           h4("Here are some buttons"),
-           checkboxGroupInput("datasetGroup",
-                              label = h3("Pick Algorithms to view."),
-                              choices = list("Greedy",
-                                             "Pagerank",
-                                             "Regret",
-                                             "Optimal"),
-                              selected = c("Greedy", "Pagerank"))
+           h3("Algorithm Overview"),
+           p("Run time is described with N, M being the number nodes in the left and right sides of the graph, and E being the number of edges (which is equal to N * M in most graphs)."), 
+
+            p("Optimal: O(NE) Translates the graph into a linear programming problem and solves for the optimal solution."),
+             
+             p("Regret: O(NMlogN) Determines which nodes have the steepest decrease in the value of their connections and matches these nodes with a higher priority"),
+             
+             p("Pagerank: O(NM) Represents the graph as a matrix and finds its principal eigenvector to determine the centrality of each node in the graph, then matches the most central nodes with a higher priority"),
+             
+             p("Greedy: O(NM) Nodes on one side of the graph greedily pick their best matching in a random order"),
+           
+             checkboxGroupInput("datasetGroup",
+                              label = h4("Pick algorithms to view."),
+                              choices = list("Optimal (pink)"=4,
+                                              "Regret (purple)"=3,
+                                              "Pagerank (orange)"=2,
+                                               "Greedy (green)"=1),
+                              selected = c(1,2,3,4))
     )
    ),
 
   fluidRow(
-    column(width = 6, class = "well",
-           h4("We can compare this graph"),
-           p("this is an example tex")
-    ),
     column(width = 6, class = "well",
            plotlyOutput("bar_graph", height = 350)
     )
@@ -166,20 +176,6 @@ server <- function(input, output) {
            barmode = 'group') 
   })
   
-  ##### GRAPH STUFF #####
-  ranges <- reactiveValues(x = NULL, y = NULL)
-
-#  data = read.csv("value_data.csv")
-#  df = data.frame(noise= data$noise,
-#                  greedy=data$greedy_mean,
-#                  pagerank=data$pagerank_value,
-#                  optimal=data$optimal_value)
-
-  # -------------------------------------------------------------------
-  # Linked plots (middle and right)
-  ranges2 <- reactiveValues(x = NULL, y = NULL)
-
-
   #-- Line Graph Visualizations --#
   data = read.csv("../results/small_incr_results.csv")
   df = data.frame(noise= data$noise,
@@ -187,8 +183,10 @@ server <- function(input, output) {
                   pagerank=data$pagerank_value,
                   regret=data$regret_value,
                   optimal=data$optimal_value)
+  
   dfReduced = data.frame(noise= data$noise,
              greedy= data$greedy_mean)
+  
   dt <- data.table(df)
 
   #At each noise value, take only the max, min and mean value
@@ -257,45 +255,75 @@ server <- function(input, output) {
 
   dfOptimalComplete <- merge(merge(dfOptimalMax, dfOptimalMin, by = "noise"), dfOptimalAvg, by = "noise")
 
+  
+  greedy_check <- reactive({is.element("1", input$datasetGroup)})
+  pagerank_check <- reactive({is.element("2", input$datasetGroup)})
+  regret_check <- reactive({is.element("3", input$datasetGroup)})
+  optimal_check <- reactive({is.element("4", input$datasetGroup)})
+  
   #Plots in filled lines
   output$plot1 <- renderPlotly({
     plot_ly(dfGreedyComplete, x = ~noise, y = ~Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
-          showlegend = FALSE, name = 'Max') %>%
-    add_trace(y = ~Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(27,158,229,0.2)', line = list(color = 'transparent'),
+          showlegend = FALSE, name = 'Max', hoverinfo='none') %>%
+    
+      add_trace(y = ~Min, type = 'scatter', mode = 'lines',
+              fill = 'tonexty', 
+              fillcolor= ifelse(greedy_check() == TRUE, "rgba(27,158,229,0.2)","transparent"), 
+              line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
-    add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(27,158,119)'),
+    
+      add_trace(x = ~noise, y = ~Avg, type = 'scatter', mode = 'lines',
+              line = list(color=ifelse(greedy_check() == TRUE,'rgb(27,158,119)', 'transparent')),
+              hoverinfo=ifelse(greedy_check() == TRUE, "y","none"),
               name = 'Average') %>%
-    add_trace(x = ~noise, y = ~dfPagerankComplete$Max, type = 'scatter', mode = 'lines',
+    
+      add_trace(x = ~noise, y = ~dfPagerankComplete$Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
-    add_trace(y = dfPagerankComplete$Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(217,95,2,0.2)', line = list(color = 'transparent'),
+    
+      add_trace(y = dfPagerankComplete$Min, type = 'scatter', mode = 'lines',
+              fill = 'tonexty', 
+              fillcolor=ifelse(pagerank_check() == TRUE,'rgba(217,95,2,0.2)','transparent'), 
+              line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
-    add_trace(x = ~noise, y = dfPagerankComplete$Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(217,95,2)'),
+    
+      add_trace(x = ~noise, y = dfPagerankComplete$Avg, type = 'scatter', mode = 'lines',
+              line = list(color=ifelse(pagerank_check() == TRUE,'rgb(217,95,2)', 'transparent')),
+              hoverinfo=ifelse(pagerank_check() == TRUE, "y","none"),
               name = 'Average') %>%
-    add_trace(x = ~noise, y = ~dfRegretComplete$Max, type = 'scatter', mode = 'lines',
+    
+      add_trace(x = ~noise, y = ~dfRegretComplete$Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
-    add_trace(y = dfRegretComplete$Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(117,112,179,0.2)', line = list(color = 'transparent'),
+    
+      add_trace(y = dfRegretComplete$Min, type = 'scatter', mode = 'lines',
+              fill = 'tonexty', 
+              fillcolor=ifelse(regret_check() == TRUE,'rgba(117,112,179,0.2)', 'transparent'), 
+              line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
-    add_trace(x = ~noise, y = dfRegretComplete$Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(117,112,179)'),
+    
+      add_trace(x = ~noise, y = dfRegretComplete$Avg, type = 'scatter', mode = 'lines',
+              line = list(color=ifelse(regret_check() == TRUE,'rgb(117,112,179)', 'transparent')),
+              hoverinfo=ifelse(regret_check() == TRUE, "y","none"),
               name = 'Average') %>%
-    add_trace(x = ~noise, y = ~dfOptimalComplete$Max, type = 'scatter', mode = 'lines',
+    
+      add_trace(x = ~noise, y = ~dfOptimalComplete$Max, type = 'scatter', mode = 'lines',
           line = list(color = 'transparent'),
           showlegend = FALSE, name = 'Max') %>%
-    add_trace(y = dfOptimalComplete$Min, type = 'scatter', mode = 'lines',
-              fill = 'tonexty', fillcolor='rgba(231,41,138,0.2)', line = list(color = 'transparent'),
+    
+      add_trace(y = dfOptimalComplete$Min, type = 'scatter', mode = 'lines',
+              fill = 'tonexty', 
+              fillcolor= ifelse(optimal_check() == TRUE,'rgba(231,41,138,0.2)', 'transparent'), 
+              line = list(color = 'transparent'),
               showlegend = FALSE, name = 'Min') %>%
-    add_trace(x = ~noise, y = dfOptimalComplete$Avg, type = 'scatter', mode = 'lines',
-              line = list(color='rgb(231,41,138)'),
+    
+      add_trace(x = ~noise, y = dfOptimalComplete$Avg, type = 'scatter', mode = 'lines',
+              line = list(color=ifelse(optimal_check() == TRUE,'rgb(231,41,138)', 'transparent')),
+              hoverinfo=ifelse(optimal_check() == TRUE, "y","none"),
               name = 'Average') %>%
-    layout(title = "Average, Greedy, Pagerank, Regret and Optimal Values in Algorithm",
+    
+      layout(title = "Average, Greedy, Pagerank, Regret and Optimal Values in Algorithm",
            paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
            xaxis = list(title = "Noise",
                         gridcolor = 'rgb(255,255,255)',
